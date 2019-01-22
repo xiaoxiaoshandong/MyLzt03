@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.MyPictureMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.MyPicture">
+    <id column="pic_id" jdbcType="VARCHAR" property="picId" />
+    <result column="spu_id" jdbcType="VARCHAR" property="spuId" />
+    <result column="tupian_name" jdbcType="VARCHAR" property="tupianName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pic_id, spu_id, tupian_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from my_picture
+    where pic_id = #{picId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from my_picture
+    where pic_id = #{picId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.MyPicture">
+    insert into my_picture (pic_id, spu_id, tupian_name
+      )
+    values (#{picId,jdbcType=VARCHAR}, #{spuId,jdbcType=VARCHAR}, #{tupianName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.MyPicture">
+    insert into my_picture
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="picId != null">
+        pic_id,
+      </if>
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="tupianName != null">
+        tupian_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="picId != null">
+        #{picId,jdbcType=VARCHAR},
+      </if>
+      <if test="spuId != null">
+        #{spuId,jdbcType=VARCHAR},
+      </if>
+      <if test="tupianName != null">
+        #{tupianName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.MyPicture">
+    update my_picture
+    <set>
+      <if test="spuId != null">
+        spu_id = #{spuId,jdbcType=VARCHAR},
+      </if>
+      <if test="tupianName != null">
+        tupian_name = #{tupianName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pic_id = #{picId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.MyPicture">
+    update my_picture
+    set spu_id = #{spuId,jdbcType=VARCHAR},
+      tupian_name = #{tupianName,jdbcType=VARCHAR}
+    where pic_id = #{picId,jdbcType=VARCHAR}
+  </update>
+</mapper>

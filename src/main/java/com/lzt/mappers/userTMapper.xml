@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.UserTMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.UserT">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="pass_word" jdbcType="VARCHAR" property="password" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="aihao" jdbcType="VARCHAR" property="aihao" />
+    <result column="minzu" jdbcType="INTEGER" property="minzu" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_name, pass_word, age,sex,aihao,minzu
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="com.lzt.entity.UserT" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_t
+    <where>
+	    <trim suffixOverrides="AND">
+	    	<if test="id != null">
+	    		id = #{id} AND
+	    	</if>
+	    	<if test="userName != null">
+	    		user_name = #{userName} AND
+	    	</if>
+	    	<if test="password != null">
+	    		pass_word = #{password} AND
+	    	</if>
+	    	<if test="age != null">
+	    		age = #{age} AND
+	    	</if>
+	    	<if test="sex != null">
+	    		sex = #{sex} AND
+	    	</if>
+	    	<if test="aihao != null">
+	    		aihao = #{aihao} AND
+	    	</if>
+	    	<if test="minzu != null">
+	    		minzu = #{minzu} AND
+	    	</if>
+    	</trim>
+    </where>
+  </select>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_t
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.UserT">
+    insert into user_t (id, user_name, password, age,sex,aihao,minzu)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER},#{sex,jdbcType=INTEGER},#{aihao,jdbcType=VARCHAR},#{minzu,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.UserT">
+    insert into user_t
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id ,
+      </if>
+      <if test="userName != null">
+        user_name ,
+      </if>
+      <if test="password != null">
+        pass_word ,
+      </if>
+      <if test="age != null">
+        age ,
+      </if>
+      <if test="sex != null">
+        sex ,
+      </if>
+      <if test="aihao != null">
+        aihao ,
+      </if>
+      <if test="minzu != null">
+        minzu ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER} ,
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR} ,
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR} ,
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER} ,
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER} ,
+      </if>
+      <if test="aihao != null">
+        #{aihao,jdbcType=VARCHAR} ,
+      </if>
+      <if test="minzu != null">
+        #{minzu,jdbcType=INTEGER} ,
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.UserT">
+    update user_t
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        pass_word = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="aihao != null">
+        aihao = #{aihao,jdbcType=VARCHAR},
+      </if>
+      <if test="minzu != null">
+        minzu = #{minzu,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.UserT">
+    update user_t
+    set user_name = #{userName,jdbcType=VARCHAR},
+      pass_word = #{password,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      aihao = #{aihao,jdbcType=VARCHAR},
+      minzu = #{minzu,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

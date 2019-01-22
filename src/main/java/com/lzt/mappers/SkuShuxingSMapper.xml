@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.SkuShuxingSMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.SkuShuxingS">
+    <id column="sku_shuxing_s_id" jdbcType="VARCHAR" property="skuShuxingSId" />
+    <result column="sku_id" jdbcType="VARCHAR" property="skuId" />
+    <result column="shuxing_s_id" jdbcType="VARCHAR" property="shuxingSId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sku_shuxing_s_id, sku_id, shuxing_s_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sku_shuxing_s
+    where sku_shuxing_s_id = #{skuShuxingSId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sku_shuxing_s
+    where sku_shuxing_s_id = #{skuShuxingSId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.SkuShuxingS">
+    insert into sku_shuxing_s (sku_shuxing_s_id, sku_id, shuxing_s_id
+      )
+    values (#{skuShuxingSId,jdbcType=VARCHAR}, #{skuId,jdbcType=VARCHAR}, #{shuxingSId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.SkuShuxingS">
+    insert into sku_shuxing_s
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuShuxingSId != null">
+        sku_shuxing_s_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="shuxingSId != null">
+        shuxing_s_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuShuxingSId != null">
+        #{skuShuxingSId,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="shuxingSId != null">
+        #{shuxingSId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.SkuShuxingS">
+    update sku_shuxing_s
+    <set>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=VARCHAR},
+      </if>
+      <if test="shuxingSId != null">
+        shuxing_s_id = #{shuxingSId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sku_shuxing_s_id = #{skuShuxingSId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.SkuShuxingS">
+    update sku_shuxing_s
+    set sku_id = #{skuId,jdbcType=VARCHAR},
+      shuxing_s_id = #{shuxingSId,jdbcType=VARCHAR}
+    where sku_shuxing_s_id = #{skuShuxingSId,jdbcType=VARCHAR}
+  </update>
+</mapper>

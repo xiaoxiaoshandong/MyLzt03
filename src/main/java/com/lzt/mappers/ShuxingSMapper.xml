@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.ShuxingSMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.ShuxingS">
+    <id column="shuxing_s_id" jdbcType="VARCHAR" property="shuxingSId" />
+    <result column="shuxing_id" jdbcType="VARCHAR" property="shuxingId" />
+    <result column="shuxing_s_val" jdbcType="VARCHAR" property="shuxingSVal" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    shuxing_s_id, shuxing_id, shuxing_s_val
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shuxing_s
+    where shuxing_s_id = #{shuxingSId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByAll" parameterType="com.lzt.entity.ShuxingS" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shuxing_s
+    <where>
+	    <trim suffixOverrides="AND">
+	    	<if test="shuxingSId != null">
+	    		shuxing_s_id = #{shuxingSId} AND
+	    	</if>
+	    	<if test="shuxingId != null">
+	    		shuxing_id = #{shuxingId} AND
+	    	</if>
+	    	<if test="shuxingSVal != null">
+	    		shuxing_s_val = #{shuxingSVal} AND
+	    	</if>
+    	</trim>
+    </where>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from shuxing_s
+    where shuxing_s_id = #{shuxingSId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.ShuxingS">
+    insert into shuxing_s (shuxing_s_id, shuxing_id, shuxing_s_val
+      )
+    values (#{shuxingSId,jdbcType=VARCHAR}, #{shuxingId,jdbcType=VARCHAR}, #{shuxingSVal,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.ShuxingS">
+    insert into shuxing_s
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shuxingSId != null">
+        shuxing_s_id,
+      </if>
+      <if test="shuxingId != null">
+        shuxing_id,
+      </if>
+      <if test="shuxingSVal != null">
+        shuxing_s_val,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shuxingSId != null">
+        #{shuxingSId,jdbcType=VARCHAR},
+      </if>
+      <if test="shuxingId != null">
+        #{shuxingId,jdbcType=VARCHAR},
+      </if>
+      <if test="shuxingSVal != null">
+        #{shuxingSVal,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.ShuxingS">
+    update shuxing_s
+    <set>
+      <if test="shuxingId != null">
+        shuxing_id = #{shuxingId,jdbcType=VARCHAR},
+      </if>
+      <if test="shuxingSVal != null">
+        shuxing_s_val = #{shuxingSVal,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shuxing_s_id = #{shuxingSId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.ShuxingS">
+    update shuxing_s
+    set shuxing_id = #{shuxingId,jdbcType=VARCHAR},
+      shuxing_s_val = #{shuxingSVal,jdbcType=VARCHAR}
+    where shuxing_s_id = #{shuxingSId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.SpuMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.Spu">
+    <id column="spu_id" jdbcType="VARCHAR" property="spuId" />
+    <result column="chanpin_name" jdbcType="VARCHAR" property="chanpinName" />
+    <result column="erji_id" jdbcType="VARCHAR" property="erjiId" />
+    <result column="pinpai_id" jdbcType="VARCHAR" property="pinpaiId" />
+    <result column="jianjie" jdbcType="VARCHAR" property="jianjie" />
+    <result column="xiangqing" jdbcType="VARCHAR" property="xiangqing" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    spu_id, chanpin_name, erji_id, pinpai_id, jianjie, xiangqing
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from spu
+    where spu_id = #{spuId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByAll" parameterType="com.lzt.entity.Spu" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from spu
+    <where>
+	    <trim suffixOverrides="AND">
+	    	<if test="spuId != null">
+	    		spu_id = #{spuId} AND
+	    	</if>
+	    	<if test="chanpinName != null">
+	    		chanpin_name = #{chanpinName} AND
+	    	</if>
+	    	<if test="erjiId != null">
+	    		erji_id = #{erjiId} AND
+	    	</if>
+	    	<if test="pinpaiId != null">
+	    		pinpai_id = #{pinpaiId} AND
+	    	</if>
+	    	<if test="jianjie != null">
+	    		jianjie = #{jianjie} AND
+	    	</if>
+	    	<if test="xiangqing != null">
+	    		xiangqing = #{xiangqing} AND
+	    	</if>
+    	</trim>
+    </where>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from spu
+    where spu_id = #{spuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.Spu">
+    insert into spu (spu_id, chanpin_name, erji_id, 
+      pinpai_id, jianjie, xiangqing
+      )
+    values (#{spuId,jdbcType=VARCHAR}, #{chanpinName,jdbcType=VARCHAR}, #{erjiId,jdbcType=VARCHAR}, 
+      #{pinpaiId,jdbcType=VARCHAR}, #{jianjie,jdbcType=VARCHAR}, #{xiangqing,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.Spu">
+    insert into spu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="chanpinName != null">
+        chanpin_name,
+      </if>
+      <if test="erjiId != null">
+        erji_id,
+      </if>
+      <if test="pinpaiId != null">
+        pinpai_id,
+      </if>
+      <if test="jianjie != null">
+        jianjie,
+      </if>
+      <if test="xiangqing != null">
+        xiangqing,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="spuId != null">
+        #{spuId,jdbcType=VARCHAR},
+      </if>
+      <if test="chanpinName != null">
+        #{chanpinName,jdbcType=VARCHAR},
+      </if>
+      <if test="erjiId != null">
+        #{erjiId,jdbcType=VARCHAR},
+      </if>
+      <if test="pinpaiId != null">
+        #{pinpaiId,jdbcType=VARCHAR},
+      </if>
+      <if test="jianjie != null">
+        #{jianjie,jdbcType=VARCHAR},
+      </if>
+      <if test="xiangqing != null">
+        #{xiangqing,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.Spu">
+    update spu
+    <set>
+      <if test="chanpinName != null">
+        chanpin_name = #{chanpinName,jdbcType=VARCHAR},
+      </if>
+      <if test="erjiId != null">
+        erji_id = #{erjiId,jdbcType=VARCHAR},
+      </if>
+      <if test="pinpaiId != null">
+        pinpai_id = #{pinpaiId,jdbcType=VARCHAR},
+      </if>
+      <if test="jianjie != null">
+        jianjie = #{jianjie,jdbcType=VARCHAR},
+      </if>
+      <if test="xiangqing != null">
+        xiangqing = #{xiangqing,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where spu_id = #{spuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.Spu">
+    update spu
+    set chanpin_name = #{chanpinName,jdbcType=VARCHAR},
+      erji_id = #{erjiId,jdbcType=VARCHAR},
+      pinpai_id = #{pinpaiId,jdbcType=VARCHAR},
+      jianjie = #{jianjie,jdbcType=VARCHAR},
+      xiangqing = #{xiangqing,jdbcType=VARCHAR}
+    where spu_id = #{spuId,jdbcType=VARCHAR}
+  </update>
+</mapper>
