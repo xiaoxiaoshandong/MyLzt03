@@ -45,7 +45,6 @@ public class ShuxingController {
 	}
 	
 	/**
-	 * @author lzt
 	 * @param shuxing
 	 * @return 
 	 */
