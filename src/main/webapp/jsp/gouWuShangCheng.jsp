@@ -49,13 +49,14 @@
 	height:340px;
 	float: left; 
 }
- .div6 img{
+
+.div6 img{
 	width:900px;
 	height: 338px;
 	margin-left: 20px;
 	/*  z-index:1;  */
 }
- .div6 ul{
+.div6 ul{
  	width: 900px;
 	height: 340px;
 	z-index:2;
@@ -64,7 +65,7 @@
 	position:absolute;
 	background-color: #F7F7F7;
 	
-}  
+}
 .div1 ul{
     	margin-left:1100px;
     }
@@ -157,9 +158,9 @@
 					var v = JSON.parse(data);
 					for (var i = 0; i < data.length; i++) {
 								
-						var c = "<li value="+v[i].id+" onmousemove='move(this);' onmouseout='out(event);'>"+v[i].flmch1
+						var c = "<li value="+v[i].id+" onmouseover='move(this);' onmouseout='out();'>"+v[i].flmch1
 						+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-						+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+		 				+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
 						+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;></li>";
 						$("#yiJiFenLeiId").append(c);
 					}
@@ -192,7 +193,7 @@
 		
 		function move(data){
 			/* alert(data.value); */
-			alert("ceshi");
+			//alert("ceshi");
 			$("#erJiUl").css({display:""});
 			var val = data.value;
 			$("#erJiUl").empty();
@@ -213,34 +214,11 @@
 			});
 			
 		};
-		
-		/* function out(){
-			$("#erJiUl").css({display:"none"});
-		}; */
-		function out(event){ 
-		/* 	alert(event); */
-					/* var div4 = document.getElementById("div4_id");  */
-					var div6 = document.getElementById("div6_id"); 
-					var x=event.clientX; 
-				    var y=event.clientY; 
-				   /*  alert("div4:"+div4+"   div6:"+div6); */
-				   /* alert("x:"+x+"   y:"+y); */
-				   /*  var divx4_1 = div4.offsetLeft; 
-				    var divy4_1 = div4.offsetTop; 
-				    var divx4_2 = div4.offsetLeft + div4.offsetWidth; 
-				    var divy4_2 = div4.offsetTop + div4.offsetHeight; */
-				    
-				    var divx6_1 = div6.offsetLeft; 
-				    var divy6_1 = div6.offsetTop; 
-				    var divx6_2 = div6.offsetLeft + div6.offsetWidth; 
-				    var divy6_2 = div6.offsetTop + div6.offsetHeight;
-				   /*  x < divx4_1 || x > divx4_2  || y < divy4_1 || y > divy4_2 ||  */
-				    if( 
-				    	x < divx6_1 || x > divx6_2  || y < divy6_1 || y > divy6_2		
-				    ){ 
-			     		  //如果离开，则执行。。
-				    	$("#erJiUl").css({display:"none"});
-			      } 
+		 function move1(){
+				$("#erJiUl").css({display:""});
+			};
+		 function out(){
+			 $("#erJiUl").css({display:"none"});
 		};
 		
 </script>
@@ -285,12 +263,10 @@
 					<li><a  href="">智能</a></li>
 				</ul>
 			</div> 
-			<div class="div6" id="div6_id">
-							<img src="${pageContext.request.contextPath}/static/img/shipin.jpg" >
-							<!-- <iframe src="shangChengErJiFenLei.jsp"></iframe> -->
+			<div class="div6" id="div6_id" onmouseover='move1();' onmouseout='out();'>
 							<ul id="erJiUl" >
 							</ul>
-							
+							<img src="${pageContext.request.contextPath}/static/img/shipin.jpg" >
 			</div>
 		</div>
 	</div>
