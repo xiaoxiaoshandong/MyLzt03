@@ -2,6 +2,7 @@ package com.lzt.dao;
 
 import java.util.List;
 
+import com.lzt.entity.ProdVo;
 import com.lzt.entity.Spu;
 
 public interface SpuMapper {
@@ -18,4 +19,6 @@ public interface SpuMapper {
     int updateByPrimaryKey(Spu record);
     
     List<Spu> selectByAll(Spu record);
+
+    List<ProdVo> selectProd(Spu spu);
 }

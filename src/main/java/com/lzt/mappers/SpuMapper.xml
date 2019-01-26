@@ -9,6 +9,18 @@
     <result column="jianjie" jdbcType="VARCHAR" property="jianjie" />
     <result column="xiangqing" jdbcType="VARCHAR" property="xiangqing" />
   </resultMap>
+  
+  <resultMap id="ProdMap" type="com.lzt.entity.ProdVo">
+  	<result column="chanpin_name" jdbcType="VARCHAR" property="chanpinName" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="jiage" jdbcType="DECIMAL" property="jiage" />
+    <collection property="myPicture" resultMap="PicMap" />
+  </resultMap>
+  
+  <resultMap id="PicMap" type="com.lzt.entity.MyPicture">
+    <result column="tupian_name" jdbcType="VARCHAR" property="tupianName" />
+  </resultMap>
+  
   <sql id="Base_Column_List">
     spu_id, chanpin_name, erji_id, pinpai_id, jianjie, xiangqing
   </sql>
@@ -132,4 +144,11 @@
       xiangqing = #{xiangqing,jdbcType=VARCHAR}
     where spu_id = #{spuId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectProd" parameterType="com.lzt.entity.Spu" resultMap="ProdMap">
+  		SELECT pic.tupian_name,sp.chanpin_name ,sk.sku_name,sk.jiage
+		FROM my_picture pic INNER JOIN spu sp ON pic.spu_id=sp.spu_id INNER JOIN sku sk ON sp.spu_id=sk.spu_id
+		WHERE sp.erji_id=#{erjiId};
+  </select>
+  
 </mapper>

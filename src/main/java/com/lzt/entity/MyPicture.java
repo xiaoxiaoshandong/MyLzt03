@@ -30,4 +30,10 @@ public class MyPicture {
     public void setTupianName(String tupianName) {
         this.tupianName = tupianName == null ? null : tupianName.trim();
     }
+
+	@Override
+	public String toString() {
+		return "MyPicture [picId=" + picId + ", spuId=" + spuId + ", tupianName=" + tupianName + "]";
+	}
+    
 }

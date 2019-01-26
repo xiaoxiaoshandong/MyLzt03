@@ -15,6 +15,7 @@ import com.lzt.dao.MyPictureMapper;
 import com.lzt.dao.ShuxingMapper;
 import com.lzt.dao.SpuMapper;
 import com.lzt.entity.MyPicture;
+import com.lzt.entity.ProdVo;
 import com.lzt.entity.Shuxing;
 import com.lzt.entity.Spu;
 import com.lzt.myutils.MyId;
@@ -67,6 +68,12 @@ public class SpuServiceImpl implements SpuService {
 		map.put("spuList", spuList);
 		map.put("shuxingList", shuxingList);
 		return map;
+	}
+
+	public List<ProdVo> selectProd(Spu spu) {
+		// TODO Auto-generated method stub
+		List<ProdVo> prodVos = spuMapper.selectProd(spu);
+		return prodVos;
 	}
 
 }

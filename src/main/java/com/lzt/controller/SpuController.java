@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lzt.entity.ProdVo;
 import com.lzt.entity.Spu;
 import com.lzt.service.SpuService;
 
@@ -66,5 +67,16 @@ public class SpuController {
 		Map<String,Object> map = spuService.selectSpu(spu);
 		
 		return map;
+	}
+	
+	@RequestMapping(value="/selectProd") 
+	public List<ProdVo> selectProd(Spu spu){
+		String erjiId = spu.getErjiId();
+		if(erjiId==null){
+			return null;
+		}
+		List<ProdVo> prodVos = spuService.selectProd(spu);
+		System.out.println(prodVos);
+		return prodVos;
 	}
 }

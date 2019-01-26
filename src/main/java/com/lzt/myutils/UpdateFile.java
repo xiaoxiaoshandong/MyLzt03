@@ -13,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class UpdateFile {
 	
 	/**
-	 * ÉÏ´«Í¼Æ¬
-	 * @return null:ÉÏ´«Í¼Æ¬Ê§°Ü 
+	 * ï¿½Ï´ï¿½Í¼Æ¬
+	 * @return null:ï¿½Ï´ï¿½Í¼Æ¬Ê§ï¿½ï¿½ 
 	 */
 	public static List<String> uploadFile(List<MultipartFile> list, HttpServletRequest request){
 		List<String> fileList = new ArrayList<String>();
@@ -23,19 +23,19 @@ public class UpdateFile {
 		}
 		for(MultipartFile file:list){
 	        File targetFile=null;
-	        String msg="";//·µ»Ø´æ´¢Â·¾¶
-			//»ñÈ¡ÎÄ¼þÃû¼Óºó×º
+	        String msg="";//ï¿½ï¿½ï¿½Ø´æ´¢Â·ï¿½ï¿½
+			//ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Óºï¿½×º
 			String fileName = file.getOriginalFilename();
 			if(fileName!=null&&fileName!=""){ 
 				 String returnUrl = request.getScheme() + "://" + request.getServerName() + ":" 
-				 + request.getServerPort() + request.getContextPath() +"/upload/imgs/";//´æ´¢Â·¾¶
-				 String path = request.getSession().getServletContext().getRealPath("upload/imgs"); //ÎÄ¼þ´æ´¢Î»ÖÃ
-				 String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//ÎÄ¼þºó×º
-				 fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//ÐÂµÄÎÄ¼þÃû
-				//ÏÈÅÐ¶ÏÎÄ¼þÊÇ·ñ´æÔÚ
+				 + request.getServerPort() + request.getContextPath() +"/upload/imgs/";//ï¿½æ´¢Â·ï¿½ï¿½
+				 String path = request.getSession().getServletContext().getRealPath("upload/imgs"); //ï¿½Ä¼ï¿½ï¿½æ´¢Î»ï¿½ï¿½
+				 String fileF = fileName.substring(fileName.lastIndexOf("."), fileName.length());//ï¿½Ä¼ï¿½ï¿½ï¿½×º
+				 fileName=new Date().getTime()+"_"+new Random().nextInt(1000)+fileF;//ï¿½Âµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
+				//ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ä¼ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 		            String fileAdd = DateUtil.format("yyyyMMdd");
 		            File file1 =new File(path+"/"+fileAdd); 
-		            //Èç¹ûÎÄ¼þ¼Ð²»´æÔÚÔò´´½¨    
+		            //ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò´´½ï¿½    
 		            if(!file1.exists()  && !file1.isDirectory()){       
 		                boolean mkdir = file1.mkdirs();
 		            }
@@ -45,6 +45,7 @@ public class UpdateFile {
 		                file.transferTo(targetFile);
 //		             	 msg=returnUrl+fileName;
 		                msg=returnUrl+fileAdd+"/"+fileName;
+		                System.out.println("msg:"+msg);
 		            } catch (Exception e) {
 		                e.printStackTrace();
 		            }

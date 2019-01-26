@@ -6,12 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-/* body{
-	padding:0;
-	margin:0;
-	width:100%;
-	height:100%;
-} */
 .div1{
 	width:1350px;
 	height:35px;
@@ -54,7 +48,6 @@
 	width:900px;
 	height: 338px;
 	margin-left: 20px;
-	/*  z-index:1;  */
 }
 .div6 ul{
  	width: 900px;
@@ -126,10 +119,6 @@
 		margin-top: 15px;
 		
 }
-/* .div6 ul {
-		margin-left:-20px;
-        margin-top:2px;
-} */
 .div4 ul li:first-child {
 	width:270px;
 	height: 50px;
@@ -168,36 +157,10 @@
 			});
 		});
 
-		/* function select2() {
-			var op = $("#select1 option:selected").val();
-			$("#select3").empty();
-			if (op != "请选择") {
-				$.ajax({
-					type : "get",
-					url : "${pageContext.request.contextPath}/data/class_2_" + op + ".txt",
-					datatype : "json",
-					success : function(data) {
-						var v = JSON.parse(data);
-						for (var i = 0; i < data.length; i++) {
-							var c = "<option value="+v[i].id+" >" + v[i].flmch2
-									+ "</option>";
-							$("#select3").append(c);
-		
-						}
-					}
-				});
-			} else {
-				$("#select3").append('<option >请选择</option>');
-			}
-		}; */
-		
 		function move(data){
-			/* alert(data.value); */
-			//alert("ceshi");
 			$("#erJiUl").css({display:""});
 			var val = data.value;
 			$("#erJiUl").empty();
-			/* alert(val); */
 			$.ajax({
 				type : "get",
 				url : "${pageContext.request.contextPath}/data/class_2_" + val
@@ -206,7 +169,7 @@
 				success : function(data) {
 					var v = JSON.parse(data);
 					for (var i = 0; i < data.length; i++) {
-						var c = "<li value="+v[i].id+" onmouseout='out(event);' ><a href=''>" + v[i].flmch2 + "</li>";
+						var c = "<li value="+v[i].id+" onmouseout='out(event);' ><a href=''onclick='spcx(this);' >" + v[i].flmch2 + "</li>";
 						$("#erJiUl").append(c);
 	
 					}
@@ -220,6 +183,19 @@
 		 function out(){
 			 $("#erJiUl").css({display:"none"});
 		};
+		/* function spcx(data){
+			var params = data.parentNode.value;
+			alert("p:"+p);
+			$.ajax({
+				type : "post",
+				url:"/lzt03/spu/selectProd",
+				data: params,
+				dataType:"json",
+				success : function(data) {
+					alert("data:"+data);
+				};
+			});
+		}; */
 		
 </script>
 </head>
