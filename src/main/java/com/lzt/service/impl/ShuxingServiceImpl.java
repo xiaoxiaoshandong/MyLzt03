@@ -10,6 +10,8 @@ import com.lzt.dao.ShuxingMapper;
 import com.lzt.dao.ShuxingSMapper;
 import com.lzt.entity.Shuxing;
 import com.lzt.entity.ShuxingS;
+import com.lzt.entity.ShuxingVo;
+import com.lzt.entity.Spu;
 import com.lzt.myutils.MyId;
 import com.lzt.service.ShuxingService;
 @Service
@@ -20,7 +22,7 @@ public class ShuxingServiceImpl implements ShuxingService {
 	private ShuxingSMapper shuxingSMapper;
 	
 	/**
-	 * @return 1:Ìí¼Ó³É¹¦ 0£ºÌí¼ÓÊ§°Ü
+	 * @return 1:ï¿½ï¿½Ó³É¹ï¿½ 0ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	public Integer addShuxing(String erjiId, String shuxingName, String shuxingSVal) {
@@ -36,7 +38,7 @@ public class ShuxingServiceImpl implements ShuxingService {
 				shuxing.setShuxingName(shuxingName);
 				integer = shuxingMapper.insert(shuxing);
 				if(integer==0){
-					throw new RuntimeException("Ìí¼ÓÊôÐÔÊ§°Ü£¡");
+					throw new RuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½");
 				}
 				for(int i=0;i<split.length;i++){
 					String sxz = split[i];
@@ -47,7 +49,7 @@ public class ShuxingServiceImpl implements ShuxingService {
 					int insert = shuxingSMapper.insert(shuxingS);
 					add = add+insert;
 					if(insert==0){
-						throw new RuntimeException("Ìí¼ÓÊôÐÔÖµÊ§°Ü");
+						throw new RuntimeException("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÊ§ï¿½ï¿½");
 					}
 				}
 			} catch (Exception e) {
@@ -72,5 +74,11 @@ public class ShuxingServiceImpl implements ShuxingService {
 		// TODO Auto-generated method stub
 		int i = shuxingMapper.updateByPrimaryKeySelective(shuxing);
 		return i;
+	}
+
+	public List<ShuxingVo> selectAll(Spu spu) {
+		// TODO Auto-generated method stub
+		List<ShuxingVo> sv = shuxingMapper.selectAll(spu);
+		return sv;
 	}
 }

@@ -1,5 +1,6 @@
 package com.lzt.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.lzt.entity.ProdVo;
+import com.lzt.entity.ShuxingVo;
 import com.lzt.entity.Spu;
+import com.lzt.service.ShuxingService;
 import com.lzt.service.SpuService;
 
 @RestController  
@@ -24,6 +28,8 @@ public class SpuController {
 	@Autowired(required=false)
 	private SpuService spuService;
 	
+	@Autowired(required=false)
+	private ShuxingService shuxingService;
 	private static Logger log=LoggerFactory.getLogger(SpuController.class);
 	
 	/**
@@ -70,13 +76,19 @@ public class SpuController {
 	}
 	
 	@RequestMapping(value="/selectProd") 
-	public List<ProdVo> selectProd(Spu spu){
+	public Map<String,Object> selectProd(Spu spu){
 		String erjiId = spu.getErjiId();
 		if(erjiId==null){
 			return null;
 		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		List<ShuxingVo> sv = shuxingService.selectAll(spu);
+		
+//		查询商品信息
 		List<ProdVo> prodVos = spuService.selectProd(spu);
-		System.out.println(prodVos);
-		return prodVos;
+		map.put("sv", sv);
+		map.put("prodVos", prodVos);
+		System.out.println(map);
+		return map;
 	}
 }

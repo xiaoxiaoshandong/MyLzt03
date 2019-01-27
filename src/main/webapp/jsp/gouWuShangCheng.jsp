@@ -169,7 +169,7 @@
 				success : function(data) {
 					var v = JSON.parse(data);
 					for (var i = 0; i < data.length; i++) {
-						var c = "<li value="+v[i].id+" onmouseout='out(event);' ><a href=''onclick='spcx(this);' >" + v[i].flmch2 + "</li>";
+						var c = "<li value="+v[i].id+" onmouseout='out(event);' ><a href='shangPinZhanShi.jsp?erjiId="+v[i].id+"' >" + v[i].flmch2 + "</li>";
 						$("#erJiUl").append(c);
 	
 					}
@@ -183,19 +183,6 @@
 		 function out(){
 			 $("#erJiUl").css({display:"none"});
 		};
-		/* function spcx(data){
-			var params = data.parentNode.value;
-			alert("p:"+p);
-			$.ajax({
-				type : "post",
-				url:"/lzt03/spu/selectProd",
-				data: params,
-				dataType:"json",
-				success : function(data) {
-					alert("data:"+data);
-				};
-			});
-		}; */
 		
 </script>
 </head>

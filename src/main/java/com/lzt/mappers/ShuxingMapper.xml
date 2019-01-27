@@ -6,6 +6,18 @@
     <result column="shuxing_name" jdbcType="VARCHAR" property="shuxingName" />
     <result column="erji_id" jdbcType="VARCHAR" property="erjiId" />
   </resultMap>
+   <resultMap id="ShuxingVoMap" type="com.lzt.entity.ShuxingVo">
+    <id column="shuxing_id" jdbcType="VARCHAR" property="shuxingId" />
+    <result column="shuxing_name" jdbcType="VARCHAR" property="shuxingName" />
+    <result column="erji_id" jdbcType="VARCHAR" property="erjiId" />
+    <collection property="shuxingS" resultMap="ShuxingSMap" ></collection>
+  </resultMap>
+  
+   <resultMap id="ShuxingSMap" type="com.lzt.entity.ShuxingS">
+     <id column="shuxing_s_id" jdbcType="VARCHAR" property="shuxingSId" />
+     <result column="shuxing_id" jdbcType="VARCHAR" property="shuxingId" />
+     <result column="shuxing_s_val" jdbcType="VARCHAR" property="shuxingSVal" />
+  </resultMap>
   <sql id="Base_Column_List">
     shuxing_id, shuxing_name, erji_id
   </sql>
@@ -89,4 +101,8 @@
       erji_id = #{erjiId,jdbcType=VARCHAR}
     where shuxing_id = #{shuxingId,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectAll" parameterType="com.lzt.entity.Spu" resultMap="ShuxingVoMap">
+  		SELECT * FROM shuxing s INNER JOIN shuxing_s ss ON s.`shuxing_id`=ss.`shuxing_id` WHERE s.`erji_id`=#{erjiId};
+  </select>
 </mapper>
