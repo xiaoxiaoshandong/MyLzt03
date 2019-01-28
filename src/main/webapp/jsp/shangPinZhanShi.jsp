@@ -18,14 +18,14 @@
 }
 .div_test_2 a{
 	text-decoration : none; /* 去掉a标签下划线*/
+	
 }
 .div_test_2 li{
 	position: relative;
 	list-style-type: none;/* 去掉小黑点 */
 	margin-left:30px;
 	float: left;
-	/* margin-top: -20px;  */
-	top:-20px;
+	margin-top: -12px;  
 }
 .div_spml{
 	width: 1200px;
@@ -58,28 +58,24 @@
 }
 .div_test{
 	width:1200px;
-	line-height:30px;
+	height:30px;
 	background: #FFD700;
 	margin-top:10px;
 	margin-left: 70px
 }
 .div_test_1{
 	width:100px;
-	/* height: 30px; */
+	 height: 30px;
 	background: #FFB6C1;
 	float: left;
 	line-height:30px;/* 改变DIV内字的位置 */
-	/* margin-top:10px;
-	margin-left: 70px */
 }
 .div_test_2{
 	position: relative;
 	width:1000px;
-	line-height:30px;
+	height: 30px;
 	background: #FFA07A;
 	float: left;
-	/* margin-top:10px;
-	margin-left: 70px */
 }
 
 </style>
@@ -88,8 +84,18 @@
 	charset="utf-8"></script>
 <script type="text/javascript">
 	$(function (){
-		var url = location.search;
-		var erjiId = url.substr(8);
+		var url = decodeURI(location.search);/* decodeURI() 解决URL参数乱码问题 */
+		alert("url:"+url);
+		var e=0;
+		for(var k=0;k<url.length;k++){
+			if(url[k]=="&"){
+				e=k-8;
+			}
+		};
+		var erjiId = url.substr(8,e);
+		
+		var f = url.search("name=");
+		var name= url.substr(f+5);
 		$.ajax({
 			type:"get",
 			url:"/lzt03/spu/selectProd",
@@ -99,7 +105,21 @@
 				var sx = result.sv;
 				for(var i = 0; i < sx.length; i++){
 					var s= sx[i];
-					
+					var ss=	s.shuxingS;
+					var c = '<div class="div_test">'
+						 +'<div class="div_test_1">'+s.shuxingName+'</div>'
+						 +'<div class="div_test_2">'
+						 +'<ul>'
+						 for(var j =0; j<ss.length; j++){
+								 var e = ss[j];
+								 var d = '<li><a href="">'+e.shuxingSVal+'</a></li>';
+								 c+=d;
+						 }
+						 +'</ul>'
+						 +'</div>'
+						 +'</div>';
+						 
+						 $("#div_spml").after(c);
 				}
 			}
 		});
@@ -108,9 +128,9 @@
 </head>
 	
 	<div class="div_all">
-		<div class="div_spml">div_spml</div>
+		<div class="div_spml" id="div_spml">div_spml</div>
 		<div class="div_test">
-			<div class="div_test_1">属性名称</div>
+			 <div class="div_test_1">属性名称</div>
 			<div class="div_test_2">
 				<ul>
 					<li><a href="">属性值1</a></li>
@@ -119,8 +139,17 @@
 				</ul>
 			</div>
 		</div>
-		<div class="div_test">div2</div>
-		<div class="div_test">div3</div>
+	<!-- 	<div class="div_test">
+			<div class="div_test_1">属性名称</div>
+			<div class="div_test_2">
+				<ul>
+					<li><a href="">属性值4</a></li>
+					<li><a href="">属性值5</a></li>
+					<li><a href="">属性值6</a></li>
+				</ul>
+			</div>
+		</div> -->
+		<!-- <div class="div_test">div3</div> -->
 		
 		<div class="div_left"></div>
 		<div class="div_top">

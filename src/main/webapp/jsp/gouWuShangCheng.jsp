@@ -169,7 +169,7 @@
 				success : function(data) {
 					var v = JSON.parse(data);
 					for (var i = 0; i < data.length; i++) {
-						var c = "<li value="+v[i].id+" onmouseout='out(event);' ><a href='shangPinZhanShi.jsp?erjiId="+v[i].id+"' >" + v[i].flmch2 + "</li>";
+						var c = "<li value="+v[i].id+" onmouseout='out(event);' ><a href='shangPinZhanShi.jsp?erjiId="+v[i].id+"&name="+encodeURI(v[i].flmch2)+"' >" + v[i].flmch2 + "</li>";
 						$("#erJiUl").append(c);
 	
 					}
