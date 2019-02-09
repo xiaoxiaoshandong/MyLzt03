@@ -80,8 +80,10 @@ input::-webkit-input-placeholder{
 </script>
 </head>
 <body>
-		<img id="bg" src="${pageContext.request.contextPath}/static/img/login.jpg" /> 
-		
+		<img id="bg" src="${pageContext.request.contextPath}/static/img/login.jpg" />
+		<!-- 音乐播放 --> 
+		<EMBED src="${pageContext.request.contextPath}/static/music/fengZhengWu.mp3" 
+		 loop="true" autostart="true"  hidden="true"></EMBED>
 		<div class="content" >	
 			<h3>欢迎进入登录页面</h3>
 		

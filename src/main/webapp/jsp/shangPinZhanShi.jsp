@@ -32,6 +32,13 @@
 	height: 30px;
 	margin-left:70px;
 	background: #FFDEAD	;
+	
+}
+.div_spml span{
+	margin-left:10px;
+	line-height:30px;
+	color: red;
+	
 }
 .div_all{
 	width: 1350px;
@@ -85,7 +92,6 @@
 <script type="text/javascript">
 	$(function (){
 		var url = decodeURI(location.search);/* decodeURI() 解决URL参数乱码问题 */
-		alert("url:"+url);
 		var e=0;
 		for(var k=0;k<url.length;k++){
 			if(url[k]=="&"){
@@ -96,6 +102,7 @@
 		
 		var f = url.search("name=");
 		var name= url.substr(f+5);
+		document.getElementById('div_spml_span').innerHTML = name;
 		$.ajax({
 			type:"get",
 			url:"/lzt03/spu/selectProd",
@@ -128,29 +135,7 @@
 </head>
 	
 	<div class="div_all">
-		<div class="div_spml" id="div_spml">div_spml</div>
-		<div class="div_test">
-			 <div class="div_test_1">属性名称</div>
-			<div class="div_test_2">
-				<ul>
-					<li><a href="">属性值1</a></li>
-					<li><a href="">属性值2</a></li>
-					<li><a href="">属性值3</a></li>
-				</ul>
-			</div>
-		</div>
-	<!-- 	<div class="div_test">
-			<div class="div_test_1">属性名称</div>
-			<div class="div_test_2">
-				<ul>
-					<li><a href="">属性值4</a></li>
-					<li><a href="">属性值5</a></li>
-					<li><a href="">属性值6</a></li>
-				</ul>
-			</div>
-		</div> -->
-		<!-- <div class="div_test">div3</div> -->
-		
+		<div class="div_spml" id="div_spml"><span id="div_spml_span"></span></div>
 		<div class="div_left"></div>
 		<div class="div_top">
 			<div>
