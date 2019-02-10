@@ -34,29 +34,44 @@
 	background: #FFDEAD	;
 	
 }
-.div_spml span{
+.div_spml div:nth-child(1) span{
 	margin-left:10px;
 	line-height:30px;
 	color: red;
 	
+}
+.div_spml div:nth-child(2) span:first-child{
+	margin-left:10px;
+	line-height:30px;
+	color: #090;
+}
+.div_spml div:nth-child(2) span:first-child span{
+	line-height:30px;
+	color: red;
+}
+.div_spml div:nth-child(1){
+	float: left;
+}
+.div_spml div:nth-child(2){
+	float: left;
 }
 .div_all{
 	width: 1350px;
 	height: 1350px;
 }
 .div_left{
-	width: 300px;
-	height: 700px;
+	width: 210px;
+	height: 990px;
 	margin-left:70px;
 	margin-top:50px;
 	background: red;
 	float: left;
 } 
 .div_top{
-	width:860px;
+	width:970px;
 	height: 40px;
 	margin-top:50px;
-	margin-left: 410px;
+	margin-left: 300px;
 	line-height:21px;/* 改变DIV内字的位置 */
 	background: #e4e4e4;
 }
@@ -84,7 +99,43 @@
 	background: #FFA07A;
 	float: left;
 }
-
+.div_centre {
+	width: 970px;
+	height: 950px;
+	background: #FFA07A;
+	float: left;
+	/* margin-top:10px; */
+	margin-left: 20px
+}
+.div_centre >div {
+	width: 220px;
+	height: 300px;
+	background: #FFB6C1;
+	float: left;
+	margin-top:10px;
+	margin-left: 14px
+}
+.div_centre >div :nth-child(1) {
+	width: 218px;
+	height: 200px;
+	background: red;
+	margin-top:1px;
+	margin-left: 1px
+}
+.div_centre >div :nth-child(2) {
+	width: 218px;
+	height: 50px;
+	background: red;
+	margin-top:5px;
+	margin-left: 1px
+}
+.div_centre >div :nth-child(3) {
+	width: 218px;
+	height: 35px;
+	background: red;
+	margin-top:5px;
+	margin-left: 1px
+}
 </style>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js"
@@ -135,7 +186,16 @@
 </head>
 	
 	<div class="div_all">
-		<div class="div_spml" id="div_spml"><span id="div_spml_span"></span></div>
+		<div class="div_spml" id="div_spml">
+			<div>
+				<span id="div_spml_span"></span>
+			</div>
+			<div>
+				<span>
+					共<span>1</span>个商品
+				</span>
+			</div>
+		</div>
 		<div class="div_left"></div>
 		<div class="div_top">
 			<div>
@@ -147,7 +207,24 @@
 			</div>
 			
 		</div>
-		<div class="div_centre">div_centre</div>
+		<div class="div_centre">
+			<div>
+				<div>图片div</div>
+				<div>商品名称div</div>
+				<div>购物车div</div>
+			</div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+		
+		
+		
 		<div class="div_down">div_down</div>
 	</div>
 <body>
