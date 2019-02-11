@@ -89,7 +89,6 @@ public class SpuController {
 		map.put("sv", sv);
 		map.put("prodVos", prodVos);
 		System.out.println(map);
-		System.out.println("111111");
 		return map;
 	}
 }
