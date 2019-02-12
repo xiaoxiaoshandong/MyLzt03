@@ -109,7 +109,7 @@
 }
 .div_centre >div {
 	width: 220px;
-	height: 300px;
+	height: 302px;
 	background: #FFB6C1;
 	float: left;
 	margin-top:10px;
@@ -117,24 +117,64 @@
 }
 .div_centre >div :nth-child(1) {
 	width: 218px;
-	height: 200px;
+	height: 180px;
 	background: red;
 	margin-top:1px;
 	margin-left: 1px
 }
 .div_centre >div :nth-child(2) {
 	width: 218px;
-	height: 50px;
+	height: 20px;
 	background: red;
 	margin-top:5px;
 	margin-left: 1px
 }
 .div_centre >div :nth-child(3) {
 	width: 218px;
-	height: 35px;
+	height: 50px;
 	background: red;
 	margin-top:5px;
 	margin-left: 1px
+}
+.div_centre >div :nth-child(3) a{
+	text-decoration : none; /* 去掉a标签下划线*/
+}
+.div_centre >div :nth-child(4) {
+	width: 218px;
+	height: 30px;
+	background: red;
+	margin-top:5px;
+	margin-left: 1px
+}
+.div_centre >div :nth-child(4) input {
+	width: 218px;
+	height: 32px;
+	background: #e4e4e4;
+	text-align: right; /*placeholder文字居右*/
+	padding-right:20px; /*placeholder文字距右20px*/
+	color: red;
+}
+.sel_btn{
+    width: 200px;
+	height: 21px;
+	margin-top:1px;
+	float: left; /* 使a标签 宽度和高度生效并浮动 */
+	border:1px #26bbdb solid;/* 边框 */
+	font-size: 12px;/* 设置字体大小 */
+	text-align:center;	
+	text-decoration : none; /* 去掉a标签下划线*/
+        }
+.icon-user {
+	display:inline-block;
+	width: 20px;
+	height: 20px; 
+	background-image: url(${pageContext.request.contextPath}/static/img/gwc_logo.png); /*引入图片图片*/
+	background-repeat: no-repeat; /*设置图片不重复*/
+	background-size: 10px 10px; /*图片显示的位置*/
+	background-position: center center;
+	position: relative;
+	left: 0;
+	z-index:5;
 }
 </style>
 <script type="text/javascript"
@@ -209,9 +249,13 @@
 		</div>
 		<div class="div_centre">
 			<div>
-				<div>图片div</div>
-				<div>商品名称div</div>
-				<div>购物车div</div>
+				<div><a href=""><img src= "http://localhost:8080/lzt03/upload/imgs/20190212/1549936241409_419.jpg" width="220" height="300" /></a></div>
+				<div>¥6000</div>
+				<div><a href="">联想470系列游戏本A 幻夜黑 移动联通电信4G</a></div>
+				<div>
+					<!-- <i class="icon-user"></i> -->
+					<a class="sel_btn" href="" >加入购物车</a>
+				</div>
 			</div>
 			<div></div>
 			<div></div>
