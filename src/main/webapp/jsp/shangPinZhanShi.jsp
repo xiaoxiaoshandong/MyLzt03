@@ -144,37 +144,29 @@
 	height: 30px;
 	background: red;
 	margin-top:5px;
-	margin-left: 1px
+	margin-left: 1px;
+	position: relative;
 }
 .div_centre >div :nth-child(4) input {
 	width: 218px;
-	height: 32px;
+	height: 30px;
 	background: #e4e4e4;
 	text-align: right; /*placeholder文字居右*/
 	padding-right:20px; /*placeholder文字距右20px*/
 	color: red;
+	/* background:url(${pageContext.request.contextPath}/static/img/gwc_logo.png) no-repeat left top; */
 }
-.sel_btn{
-    width: 200px;
-	height: 21px;
-	margin-top:1px;
-	float: left; /* 使a标签 宽度和高度生效并浮动 */
-	border:1px #26bbdb solid;/* 边框 */
-	font-size: 12px;/* 设置字体大小 */
-	text-align:center;	
-	text-decoration : none; /* 去掉a标签下划线*/
-        }
 .icon-user {
-	display:inline-block;
+	position: absolute;
 	width: 20px;
 	height: 20px; 
 	background-image: url(${pageContext.request.contextPath}/static/img/gwc_logo.png); /*引入图片图片*/
 	background-repeat: no-repeat; /*设置图片不重复*/
-	background-size: 10px 10px; /*图片显示的位置*/
-	background-position: center center;
+	background-size: 20px 20px; /*图片显示的位置*/
+	background-position: 0px 0px;
 	position: relative;
 	left: 0;
-	z-index:5;
+	z-index:1;
 }
 </style>
 <script type="text/javascript"
@@ -253,11 +245,14 @@
 				<div>¥6000</div>
 				<div><a href="">联想470系列游戏本A 幻夜黑 移动联通电信4G</a></div>
 				<div>
-					<!-- <i class="icon-user"></i> -->
-					<a class="sel_btn" href="" >加入购物车</a>
+					<i class="icon-user"></i>
+					<input type="button" value="添加购物车" onClick="location.href='#'"/>
 				</div>
 			</div>
-			<div></div>
+			<div>
+					<i class="icon-user"></i>
+					<input type="button" value="添加购物车" onClick="location.href='#'"/>
+			</div>
 			<div></div>
 			<div></div>
 			<div></div>
