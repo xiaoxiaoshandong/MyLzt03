@@ -83,7 +83,7 @@
 	height:30px;
 	background: #FFD700;
 	margin-top:10px;
-	margin-left: 70px
+	margin-left: 70px;
 }
 .div_test_1{
 	width:100px;
@@ -105,7 +105,7 @@
 	background: #FFA07A;
 	float: left;
 	/* margin-top:10px; */
-	margin-left: 20px
+	margin-left: 20px;
 }
 .div_centre >div {
 	width: 220px;
@@ -113,28 +113,34 @@
 	background: #FFB6C1;
 	float: left;
 	margin-top:10px;
-	margin-left: 14px
+	margin-left: 14px;
 }
 .div_centre >div :nth-child(1) {
 	width: 218px;
-	height: 180px;
+	height: 200px;
 	background: red;
-	margin-top:1px;
-	margin-left: 1px
+}
+.div_centre >div :nth-child(1) img{
+	border:0;
 }
 .div_centre >div :nth-child(2) {
 	width: 218px;
 	height: 20px;
 	background: red;
-	margin-top:5px;
-	margin-left: 1px
+	margin-top:2px;
+	margin-left: 1px;
 }
 .div_centre >div :nth-child(3) {
 	width: 218px;
-	height: 50px;
+	height: 40px;
 	background: red;
-	margin-top:5px;
-	margin-left: 1px
+	margin-top:3px;
+	margin-left: 1px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box; /* 本属性+下两个属性功能：文本超出容易两行 文本超出部分省略号代替 */
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
 .div_centre >div :nth-child(3) a{
 	text-decoration : none; /* 去掉a标签下划线*/
@@ -143,30 +149,30 @@
 	width: 218px;
 	height: 30px;
 	background: red;
-	margin-top:5px;
+	margin-top:2px;
 	margin-left: 1px;
 	position: relative;
 }
 .div_centre >div :nth-child(4) input {
 	width: 218px;
 	height: 30px;
-	background: #e4e4e4;
+	background: #f6f6f6;
 	text-align: right; /*placeholder文字居右*/
 	padding-right:20px; /*placeholder文字距右20px*/
 	color: red;
-	/* background:url(${pageContext.request.contextPath}/static/img/gwc_logo.png) no-repeat left top; */
+	border: none;
+	margin:0;
 }
 .icon-user {
-	position: absolute;
-	width: 20px;
-	height: 20px; 
-	background-image: url(${pageContext.request.contextPath}/static/img/gwc_logo.png); /*引入图片图片*/
-	background-repeat: no-repeat; /*设置图片不重复*/
-	background-size: 20px 20px; /*图片显示的位置*/
-	background-position: 0px 0px;
-	position: relative;
-	left: 0;
-	z-index:1;
+	position: absolute !important;
+	display: block !important;
+	width: 30px !important;
+	height: 25px !important; 
+	background : url(${pageContext.request.contextPath}/static/img/gwc_logo.png) !important; /*引入图片图片*/
+	background-repeat: no-repeat !important; /*设置图片不重复*/
+	background-size: 20px 30px !important; /*图片显示的位置*/
+	left: 10px;
+	top:1px; 
 }
 </style>
 <script type="text/javascript"
@@ -193,6 +199,7 @@
 			dataType:"json",
 			success : function(result) {
 				var sx = result.sv;
+				var prod = result.prodVos;
 				for(var i = 0; i < sx.length; i++){
 					var s= sx[i];
 					var ss=	s.shuxingS;
@@ -211,6 +218,27 @@
 						 
 						 $("#div_spml").after(c);
 				}
+				
+				for(var i = 0; i < prod.length; i++){
+					var p = prod[i];
+					var pic  =p.myPicture[0].tupianName;
+					var jg = p.jiage;
+					var name = p.chanpinName+" "+p.skuName;
+					/* var name="ceshi"; */
+					 /* alert("pic:"+pic+" jg:"+jg+" name:"+name); */
+					
+					var c ='<div>'
+								+'<div><a href=""><img src= "'+pic+'" /></a></div>'
+								+'<div>¥'+jg+'</div>'
+								+'<div><a href="">'+name+'</a></div>'
+								+'<div>'
+										+'<i class="icon-user"></i>'
+										+'<input type="button" value="添加购物车" onClick="location.href='+"#"+'"/>'
+								+'</div>'
+							+'</div>';
+					$("#div_centre").append(c);
+				}
+				
 			}
 		});
 	});
@@ -220,7 +248,7 @@
 	<div class="div_all">
 		<div class="div_spml" id="div_spml">
 			<div>
-				<span id="div_spml_span"></span>
+				<span id="div_spml_span" ></span>
 			</div>
 			<div>
 				<span>
@@ -239,8 +267,8 @@
 			</div>
 			
 		</div>
-		<div class="div_centre">
-			<div>
+		<div class="div_centre" id="div_centre">
+			<!--  <div>
 				<div><a href=""><img src= "http://localhost:8080/lzt03/upload/imgs/20190212/1549936241409_419.jpg" width="220" height="300" /></a></div>
 				<div>¥6000</div>
 				<div><a href="">联想470系列游戏本A 幻夜黑 移动联通电信4G</a></div>
@@ -248,18 +276,7 @@
 					<i class="icon-user"></i>
 					<input type="button" value="添加购物车" onClick="location.href='#'"/>
 				</div>
-			</div>
-			<div>
-					<i class="icon-user"></i>
-					<input type="button" value="添加购物车" onClick="location.href='#'"/>
-			</div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
-			<div></div>
+			</div>  -->
 		</div>
 		
 		
