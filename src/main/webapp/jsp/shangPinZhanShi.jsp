@@ -174,6 +174,67 @@
 	left: 10px;
 	top:1px; 
 }
+.div_page {
+	width:970px;
+	height: 38px;
+	margin-left: 300px;
+	margin-top: 980px;
+	background-color: red;
+}
+.div_page a{
+	float: left;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 14px;
+    margin-right: 5px;
+    font-size: 14px;/*设置字体的尺寸。*/
+    background-color: #f7f7f7;
+    color: #333;
+   	border: 1px solid #ddd; 
+	text-decoration : none; /* 去掉a标签下划线*/
+}
+.div_page a em{
+	vertical-align: middle;/*把此元素放置在父元素的中部。*/
+	font-style: normal;/*汉字样式*/
+	font-size: 14px;/*设置字体的尺寸。*/
+}
+.div_page .p-skip {
+	margin-left: 20px;
+	background-color: #f7f7f7;
+}
+.div_page .p-skip em{
+	float: left;
+	line-height: 38px;
+	font-style: normal;/*汉字样式*/
+    font-size: 14px;/*设置字体的尺寸。*/
+}
+.div_page .p-skip .input-txt{
+	float: left;
+	width: 30px;
+    height: 30px;
+    margin: 0 3px;
+    line-height: 30px;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #CCC;
+    padding: 3px;
+}
+.div_page .p-skip .btn{
+	float: left;
+    height: 27px;
+    margin-left: 10px;
+    font-size: 14px;
+    line-height: 27px;
+    /* display: inline-block; */
+    border-radius: 2px;/*定义 圆角边框*/
+    background: #F7F7F7;
+    text-align: center;
+    cursor: pointer;	/*鼠标光标*/
+    border: 1px solid #DDD;
+    padding: 4px 13px 5px;
+    color: #666;
+    background-color: #f7f7f7;
+}
 </style>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js"
@@ -279,9 +340,29 @@
 			</div>  -->
 		</div>
 		
-		
-		
-		<div class="div_down">div_down</div>
+		<div class="div_page">
+			<span>
+				<a href="">
+					<i><</i>
+					<em>上一页</em>
+				</a>
+				<a href="">1</a>
+				<a href="">2</a>
+				<a href="">3</a>
+				<a href="">4</a>
+				<a href="">55555</a>
+				<a href="">
+					<em>下一页</em>
+					<i>></i>
+				</a>
+			</span>
+			<span class="p-skip">
+				<em>共<b>222</b>页&nbsp;&nbsp;到第</em>
+				<input class="input-txt" value="1"/>
+				<em>页</em>
+				<a class="btn" href="">确定</a>
+			</span>
+		</div>
 	</div>
 <body>
 </body>
