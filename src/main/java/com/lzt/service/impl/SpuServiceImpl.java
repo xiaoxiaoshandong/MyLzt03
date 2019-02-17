@@ -19,6 +19,7 @@ import com.lzt.entity.ProdVo;
 import com.lzt.entity.Shuxing;
 import com.lzt.entity.Spu;
 import com.lzt.myutils.MyId;
+import com.lzt.myutils.Page;
 import com.lzt.myutils.UpdateFile;
 import com.lzt.service.SpuService;
 @Service
@@ -70,10 +71,19 @@ public class SpuServiceImpl implements SpuService {
 		return map;
 	}
 
-	public List<ProdVo> selectProd(Spu spu) {
+	public List<ProdVo> selectProd(Spu spu, Page page) {
 		// TODO Auto-generated method stub
-		List<ProdVo> prodVos = spuMapper.selectProd(spu);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("erjiId", spu.getErjiId());
+		map.put("m", page.getM());
+		map.put("n", page.getN());
+		List<ProdVo> prodVos = spuMapper.selectProd(map);
 		return prodVos;
+	}
+
+	public Integer selectProdCount(Spu spu) {
+		// TODO Auto-generated method stub
+		return spuMapper.selectProdCount( spu);
 	}
 
 }

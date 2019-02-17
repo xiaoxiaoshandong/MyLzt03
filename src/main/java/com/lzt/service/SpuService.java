@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lzt.entity.ProdVo;
 import com.lzt.entity.Spu;
+import com.lzt.myutils.Page;
 
 public interface SpuService {
 
@@ -16,6 +17,8 @@ public interface SpuService {
 
 	Map<String,Object> selectSpu(Spu spu);
 
-	List<ProdVo> selectProd(Spu spu);
+	List<ProdVo> selectProd(Spu spu,Page page);
+
+	Integer selectProdCount(Spu spu);
 
 }

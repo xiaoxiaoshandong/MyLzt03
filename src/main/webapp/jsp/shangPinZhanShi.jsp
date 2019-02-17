@@ -256,9 +256,11 @@
 		$.ajax({
 			type:"get",
 			url:"/lzt03/spu/selectProd",
-			data: {"erjiId":erjiId},
+			data: {"erjiId":erjiId,"m":0,"n":12},
 			dataType:"json",
 			success : function(result) {
+				var count  = result.count;
+				alert(count);
 				var sx = result.sv;
 				var prod = result.prodVos;
 				for(var i = 0; i < sx.length; i++){

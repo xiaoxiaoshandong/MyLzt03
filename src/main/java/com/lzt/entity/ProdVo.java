@@ -8,11 +8,19 @@ import java.util.List;
  *
  */
 public class ProdVo {
+	private String skuId;
 	private String chanpinName;
 	private String skuName;
 	private BigDecimal jiage;
 	private List<MyPicture> myPicture;
 	
+	
+	public String getSkuId() {
+		return skuId;
+	}
+	public void setSkuId(String skuId) {
+		this.skuId = skuId;
+	}
 	public String getChanpinName() {
 		return chanpinName;
 	}
@@ -39,8 +47,8 @@ public class ProdVo {
 	}
 	@Override
 	public String toString() {
-		return "ProdVo [chanpinName=" + chanpinName + ", skuName=" + skuName + ", jiage=" + jiage + ", myPicture="
-				+ myPicture + "]";
+		return "ProdVo [skuId=" + skuId + ", chanpinName=" + chanpinName + ", skuName=" + skuName + ", jiage=" + jiage
+				+ ", myPicture=" + myPicture + "]";
 	}
 	
 }

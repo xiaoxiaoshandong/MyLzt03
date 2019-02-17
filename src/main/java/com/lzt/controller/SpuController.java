@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.google.gson.Gson;
 import com.lzt.entity.ProdVo;
 import com.lzt.entity.ShuxingVo;
 import com.lzt.entity.Spu;
+import com.lzt.myutils.Page;
 import com.lzt.service.ShuxingService;
 import com.lzt.service.SpuService;
 
@@ -76,7 +76,10 @@ public class SpuController {
 	}
 	
 	@RequestMapping(value="/selectProd") 
-	public Map<String,Object> selectProd(Spu spu){
+	public Map<String,Object> selectProd(Spu spu,Page page){
+	/*	Page page = new Page();
+		page.setM(m);
+		page.setN(n);*/
 		String erjiId = spu.getErjiId();
 		if(erjiId==null){
 			return null;
@@ -84,11 +87,15 @@ public class SpuController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		List<ShuxingVo> sv = shuxingService.selectAll(spu);
 		
+		// 商品总数
+			Integer count = spuService.selectProdCount(spu);
+			map.put("count", count);
 //		查询商品信息
-		List<ProdVo> prodVos = spuService.selectProd(spu);
+		List<ProdVo> prodVos = spuService.selectProd(spu,page);
+		// 商品总数
 		map.put("sv", sv);
 		map.put("prodVos", prodVos);
-		System.out.println(map);
+		System.out.println(prodVos);
 		return map;
 	}
 }
