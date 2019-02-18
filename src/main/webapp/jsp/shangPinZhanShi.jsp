@@ -171,7 +171,7 @@
 	height: 38px;
 	margin-left: 300px;
 	margin-top: 980px;
-	background-color: red;
+	/* background-color: red; */
 }
 .div_page a{
 	float: left;
@@ -181,14 +181,20 @@
     margin-right: 5px;
     font-size: 14px;/*设置字体的尺寸。*/
     background-color: #f7f7f7;
-    color: #333;
+    
    	border: 1px solid #ddd; 
 }
-.div_page a:visited{
-    color: red;
+.div_page a:link{ /*正常，未访问过的链接*/
+	color: red;
+	}
+.div_page a:visited{/*用户已访问过的链接*/
+    border: none;
 } 
-.div_page a:hover{
+.div_page a:hover{ /*当用户鼠标放在链接上时*/
     box-shadow: 0 1px 1px red;/*添加阴影*/
+}
+.div_page a:active{ /*链接被点击的那一刻*/
+	color:#99dd6b;
 }
 a {
 	text-decoration: none; /*去掉下划线*/
@@ -274,7 +280,7 @@ a {
 				}
 				for(var i=0;i<fy_total;i++){
 					var j = i+1;
-					var c=  '<a href="javascript:;"  onclick="fy_xz(this);">'+j+'</a>';
+					var c=  '<a href="javascript:void(0);"  onclick="fy_xz(this);">'+j+'</a>';
 					d = d+c;
 				}
 				$("#fenYe_one").children(":first").after(d);
@@ -353,7 +359,6 @@ a {
 				}
 			}
 		});
-		
 	};
 </script>
 </head>
@@ -403,7 +408,7 @@ a {
 				<em>共<b id="total_page"></b>页&nbsp;&nbsp;到第</em>
 				<input class="input-txt" value="1"/>
 				<em>页</em>
-				<a class="btn" href="">确定</a>
+				<a class="btn" href="javascript:;">确定</a>
 			</span>
 		</div>
 	</div>
