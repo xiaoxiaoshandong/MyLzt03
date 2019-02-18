@@ -37,19 +37,20 @@ public class SkuController {
 		if(spuId=="" ||spuId==null || skuName=="" || skuName==null || kucun==null || jiage==null || shuxingSId==null || shuxingSId==""){
 			return "0";
 		}
-		/* Random random = new Random();
+		 Random random = new Random();
 		 int cont =0;
-		 for(int i=0;i<200;i++){
+		 for(int i=0;i<50;i++){
 		
 		List<String> spuIds  = new ArrayList<String>();
 		List<String> skuNames  = new ArrayList<String>();
 		List<Integer> kucuns  = new ArrayList<Integer>();
 		List<BigDecimal> jiages  = new ArrayList<BigDecimal>();
 	
-		spuIds.add("154580283280383");
-		spuIds.add("154580291627821");
-		spuIds.add("154580296961767");
-		spuIds.add("15458030068486");
+		spuIds.add("155012832910688");
+		spuIds.add("15501283525208");
+		spuIds.add("155012837660316");
+		spuIds.add("155012840028026");
+		spuIds.add("15501326512630");
 		spuId = spuIds.get(random.nextInt(spuIds.size()));
 		
 		skuNames.add("sku名称测试1");
@@ -123,9 +124,9 @@ public class SkuController {
 		 integer = skuService.insertSku(spuId,skuName,kucun,jiage,shuxingSId);
 		 cont++;
 		 }
-		 System.out.println("总共执行次数："+cont);*/
+		 System.out.println("总共执行次数："+cont);
 		 
-		integer = skuService.insertSku(spuId,skuName,kucun,jiage,shuxingSId);
+		/*integer = skuService.insertSku(spuId,skuName,kucun,jiage,shuxingSId);*/
 		return integer+"";
 	}
 }

@@ -100,7 +100,6 @@
 		};
 		function sxmxg(){
 			var params = $("#xgsxm").serialize();
-			alert(params);
 			$.ajax({
 				type:"POST",
 				url:"/lzt03/shuxing/update",
@@ -125,7 +124,6 @@
 				data:params,
 				dataType:'json',
 				success : function(data) {
-					alert(data);
 					if(data==2){
 						alert("请输入参数");
 					}else if(data==0){

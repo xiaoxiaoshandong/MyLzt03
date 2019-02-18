@@ -14,11 +14,6 @@
 	border:1px #26bbdb solid;/* 边框 */
 	font-size: 12px;/* 设置字体大小 */
 	text-align:center;	
-	text-decoration : none; /* 去掉a标签下划线*/
-}
-.div_test_2 a{
-	text-decoration : none; /* 去掉a标签下划线*/
-	
 }
 .div_test_2 li{
 	position: relative;
@@ -142,9 +137,6 @@
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
-.div_centre >div :nth-child(3) a{
-	text-decoration : none; /* 去掉a标签下划线*/
-}
 .div_centre >div :nth-child(4) {
 	width: 218px;
 	height: 30px;
@@ -191,7 +183,15 @@
     background-color: #f7f7f7;
     color: #333;
    	border: 1px solid #ddd; 
-	text-decoration : none; /* 去掉a标签下划线*/
+}
+.div_page a:visited{
+    color: red;
+} 
+.div_page a:hover{
+    box-shadow: 0 1px 1px red;/*添加阴影*/
+}
+a {
+	text-decoration: none; /*去掉下划线*/
 }
 .div_page a em{
 	vertical-align: middle;/*把此元素放置在父元素的中部。*/
@@ -219,22 +219,21 @@
     border: 1px solid #CCC;
     padding: 3px;
 }
-.div_page .p-skip .btn{
+/* .div_page .p-skip .btn{
 	float: left;
     height: 27px;
     margin-left: 10px;
     font-size: 14px;
     line-height: 27px;
-    /* display: inline-block; */
-    border-radius: 2px;/*定义 圆角边框*/
+    border-radius: 2px;
     background: #F7F7F7;
     text-align: center;
-    cursor: pointer;	/*鼠标光标*/
+    cursor: pointer;	
     border: 1px solid #DDD;
     padding: 4px 13px 5px;
     color: #666;
     background-color: #f7f7f7;
-}
+} */
 </style>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js"
@@ -252,6 +251,7 @@
 		
 		var f = url.search("name=");
 		var name= url.substr(f+5);
+		document.getElementById('div_spml_span').value = erjiId;
 		document.getElementById('div_spml_span').innerHTML = name;
 		$.ajax({
 			type:"get",
@@ -259,10 +259,26 @@
 			data: {"erjiId":erjiId,"m":0,"n":12},
 			dataType:"json",
 			success : function(result) {
+				/*总页数*/
+				var total  = result.total;
 				var count  = result.count;
-				alert(count);
 				var sx = result.sv;
 				var prod = result.prodVos;
+				
+				document.getElementById("total_page").innerText = total;
+				document.getElementById("total_sp").innerText = count;
+				var d ="";
+				var fy_total=total;
+				if(total>5){
+					fy_total=5;
+				}
+				for(var i=0;i<fy_total;i++){
+					var j = i+1;
+					var c=  '<a href="javascript:;"  onclick="fy_xz(this);">'+j+'</a>';
+					d = d+c;
+				}
+				$("#fenYe_one").children(":first").after(d);
+				
 				for(var i = 0; i < sx.length; i++){
 					var s= sx[i];
 					var ss=	s.shuxingS;
@@ -305,17 +321,52 @@
 			}
 		});
 	});
+	function fy_xz(data){
+		var erjiId = document.getElementById('div_spml_span').value;
+		var val  = data.text;
+		var m = (val-1)*12;
+		/* alert("m:"+m+" erjiId:"+erjiId); */
+		$.ajax({
+			type:"get",
+			data: {"erjiId":erjiId,"m":m,"n":12},
+			url:"/lzt03/spu/selectProd",
+			dataType:"json",
+			success : function(result) {
+				var prod = result.prodVos;
+				/*商品展示区 初始化*/
+				$("#div_centre").empty();
+				for(var i = 0; i < prod.length; i++){
+					var p = prod[i];
+					var pic  =p.myPicture[0].tupianName;
+					var jg = p.jiage;
+					var name = p.chanpinName+" "+p.skuName;
+					var c ='<div>'
+								+'<div><a href=""><img src= "'+pic+'" /></a></div>'
+								+'<div>¥'+jg+'</div>'
+								+'<div><a href="">'+name+'</a></div>'
+								+'<div>'
+										+'<i class="icon-user"></i>'
+										+'<input type="button" value="添加购物车" onClick="location.href='+"#"+'"/>'
+								+'</div>'
+							+'</div>';
+					$("#div_centre").append(c);
+				}
+			}
+		});
+		
+	};
 </script>
 </head>
 	
 	<div class="div_all">
 		<div class="div_spml" id="div_spml">
 			<div>
+				<input type="hidden" id="div_spml_erjiId"/>
 				<span id="div_spml_span" ></span>
 			</div>
 			<div>
 				<span>
-					共<span>1</span>个商品
+					共<span id="total_sp"></span>个商品
 				</span>
 			</div>
 		</div>
@@ -330,36 +381,26 @@
 			</div>
 			
 		</div>
-		<div class="div_centre" id="div_centre">
-			<!--  <div>
-				<div><a href=""><img src= "http://localhost:8080/lzt03/upload/imgs/20190212/1549936241409_419.jpg" width="220" height="300" /></a></div>
-				<div>¥6000</div>
-				<div><a href="">联想470系列游戏本A 幻夜黑 移动联通电信4G</a></div>
-				<div>
-					<i class="icon-user"></i>
-					<input type="button" value="添加购物车" onClick="location.href='#'"/>
-				</div>
-			</div>  -->
-		</div>
+		<div class="div_centre" id="div_centre"></div>
 		
 		<div class="div_page">
-			<span>
-				<a href="">
+			<span id="fenYe_one">
+				<a href="javascript:;">
 					<i><</i>
 					<em>上一页</em>
 				</a>
-				<a href="">1</a>
+				<!-- <a href="">1</a>
 				<a href="">2</a>
 				<a href="">3</a>
 				<a href="">4</a>
-				<a href="">55555</a>
-				<a href="">
+				<a href="">55555</a> -->
+				<a href="javascript:;">
 					<em>下一页</em>
 					<i>></i>
 				</a>
 			</span>
 			<span class="p-skip">
-				<em>共<b>222</b>页&nbsp;&nbsp;到第</em>
+				<em>共<b id="total_page"></b>页&nbsp;&nbsp;到第</em>
 				<input class="input-txt" value="1"/>
 				<em>页</em>
 				<a class="btn" href="">确定</a>

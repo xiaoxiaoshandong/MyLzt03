@@ -77,9 +77,6 @@ public class SpuController {
 	
 	@RequestMapping(value="/selectProd") 
 	public Map<String,Object> selectProd(Spu spu,Page page){
-	/*	Page page = new Page();
-		page.setM(m);
-		page.setN(n);*/
 		String erjiId = spu.getErjiId();
 		if(erjiId==null){
 			return null;
@@ -88,14 +85,22 @@ public class SpuController {
 		List<ShuxingVo> sv = shuxingService.selectAll(spu);
 		
 		// 商品总数
-			Integer count = spuService.selectProdCount(spu);
+		int total =0 ;
+			int count = spuService.selectProdCount(spu);
+			System.out.println("count:"+count);
+			if(count%12 !=0){
+				total = count/12+1;
+			}else{
+				total = count/12;
+			}
+			map.put("total", total);
 			map.put("count", count);
 //		查询商品信息
 		List<ProdVo> prodVos = spuService.selectProd(spu,page);
 		// 商品总数
 		map.put("sv", sv);
 		map.put("prodVos", prodVos);
-		System.out.println(prodVos);
+		System.out.println(map);
 		return map;
 	}
 }

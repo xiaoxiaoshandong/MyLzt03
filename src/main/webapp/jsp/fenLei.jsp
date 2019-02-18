@@ -212,17 +212,7 @@
 				</tr>
 			</thead>
 		</table>
-		<!-- <div id="toolbar">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"
-				onclick="newUser()">New User</a> <a href="#"
-				class="easyui-linkbutton" iconCls="icon-edit" plain="true"
-				onclick="editUser()">Edit User</a> <a href="#"
-				class="easyui-linkbutton" iconCls="icon-remove" plain="true"
-				onclick="destroyUser()">Remove User</a>
-		</div> -->
 	</div> 
 	
-	    <!-- <div data-options="region:'west',title:'West',split:true" style="width:300px;"></div>
-	    <div data-options="region:'center',title:'center title'" style="padding:5px;background:#eee;"></div> -->
 </body>
 </html>
