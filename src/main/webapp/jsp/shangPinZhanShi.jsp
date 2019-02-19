@@ -225,21 +225,6 @@ a {
     border: 1px solid #CCC;
     padding: 3px;
 }
-/* .div_page .p-skip .btn{
-	float: left;
-    height: 27px;
-    margin-left: 10px;
-    font-size: 14px;
-    line-height: 27px;
-    border-radius: 2px;
-    background: #F7F7F7;
-    text-align: center;
-    cursor: pointer;	
-    border: 1px solid #DDD;
-    padding: 4px 13px 5px;
-    color: #666;
-    background-color: #f7f7f7;
-} */
 </style>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js"
@@ -273,17 +258,8 @@ a {
 				
 				document.getElementById("total_page").innerText = total;
 				document.getElementById("total_sp").innerText = count;
-				var d ="";
-				var fy_total=total;
-				if(total>5){
-					fy_total=5;
-				}
-				for(var i=0;i<fy_total;i++){
-					var j = i+1;
-					var c=  '<a href="javascript:void(0);"  onclick="fy_xz(this);">'+j+'</a>';
-					d = d+c;
-				}
-				$("#fenYe_one").children(":first").after(d);
+				/* var d =""; */
+				var d = fy_show(total,null); 
 				
 				for(var i = 0; i < sx.length; i++){
 					var s= sx[i];
@@ -310,7 +286,6 @@ a {
 					var jg = p.jiage;
 					var name = p.chanpinName+" "+p.skuName;
 					/* var name="ceshi"; */
-					 /* alert("pic:"+pic+" jg:"+jg+" name:"+name); */
 					
 					var c ='<div>'
 								+'<div><a href=""><img src= "'+pic+'" /></a></div>'
@@ -328,10 +303,45 @@ a {
 		});
 	});
 	function fy_xz(data){
+		// 二级商品ID
 		var erjiId = document.getElementById('div_spml_span').value;
+		// 总页数
+		var total = document.getElementById('total_page').innerText;
+		//获取 当前页数
 		var val  = data.text;
+	// 获取 上一次点击的页数
+		var lastVal = document.getElementById('input-txt').value;
+	//判断是否为数字
+		var isNum = isNumber(lastVal);
+		if(isNum==false){
+			alert("请输入数字！");
+			return;
+		}
+		if(val=="<上一页"){
+			if(lastVal>1 && lastVal<total){
+				val = parseInt(lastVal)-1;
+			}else {
+				return;
+			}
+		}else if(val=="下一页>"){
+			if(lastVal<total && lastVal>1){
+				val = parseInt(lastVal)+1;
+			}else{
+				return;
+			}
+		}else if(val=="确定"){
+			alert("lastVal:"+lastVal);
+			if(lastVal<=total && lastVal>=1){
+				val = parseInt(lastVal);
+			}else{
+				alert("输入查询页数有误！");
+				return ;
+			}
+		}
+		// 当前页赋值 
+		document.getElementById('input-txt').value=val;
 		var m = (val-1)*12;
-		/* alert("m:"+m+" erjiId:"+erjiId); */
+		fy_show(total,val);
 		$.ajax({
 			type:"get",
 			data: {"erjiId":erjiId,"m":m,"n":12},
@@ -360,6 +370,58 @@ a {
 			}
 		});
 	};
+	
+	function fy_show(total,sel_page){
+		/*
+			total <=5         按顺序展示
+			total >5 时  
+				        sel_page=null 时  	按顺序展示
+						sel_page=1时 		 start:0   end:5
+				        sel_page=2时 		 start:0   end:5
+				        sel_page=total  时   start:total-4  end:total
+				        sel_page=total-1 时 start:total-4  end:total
+				        sel_page（其他）时  	 start:sel_page-2    end: sel_pag+2
+
+		*/
+		document.getElementById('fenYe_one').innerHTML='';
+		var d='<a href="javascript:;" onclick="fy_xz(this);"><i><</i><em>上一页</em></a>';
+		var  start=0;
+		var  end=0;
+		if(total<=5){
+			for(var i=0;i<total;i++){
+				var j = i+1;
+				var c=  '<a href="javascript:void(0);"  onclick="fy_xz(this);">'+j+'</a>';
+				d = d+c;
+			}
+		}else{
+			if(sel_page==1 || sel_page==2 || sel_page==null){
+				start=1;
+				end=5;
+			}else if(sel_page==total || sel_page==total-1){
+				start=parseInt(total)-4;
+				end=parseInt(total);
+			}else{
+				start=parseInt(sel_page)-2;   
+				end=parseInt(sel_page)+2;
+			}
+			for(var i=start;i<=end;i++){
+				var c=  '<a href="javascript:void(0);"  onclick="fy_xz(this);">'+i+'</a>';
+				d = d+c;
+			}
+		}
+		d=d+'<a href="javascript:;" onclick="fy_xz(this);"><em>下一页</em><i>></i></a>';
+		$("#fenYe_one").append(d);
+	}; 
+	
+	//判断是否为数字
+	function isNumber(value) {
+    var patrn = /^(-)?\d+(\.\d+)?$/;
+    if (patrn.exec(value) == null || value == "") {
+        return false
+    } else {
+        return true
+    }
+}
 </script>
 </head>
 	
@@ -390,25 +452,25 @@ a {
 		
 		<div class="div_page">
 			<span id="fenYe_one">
-				<a href="javascript:;">
+				<!-- <a href="javascript:;">
 					<i><</i>
 					<em>上一页</em>
 				</a>
-				<!-- <a href="">1</a>
+				<a href="">1</a>
 				<a href="">2</a>
 				<a href="">3</a>
 				<a href="">4</a>
-				<a href="">55555</a> -->
+				<a href="">55555</a> 
 				<a href="javascript:;">
 					<em>下一页</em>
 					<i>></i>
-				</a>
+				</a>-->
 			</span>
 			<span class="p-skip">
 				<em>共<b id="total_page"></b>页&nbsp;&nbsp;到第</em>
-				<input class="input-txt" value="1"/>
+				<input id="input-txt" class="input-txt"  value="1"/>
 				<em>页</em>
-				<a class="btn" href="javascript:;">确定</a>
+				<a class="btn" href="javascript:;" onclick="fy_xz(this);">确定</a>
 			</span>
 		</div>
 	</div>
