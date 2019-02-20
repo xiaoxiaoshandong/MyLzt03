@@ -77,6 +77,8 @@ public class SpuServiceImpl implements SpuService {
 		map.put("erjiId", spu.getErjiId());
 		map.put("m", page.getM());
 		map.put("n", page.getN());
+		/*map.put("orderBy", null);
+		map.put("sc", null);*/
 		List<ProdVo> prodVos = spuMapper.selectProd(map);
 		return prodVos;
 	}

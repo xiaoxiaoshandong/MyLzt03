@@ -15,9 +15,15 @@
 	font-size: 12px;/* 设置字体大小 */
 	text-align:center;	
 }
+ul{
+	list-style: none;
+}
+li{
+	list-style-type: none;/* 去掉小黑点 */
+}
 .div_test_2 li{
 	position: relative;
-	list-style-type: none;/* 去掉小黑点 */
+	
 	margin-left:30px;
 	float: left;
 	margin-top: -12px;  
@@ -54,14 +60,6 @@
 	width: 1350px;
 	height: 1350px;
 }
-.div_left{
-	width: 210px;
-	height: 990px;
-	margin-left:70px;
-	margin-top:50px;
-	background: red;
-	float: left;
-} 
 .div_top{
 	width:970px;
 	height: 40px;
@@ -99,7 +97,6 @@
 	height: 950px;
 	background: #FFA07A;
 	float: left;
-	/* margin-top:10px; */
 	margin-left: 20px;
 }
 .div_centre >div {
@@ -171,7 +168,6 @@
 	height: 38px;
 	margin-left: 300px;
 	margin-top: 980px;
-	/* background-color: red; */
 }
 .div_page a{
 	float: left;
@@ -224,6 +220,80 @@ a {
     text-align: center;
     border: 1px solid #CCC;
     padding: 3px;
+}
+.div_left{
+	position:relative;
+	width: 210px;
+	height: 990px;
+	margin-left:70px;
+	margin-top:50px;
+	background: red;
+	float: left;
+} 
+.div_left .mt {
+	line-height: 36px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    background-color: #CCC;
+}
+.div_left .mt h3{
+    font-size: 14px;
+    margin: 0px;
+}
+.div_left span {
+	position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 40px;
+    height: 20px;
+   	font-size:9px;/*设置 字体大小*/
+}
+.div_left ul{
+	width: 210px;
+	height: 945px;
+	background-color: #f7f7f7;
+	padding: 0px;
+	margin: 0px;
+}
+.div_left li{
+	width: 210px;
+	height: 228px;
+	background-color: red;
+	padding: 0px;
+	margin: 10px 0px 0px 0px;
+}
+.div_left .left_sp{
+	width: 210px;
+	height: 228px;
+	background: #FFB6C1;
+	float: left;
+}
+.div_left .left_sp_01{
+	width: 190px;
+	height: 158px;
+	background: yellow;
+	margin: 0px 10px 0px 10px;
+}
+.div_left .left_sp_02{
+	width: 190px;
+	height: 20px;
+	background: #dd7e6b;
+	margin: 0px 10px 0px 10px;
+}
+.div_left .left_sp_03{
+	width: 190px;
+	height: 45px;
+	background: #9b6e65;
+	margin: 0px 10px 0px 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box; /* 本属性+下两个属性功能：文本超出容易两行 文本超出部分省略号代替 */
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.div_left .left_sp_01 .left_sp_01_img{
+	width: 190px;
+	height: 158px;
 }
 </style>
 <script type="text/javascript"
@@ -309,9 +379,9 @@ a {
 		var total = document.getElementById('total_page').innerText;
 		//获取 当前页数
 		var val  = data.text;
-	// 获取 上一次点击的页数
+		// 获取 上一次点击的页数
 		var lastVal = document.getElementById('input-txt').value;
-	//判断是否为数字
+		//判断是否为数字
 		var isNum = isNumber(lastVal);
 		if(isNum==false){
 			alert("请输入数字！");
@@ -437,7 +507,34 @@ a {
 				</span>
 			</div>
 		</div>
-		<div class="div_left"></div>
+		<div class="div_left">
+				<span>广告</span>
+				<div class="mt">
+					<h3>商品精选</h3>
+				</div>
+				<ul>
+					<li>
+						<div class="left_sp">
+							<div class="left_sp_01">
+								<a  href="">
+									<img class="left_sp_01_img" src="http://localhost:8080/lzt03/upload/imgs/20190214/1550128329137_779.jpg">
+								</a>
+							</div>
+							<div class="left_sp_02">
+							  ¥2999
+							</div>
+							<div class="left_sp_03">
+								<a class="left_sp_03_name" href="">
+									测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据								
+								</a>
+							</div>
+						</div>
+					</li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+		</div>
 		<div class="div_top">
 			<div>
 				<a href="">综合排序</a> 
