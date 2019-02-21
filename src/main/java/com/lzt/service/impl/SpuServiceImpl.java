@@ -71,16 +71,30 @@ public class SpuServiceImpl implements SpuService {
 		return map;
 	}
 
-	public List<ProdVo> selectProd(Spu spu, Page page) {
+	public Map<String,Object> selectProd(Spu spu, Page page,Integer orderBy,Integer sc) {
 		// TODO Auto-generated method stub
+		Map<String,Object> maps = new HashMap<String,Object>();
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("erjiId", spu.getErjiId());
 		map.put("m", page.getM());
 		map.put("n", page.getN());
-		/*map.put("orderBy", null);
-		map.put("sc", null);*/
+		map.put("orderBy", orderBy);
+		map.put("sc", sc);
 		List<ProdVo> prodVos = spuMapper.selectProd(map);
-		return prodVos;
+		
+		
+		Map<String,Object> map1 = new HashMap<String,Object>();
+		map1.put("erjiId", spu.getErjiId());
+		map1.put("m", 0);
+		map1.put("n", 4);
+		//  orderBy=null时 综合查询  1时:销量查询  2:价格查询  3:评论数  4:上架时间
+		map1.put("orderBy", 2);
+	//  sc=0时 正序查询
+		map1.put("sc",0);
+		List<ProdVo> prodVos1= spuMapper.selectProd(map1);
+		maps.put("pv", prodVos);
+		maps.put("pv1", prodVos1);
+		return maps;
 	}
 
 	public Integer selectProdCount(Spu spu) {

@@ -325,6 +325,7 @@ a {
 				var count  = result.count;
 				var sx = result.sv;
 				var prod = result.prodVos;
+				var prod1 = result.prodVos1;
 				
 				document.getElementById("total_page").innerText = total;
 				document.getElementById("total_sp").innerText = count;
@@ -369,9 +370,26 @@ a {
 					$("#div_centre").append(c);
 				}
 				
+				for(var i=0;i<prod1.length; i++){
+					var p = prod1[i];
+					var pic  =p.myPicture[0].tupianName;
+					var jg = p.jiage;
+					var name = p.chanpinName+" "+p.skuName;
+					var c ='<li>'
+								+'<div class="left_sp">'
+									+'<div class="left_sp_01">'
+										+'<a  href=""><img class="left_sp_01_img" src="'+pic+'"></a>'
+									+'</div>'
+									+'<div class="left_sp_02">¥'+jg+'</div>'
+									+'<div class="left_sp_03"><a class="left_sp_03_name" href="">'+name+'</a></div>'
+								+'</div>'
+							+'</li>';
+			$("#div_left_ul").append(c);
+				}
 			}
 		});
 	});
+	
 	function fy_xz(data){
 		// 二级商品ID
 		var erjiId = document.getElementById('div_spml_span').value;
@@ -411,10 +429,18 @@ a {
 		// 当前页赋值 
 		document.getElementById('input-txt').value=val;
 		var m = (val-1)*12;
+		//分页功能 
 		fy_show(total,val);
+		
+		// 获取查询排序条件
+		var orderBy = parseInt($("#ob_id").val());
+		
+		// 获取排序规则
+		var sc = parseInt($("#sc_id").val());
+		alert("orderBy:"+orderBy+" sc:"+sc); 
 		$.ajax({
 			type:"get",
-			data: {"erjiId":erjiId,"m":m,"n":12},
+			data: {"erjiId":erjiId,"m":m,"n":12,"orderBy":orderBy,"sc":sc},
 			url:"/lzt03/spu/selectProd",
 			dataType:"json",
 			success : function(result) {
@@ -441,6 +467,7 @@ a {
 		});
 	};
 	
+	/*分页功能*/
 	function fy_show(total,sel_page){
 		/*
 			total <=5         按顺序展示
@@ -492,6 +519,28 @@ a {
         return true
     }
 }
+	function add_paixu(data){
+		var val = data.text;
+		/* alert("val:"+val); */
+		if(val=="销量"){
+			$("#ob_id").value=1;
+		}else if(val== "价格"){
+			$("#ob_id").val(2);
+			/* var jg_val = $("jiage_id").value;
+			if(parseInt(jg_val)==0){
+				$("jiage_id").value=1;
+			}else if(parseInt(jg_val)==1){
+				$("jiage_id").value=0;
+			} */
+			
+		}else if(val== "评论数"){
+			$("#ob_id").value=3;
+		}else if(val== "上架时间"){
+			$("#ob_id").value=4;
+		}
+		 fy_xz(this);
+	};
+	
 </script>
 </head>
 	
@@ -512,57 +561,24 @@ a {
 				<div class="mt">
 					<h3>商品精选</h3>
 				</div>
-				<ul>
-					<li>
-						<div class="left_sp">
-							<div class="left_sp_01">
-								<a  href="">
-									<img class="left_sp_01_img" src="http://localhost:8080/lzt03/upload/imgs/20190214/1550128329137_779.jpg">
-								</a>
-							</div>
-							<div class="left_sp_02">
-							  ¥2999
-							</div>
-							<div class="left_sp_03">
-								<a class="left_sp_03_name" href="">
-									测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据								
-								</a>
-							</div>
-						</div>
-					</li>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
+				<ul id="div_left_ul"></ul>
 		</div>
 		<div class="div_top">
 			<div>
 				<a href="">综合排序</a> 
 				<a href="">销量</a>
-				<a href="">价格</a> 
+				<a href="" onclick="add_paixu(this);" id="jiage_id">价格</a> 
 				<a href="">评论数</a>
 				<a href="">上架时间</a>
+				<input type="text" id="ob_id" />
+				<input type="hidden" id="sc_id"  value="0" />
 			</div>
 			
 		</div>
 		<div class="div_centre" id="div_centre"></div>
 		
 		<div class="div_page">
-			<span id="fenYe_one">
-				<!-- <a href="javascript:;">
-					<i><</i>
-					<em>上一页</em>
-				</a>
-				<a href="">1</a>
-				<a href="">2</a>
-				<a href="">3</a>
-				<a href="">4</a>
-				<a href="">55555</a> 
-				<a href="javascript:;">
-					<em>下一页</em>
-					<i>></i>
-				</a>-->
-			</span>
+			<span id="fenYe_one"></span>
 			<span class="p-skip">
 				<em>共<b id="total_page"></b>页&nbsp;&nbsp;到第</em>
 				<input id="input-txt" class="input-txt"  value="1"/>

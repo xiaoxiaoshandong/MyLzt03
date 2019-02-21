@@ -150,11 +150,26 @@
   		SELECT sk.sku_id,pic.tupian_name,sp.chanpin_name ,sk.sku_name,sk.jiage
 		FROM my_picture pic INNER JOIN spu sp ON pic.spu_id=sp.spu_id INNER JOIN sku sk ON sp.spu_id=sk.spu_id
 		WHERE sp.erji_id=#{erjiId} GROUP BY sk.sku_id
-		<if test="orderBy==0">
-			ORDER BY jiage
-		</if>
-		<if test="sc != null">
-			DESC #{sc}
+		<if test="orderBy != null and sc != null">
+			ORDER BY 
+			<if test="orderBy==1">
+				xiaoLiang
+			</if> 
+			<if test="orderBy==2">
+				jiage
+			</if> 
+			<if test="orderBy==3">
+				pingLun
+			</if>
+			<if test="orderBy==4">
+				startTime
+			</if>
+			<if test="sc == 0">
+				ASC
+			</if>
+			<if test="sc == 1">
+				DESC
+			</if>
 		</if>
 		<if test="m != null and n !=null">
         	LIMIT #{m},#{n}

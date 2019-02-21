@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,11 +77,12 @@ public class SpuController {
 	}
 	
 	@RequestMapping(value="/selectProd") 
-	public Map<String,Object> selectProd(Spu spu,Page page){
+	public Map<String,Object> selectProd(Spu spu,Page page, @Param("orderBy") Integer orderBy,@Param("sc") Integer sc){
 		String erjiId = spu.getErjiId();
 		if(erjiId==null){
 			return null;
 		}
+		// 商品属性
 		Map<String,Object> map = new HashMap<String,Object>();
 		List<ShuxingVo> sv = shuxingService.selectAll(spu);
 		
@@ -96,11 +98,15 @@ public class SpuController {
 			map.put("total", total);
 			map.put("count", count);
 //		查询商品信息
-		List<ProdVo> prodVos = spuService.selectProd(spu,page);
-		// 商品总数
+			Map<String,Object> pv = spuService.selectProd(spu,page,orderBy,sc);
+			Object prodVos = pv.get("pv");
+			Object prodVos1 = pv.get("pv1");
+			
 		map.put("sv", sv);
 		map.put("prodVos", prodVos);
-		System.out.println(map);
+		System.out.println(prodVos);
+		map.put("prodVos1", prodVos1);
+		/*System.out.println(map);*/
 		return map;
 	}
 }
