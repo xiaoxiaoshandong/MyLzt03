@@ -87,7 +87,7 @@ public class SpuServiceImpl implements SpuService {
 		map1.put("erjiId", spu.getErjiId());
 		map1.put("m", 0);
 		map1.put("n", 4);
-		//  orderBy=null时 综合查询  1时:销量查询  2:价格查询  3:评论数  4:上架时间
+		//  orderBy=0时 综合查询  1时:销量查询  2:价格查询  3:评论数  4:上架时间
 		map1.put("orderBy", 2);
 	//  sc=0时 正序查询
 		map1.put("sc",0);

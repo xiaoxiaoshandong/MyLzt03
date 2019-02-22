@@ -300,7 +300,10 @@ a {
 	src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js"
 	charset="utf-8"></script>
 <script type="text/javascript">
-	$(function (){
+	$(function(){
+		jq_all();
+	});
+	function jq_all(){
 		var url = decodeURI(location.search);/* decodeURI() 解决URL参数乱码问题 */
 		var e=0;
 		for(var k=0;k<url.length;k++){
@@ -314,10 +317,14 @@ a {
 		var name= url.substr(f+5);
 		document.getElementById('div_spml_span').value = erjiId;
 		document.getElementById('div_spml_span').innerHTML = name;
+		// 获取查询排序条件
+		var orderBy = $("#ob_id").val();
+		// 获取排序规则
+		var sc = $("#sc_id").val();
 		$.ajax({
 			type:"get",
 			url:"/lzt03/spu/selectProd",
-			data: {"erjiId":erjiId,"m":0,"n":12},
+			data: {"erjiId":erjiId,"m":0,"n":12,"orderBy":orderBy,"sc":sc},
 			dataType:"json",
 			success : function(result) {
 				/*总页数*/
@@ -336,12 +343,12 @@ a {
 					var s= sx[i];
 					var ss=	s.shuxingS;
 					var c = '<div class="div_test">'
-						 +'<div class="div_test_1">'+s.shuxingName+'</div>'
+						 +'<div class="div_test_1" id="'+s.shuxingId+'">'+s.shuxingName+'</div>'
 						 +'<div class="div_test_2">'
 						 +'<ul>'
 						 for(var j =0; j<ss.length; j++){
 								 var e = ss[j];
-								 var d = '<li><a href="">'+e.shuxingSVal+'</a></li>';
+								 var d = '<li><a href="" id="'+e.shuxingSId+'" >'+e.shuxingSVal+'</a></li>';
 								 c+=d;
 						 }
 						 +'</ul>'
@@ -388,7 +395,7 @@ a {
 				}
 			}
 		});
-	});
+	};
 	
 	function fy_xz(data){
 		// 二级商品ID
@@ -396,7 +403,15 @@ a {
 		// 总页数
 		var total = document.getElementById('total_page').innerText;
 		//获取 当前页数
-		var val  = data.text;
+		if( $.isEmptyObject(data) ){
+			var val =1;
+		}else{
+			var val  = data.text;
+		}
+		
+		/* if(val==null){
+			val=1;
+		} */
 		// 获取 上一次点击的页数
 		var lastVal = document.getElementById('input-txt').value;
 		//判断是否为数字
@@ -406,19 +421,18 @@ a {
 			return;
 		}
 		if(val=="<上一页"){
-			if(lastVal>1 && lastVal<total){
+			if(lastVal>1 && lastVal<=total){
 				val = parseInt(lastVal)-1;
 			}else {
 				return;
 			}
 		}else if(val=="下一页>"){
-			if(lastVal<total && lastVal>1){
+			if(lastVal<total && lastVal>=1){
 				val = parseInt(lastVal)+1;
 			}else{
 				return;
 			}
 		}else if(val=="确定"){
-			alert("lastVal:"+lastVal);
 			if(lastVal<=total && lastVal>=1){
 				val = parseInt(lastVal);
 			}else{
@@ -433,11 +447,11 @@ a {
 		fy_show(total,val);
 		
 		// 获取查询排序条件
-		var orderBy = parseInt($("#ob_id").val());
-		
+		/* var orderBy = parseInt($("#ob_id").val()); */
+		var orderBy = $("#ob_id").val();
 		// 获取排序规则
-		var sc = parseInt($("#sc_id").val());
-		alert("orderBy:"+orderBy+" sc:"+sc); 
+		/* var sc = parseInt($("#sc_id").val()); */
+		var sc = $("#sc_id").val();
 		$.ajax({
 			type:"get",
 			data: {"erjiId":erjiId,"m":m,"n":12,"orderBy":orderBy,"sc":sc},
@@ -522,23 +536,25 @@ a {
 	function add_paixu(data){
 		var val = data.text;
 		/* alert("val:"+val); */
+		if(val=="综合排序"){
+			$("#ob_id").value=0;
+		}
 		if(val=="销量"){
 			$("#ob_id").value=1;
 		}else if(val== "价格"){
 			$("#ob_id").val(2);
-			/* var jg_val = $("jiage_id").value;
-			if(parseInt(jg_val)==0){
-				$("jiage_id").value=1;
-			}else if(parseInt(jg_val)==1){
-				$("jiage_id").value=0;
-			} */
-			
+			var scId = $("#sc_id").val();
+			if(scId=="0"){
+				document.getElementById('sc_id').value='1';
+			}else{
+				document.getElementById('sc_id').value='0';
+			}
 		}else if(val== "评论数"){
 			$("#ob_id").value=3;
 		}else if(val== "上架时间"){
 			$("#ob_id").value=4;
 		}
-		 fy_xz(this);
+		fy_xz();
 	};
 	
 </script>
@@ -567,10 +583,10 @@ a {
 			<div>
 				<a href="">综合排序</a> 
 				<a href="">销量</a>
-				<a href="" onclick="add_paixu(this);" id="jiage_id">价格</a> 
+				<a href="javascript:;" onclick="add_paixu(this);" >价格</a> 
 				<a href="">评论数</a>
 				<a href="">上架时间</a>
-				<input type="text" id="ob_id" />
+				<input type="hidden" id="ob_id" value="0"/>
 				<input type="hidden" id="sc_id"  value="0" />
 			</div>
 			

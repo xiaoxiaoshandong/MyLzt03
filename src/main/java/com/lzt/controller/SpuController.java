@@ -77,13 +77,26 @@ public class SpuController {
 	}
 	
 	@RequestMapping(value="/selectProd") 
-	public Map<String,Object> selectProd(Spu spu,Page page, @Param("orderBy") Integer orderBy,@Param("sc") Integer sc){
-		String erjiId = spu.getErjiId();
+	public Map<String,Object> selectProd(@RequestParam Map<String,Object> map){
+		Integer orderBy = null;
+		Integer sc =null;
+		String erjiId = (String) map.get("erjiId");
+		if(map.containsKey("orderBy") && map.containsKey("sc")){
+			orderBy = Integer.parseInt((String)map.get("orderBy"));
+			sc = Integer.parseInt((String)map.get("sc"));;
+		}
+		Integer m = Integer.parseInt((String)map.get("m"));
+		Integer n = Integer.parseInt((String)map.get("n"));;
+		Page page = new Page();
+		page.setM(m);
+		page.setN(n);
 		if(erjiId==null){
 			return null;
 		}
 		// 商品属性
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map1 = new HashMap<String,Object>();
+		Spu spu = new Spu();
+		spu.setErjiId(erjiId);
 		List<ShuxingVo> sv = shuxingService.selectAll(spu);
 		
 		// 商品总数
@@ -95,18 +108,18 @@ public class SpuController {
 			}else{
 				total = count/12;
 			}
-			map.put("total", total);
-			map.put("count", count);
+			map1.put("total", total);
+			map1.put("count", count);
 //		查询商品信息
 			Map<String,Object> pv = spuService.selectProd(spu,page,orderBy,sc);
 			Object prodVos = pv.get("pv");
 			Object prodVos1 = pv.get("pv1");
 			
-		map.put("sv", sv);
-		map.put("prodVos", prodVos);
-		System.out.println(prodVos);
-		map.put("prodVos1", prodVos1);
-		/*System.out.println(map);*/
-		return map;
+		map1.put("sv", sv);
+		map1.put("prodVos", prodVos);
+		System.out.println("sv"+sv);
+		map1.put("prodVos1", prodVos1);
+		/*System.out.println("map1:"+map1);*/
+		return map1;
 	}
 }
