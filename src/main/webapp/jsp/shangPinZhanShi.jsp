@@ -6,15 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>商品展示</title>
 <style>
-.div_top a{
-	width: 70px;
-	height: 21px;
-	margin-top:10px;
-	float: left; /* 使a标签 宽度和高度生效并浮动 */
-	border:1px #26bbdb solid;/* 边框 */
-	font-size: 12px;/* 设置字体大小 */
-	text-align:center;	
-}
 ul{
 	list-style: none;
 }
@@ -61,14 +52,36 @@ li{
 	height: 1350px;
 }
 .div_top{
+	position: relative;
 	width:970px;
 	height: 40px;
 	margin-top:50px;
 	margin-left: 300px;
-	line-height:21px;/* 改变DIV内字的位置 */
 	background: #e4e4e4;
 }
+.div_top a{
+	position: relative;
+	width: 70px;
+	height: 21px; 
+	top:8px;
+	float: left; /* 使a标签 宽度和高度生效并浮动 */
+	border:1px #26bbdb solid;/* 边框 */
+	font-size: 14px;/* 设置字体大小 */
+	text-align:center;	
+}
+.jg_tp {
+	position: absolute;
+	left:213px;
+	top:10px; 
+	background-image: url(/lzt03/static/img/shang.jpg);
+	width: 10px;
+	height: 20px;
+	 display: block;
+	background-repeat: no-repeat; 
+	background-size: 7px 18px; /*定义图片的尺寸*/
+}
 .div_top div{
+	/* position: relative; */
 	margin-left: 10px;
 }
 .div_test{
@@ -398,22 +411,23 @@ a {
 	};
 	
 	function fy_xz(data){
+		var val  = null;
 		// 二级商品ID
 		var erjiId = document.getElementById('div_spml_span').value;
 		// 总页数
 		var total = document.getElementById('total_page').innerText;
-		//获取 当前页数
+		//获取 当前页数 
 		if( $.isEmptyObject(data) ){
-			var val =1;
+			val =1;
 		}else{
-			var val  = data.text;
+			val  = data.text;
 		}
 		
 		/* if(val==null){
 			val=1;
 		} */
 		// 获取 上一次点击的页数
-		var lastVal = document.getElementById('input-txt').value;
+		var lastVal = parseInt(document.getElementById('input-txt').value);
 		//判断是否为数字
 		var isNum = isNumber(lastVal);
 		if(isNum==false){
@@ -421,6 +435,7 @@ a {
 			return;
 		}
 		if(val=="<上一页"){
+			/* alert("lastVal:"+lastVal+"  total:"+total+" val:"+val); */
 			if(lastVal>1 && lastVal<=total){
 				val = parseInt(lastVal)-1;
 			}else {
@@ -534,6 +549,7 @@ a {
     }
 }
 	function add_paixu(data){
+		
 		var val = data.text;
 		/* alert("val:"+val); */
 		if(val=="综合排序"){
@@ -546,8 +562,10 @@ a {
 			var scId = $("#sc_id").val();
 			if(scId=="0"){
 				document.getElementById('sc_id').value='1';
+				document.getElementById('jg_id').setAttribute('style','background-image:url(/lzt03/static/img/xia.jpg)');
 			}else{
 				document.getElementById('sc_id').value='0';
+				document.getElementById('jg_id').setAttribute('style','background-image:url(/lzt03/static/img/shang.jpg)');
 			}
 		}else if(val== "评论数"){
 			$("#ob_id").value=3;
@@ -583,9 +601,10 @@ a {
 			<div>
 				<a href="">综合排序</a> 
 				<a href="">销量</a>
-				<a href="javascript:;" onclick="add_paixu(this);" >价格</a> 
+				<a href="javascript:;" onclick="add_paixu(this);" id="jg_px">价格</a> 
 				<a href="">评论数</a>
 				<a href="">上架时间</a>
+				<i class="jg_tp" id="jg_id"></i>
 				<input type="hidden" id="ob_id" value="0"/>
 				<input type="hidden" id="sc_id"  value="0" />
 			</div>
