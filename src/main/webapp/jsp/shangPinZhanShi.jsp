@@ -342,26 +342,30 @@ a {
 			success : function(result) {
 				/*总页数*/
 				var total  = result.total;
+				/*商品总个数*/
 				var count  = result.count;
+				/*属性信息*/
 				var sx = result.sv;
+				/*商品信息1*/
 				var prod = result.prodVos;
+				/*属性信息2*/
 				var prod1 = result.prodVos1;
 				
 				document.getElementById("total_page").innerText = total;
 				document.getElementById("total_sp").innerText = count;
 				/* var d =""; */
 				var d = fy_show(total,null); 
-				
+				/*属性遍历*/
 				for(var i = 0; i < sx.length; i++){
 					var s= sx[i];
 					var ss=	s.shuxingS;
-					var c = '<div class="div_test">'
-						 +'<div class="div_test_1" id="'+s.shuxingId+'">'+s.shuxingName+'</div>'
+					var c = '<div class="div_test" id="sx_div_'+i+'">'
+						 +'<div class="div_test_1" id="'+s.shuxingId+'" >'+s.shuxingName+'</div>'
 						 +'<div class="div_test_2">'
 						 +'<ul>'
 						 for(var j =0; j<ss.length; j++){
 								 var e = ss[j];
-								 var d = '<li><a href="" id="'+e.shuxingSId+'" >'+e.shuxingSVal+'</a></li>';
+								 var d = '<li><a href="javascript:;" id="'+e.shuxingSId+'" onClick="hidenDiv(this);">'+e.shuxingSVal+'</a></li>';
 								 c+=d;
 						 }
 						 +'</ul>'
@@ -370,7 +374,7 @@ a {
 						 
 						 $("#div_spml").after(c);
 				}
-				
+				/*商品遍历*/
 				for(var i = 0; i < prod.length; i++){
 					var p = prod[i];
 					var pic  =p.myPicture[0].tupianName;
@@ -389,7 +393,7 @@ a {
 							+'</div>';
 					$("#div_centre").append(c);
 				}
-				
+				/*左侧商品遍历*/
 				for(var i=0;i<prod1.length; i++){
 					var p = prod1[i];
 					var pic  =p.myPicture[0].tupianName;
@@ -410,6 +414,7 @@ a {
 		});
 	};
 	
+	/*商品条件查询*/
 	function fy_xz(data){
 		var val  = null;
 		// 二级商品ID
@@ -574,7 +579,14 @@ a {
 		}
 		fy_xz();
 	};
-	
+	/*隐藏属性 和 展示属性*/
+	function hidenDiv(data){
+	/* 	alert("data:"+data.id); */
+		var id = data.id;
+		var c = $("#154528925703257").parent("div").parent("div");
+		alert(c);
+		document.getElementById('sx_div_5').setAttribute('style','display:none;'); 
+	};
 </script>
 </head>
 	
@@ -597,7 +609,7 @@ a {
 				</div>
 				<ul id="div_left_ul"></ul>
 		</div>
-		<div class="div_top">
+		<div class="div_top" >
 			<div>
 				<a href="">综合排序</a> 
 				<a href="">销量</a>
