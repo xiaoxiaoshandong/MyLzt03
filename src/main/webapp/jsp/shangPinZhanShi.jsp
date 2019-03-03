@@ -552,7 +552,8 @@ a {
     } else {
         return true
     }
-}
+}	
+	//排序图标
 	function add_paixu(data){
 		
 		var val = data.text;
@@ -583,8 +584,9 @@ a {
 	function hidenDiv(data){
 	/* 	alert("data:"+data.id); */
 		var id = data.id;
-		var c = $("#154528925703257").parent("div").parent("div");
-		alert(c);
+		/* var c = document.getElementById('154528925703257').parentNode.parentNode; */
+		var c = $("#154528925703257").parent();
+		alert("c:"+c.id);
 		document.getElementById('sx_div_5').setAttribute('style','display:none;'); 
 	};
 </script>
