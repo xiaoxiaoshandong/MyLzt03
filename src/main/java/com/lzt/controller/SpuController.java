@@ -78,9 +78,14 @@ public class SpuController {
 	
 	@RequestMapping(value="/selectProd") 
 	public Map<String,Object> selectProd(@RequestParam Map<String,Object> map){
+		
+		
 		Integer orderBy = null;
 		Integer sc =null;
-		String erjiId = (String) map.get("erjiId");
+		
+		String shuxingSIds = (String)map.get("shuxingSIds");
+		
+		String erjiId = (String)map.get("erjiId");
 		if(map.containsKey("orderBy") && map.containsKey("sc")){
 			orderBy = Integer.parseInt((String)map.get("orderBy"));
 			sc = Integer.parseInt((String)map.get("sc"));;
@@ -111,7 +116,7 @@ public class SpuController {
 			map1.put("total", total);
 			map1.put("count", count);
 //		查询商品信息
-			Map<String,Object> pv = spuService.selectProd(spu,page,orderBy,sc);
+			Map<String,Object> pv = spuService.selectProd(spu,page,orderBy,sc,shuxingSIds);
 			Object prodVos = pv.get("pv");
 			Object prodVos1 = pv.get("pv1");
 			

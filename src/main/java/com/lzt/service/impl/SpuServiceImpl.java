@@ -1,5 +1,6 @@
 package com.lzt.service.impl;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,10 +72,16 @@ public class SpuServiceImpl implements SpuService {
 		return map;
 	}
 
-	public Map<String,Object> selectProd(Spu spu, Page page,Integer orderBy,Integer sc) {
+	public Map<String,Object> selectProd(Spu spu, Page page,Integer orderBy,Integer sc,String shuxingSIds) {
 		// TODO Auto-generated method stub
 		Map<String,Object> maps = new HashMap<String,Object>();
 		Map<String,Object> map = new HashMap<String,Object>();
+		
+		List<String> list = null;
+		if(shuxingSIds != null && shuxingSIds!=""){
+			list = Arrays.asList(shuxingSIds.split(","));
+		}
+		map.put("ss", list);
 		map.put("erjiId", spu.getErjiId());
 		map.put("m", page.getM());
 		map.put("n", page.getN());

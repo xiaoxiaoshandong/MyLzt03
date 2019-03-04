@@ -17,7 +17,7 @@ public interface SpuService {
 
 	Map<String,Object> selectSpu(Spu spu);
 
-	Map<String,Object> selectProd(Spu spu,Page page,Integer orderBy,Integer sc);
+	Map<String,Object> selectProd(Spu spu,Page page,Integer orderBy,Integer sc,String shuxingSIds);
 
 	Integer selectProdCount(Spu spu);
 

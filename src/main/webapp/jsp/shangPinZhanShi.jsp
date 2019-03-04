@@ -12,19 +12,18 @@ ul{
 li{
 	list-style-type: none;/* 去掉小黑点 */
 }
-.div_test_2 li{
-	position: relative;
-	
-	margin-left:30px;
-	float: left;
-	margin-top: -12px;  
-}
 .div_spml{
 	width: 1200px;
 	height: 30px;
 	margin-left:70px;
 	background: #FFDEAD	;
 	
+}
+.div_spml li{
+	position: relative; 
+	margin-left:30px;
+	float: left;
+	 margin-top: 4px;  
 }
 .div_spml div:nth-child(1) span{
 	margin-left:10px;
@@ -59,6 +58,7 @@ li{
 	margin-left: 300px;
 	background: #e4e4e4;
 }
+
 .div_top a{
 	position: relative;
 	width: 70px;
@@ -104,6 +104,12 @@ li{
 	height: 30px;
 	background: #FFA07A;
 	float: left;
+}
+.div_test_2 li{
+	position: relative; 
+	margin-left:30px;
+	float: left;
+	margin-top: -12px;  
 }
 .div_centre {
 	width: 970px;
@@ -317,6 +323,7 @@ a {
 		jq_all();
 	});
 	function jq_all(){
+		var  shuxingSIds = getIds();
 		var url = decodeURI(location.search);/* decodeURI() 解决URL参数乱码问题 */
 		var e=0;
 		for(var k=0;k<url.length;k++){
@@ -337,7 +344,7 @@ a {
 		$.ajax({
 			type:"get",
 			url:"/lzt03/spu/selectProd",
-			data: {"erjiId":erjiId,"m":0,"n":12,"orderBy":orderBy,"sc":sc},
+			data: {"erjiId":erjiId,"m":0,"n":12,"orderBy":orderBy,"sc":sc,"shuxingSIds":shuxingSIds},
 			dataType:"json",
 			success : function(result) {
 				/*总页数*/
@@ -365,7 +372,7 @@ a {
 						 +'<ul>'
 						 for(var j =0; j<ss.length; j++){
 								 var e = ss[j];
-								 var d = '<li><a href="javascript:;" id="'+e.shuxingSId+'" onClick="hidenDiv(this);">'+e.shuxingSVal+'</a></li>';
+								 var d = '<li class="MyLi"><a href="javascript:;" id="a'+e.shuxingSId+'" onClick="hidenDiv(this);">'+e.shuxingSVal+'</a></li>';
 								 c+=d;
 						 }
 						 +'</ul>'
@@ -416,6 +423,7 @@ a {
 	
 	/*商品条件查询*/
 	function fy_xz(data){
+		var  shuxingSIds = getIds();
 		var val  = null;
 		// 二级商品ID
 		var erjiId = document.getElementById('div_spml_span').value;
@@ -474,7 +482,7 @@ a {
 		var sc = $("#sc_id").val();
 		$.ajax({
 			type:"get",
-			data: {"erjiId":erjiId,"m":m,"n":12,"orderBy":orderBy,"sc":sc},
+			data: {"erjiId":erjiId,"m":m,"n":12,"orderBy":orderBy,"sc":sc,"shuxingSIds":shuxingSIds},
 			url:"/lzt03/spu/selectProd",
 			dataType:"json",
 			success : function(result) {
@@ -552,8 +560,7 @@ a {
     } else {
         return true
     }
-}	
-	//排序图标
+}
 	function add_paixu(data){
 		
 		var val = data.text;
@@ -580,15 +587,46 @@ a {
 		}
 		fy_xz();
 	};
-	/*隐藏属性 和 展示属性*/
+	//隐藏属性值 和 div_spml中添加属性值
 	function hidenDiv(data){
-	/* 	alert("data:"+data.id); */
-		var id = data.id;
-		/* var c = document.getElementById('154528925703257').parentNode.parentNode; */
-		var c = $("#154528925703257").parent();
-		alert("c:"+c.id);
-		document.getElementById('sx_div_5').setAttribute('style','display:none;'); 
+		var my_id = data.id;
+		var c = $("#"+my_id).parents(".div_test").attr("id");// parents():获取所有祖先元素 。
+		// 隐藏 被选中的DIV 
+		document.getElementById(c).setAttribute('style','display:none;');  
+		var id = my_id.substring(1);
+		var c ='<li><a href="javascript:;" id="'+id+'" onClick="showDiv(this);">'+data.text+'</a></li>';;
+		$("#ul_id").append(c);
+		 fy_xz();
 	};
+	
+	// 展示属性 & div_spml中删除属性
+	function showDiv(data){
+		var my_id = data.id;
+		var c = $("#a"+my_id).parents(".div_test").attr("id");// parents():获取所有祖先元素 。
+		// 还原 被选中的DIV 
+		document.getElementById(c).setAttribute('style','');  
+		// 删除 点击的a标签
+		$("#"+my_id).parent().remove();
+		fy_xz();
+		
+	};
+	
+	// 遍历 div_spml中所有的属性值 得到多个ID 组成字符串
+	function getIds(){
+		var str="";
+		var len = $("#ul_id").children().size();
+		if(len>0){
+			for(var i=0; i<len;i++){
+				var id = $("#ul_id").children().eq(i).children("a:first-child").attr("id");
+				if(i==0){
+					str=id;
+				}else{
+					str=str+","+id;
+				}
+			}
+		}
+		return str;
+	}
 </script>
 </head>
 	
@@ -602,6 +640,9 @@ a {
 				<span>
 					共<span id="total_sp"></span>个商品
 				</span>
+			</div>
+			<div>
+				<ul id="ul_id"></ul>
 			</div>
 		</div>
 		<div class="div_left">
