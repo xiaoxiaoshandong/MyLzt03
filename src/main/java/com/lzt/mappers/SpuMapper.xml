@@ -151,11 +151,12 @@
 		FROM my_picture pic INNER JOIN spu sp ON pic.spu_id=sp.spu_id INNER JOIN sku sk ON sp.spu_id=sk.spu_id
 		WHERE sp.erji_id=#{erjiId} 
 		<if test="ss !=null">
-			AND sku_id IN(
+			AND sku_id IN (
 			SELECT  DISTINCT sku_id FROM sku_shuxing_s  WHERE shuxing_s_id IN
-			<foreach collection="ss" item="id" index="index" open="(" close=")" separator=",">
-　　　　　			　#{id}
+			<foreach collection="ss" item="a" index="index" open="(" close=")" separator=",">
+　　　　　			　${a}
 　　　　		</foreach>
+			)
 		</if>
 		GROUP BY sk.sku_id
 		<if test="orderBy!=0">

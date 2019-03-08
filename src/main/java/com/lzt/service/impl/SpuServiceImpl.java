@@ -1,5 +1,7 @@
 package com.lzt.service.impl;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -77,9 +79,12 @@ public class SpuServiceImpl implements SpuService {
 		Map<String,Object> maps = new HashMap<String,Object>();
 		Map<String,Object> map = new HashMap<String,Object>();
 		
-		List<String> list = null;
+		List<Integer> list = null;
 		if(shuxingSIds != null && shuxingSIds!=""){
-			list = Arrays.asList(shuxingSIds.split(","));
+			/*list = Arrays.asList(shuxingSIds.split(","));
+			System.out.println(list);*/
+			list = new ArrayList<Integer>();
+			list.add(154528935);
 		}
 		map.put("ss", list);
 		map.put("erjiId", spu.getErjiId());
