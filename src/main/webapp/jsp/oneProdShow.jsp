@@ -198,6 +198,29 @@ a {
 	text-decoration: none; /*去掉下划线*/
 }
 </style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(function (){
+	var erjiName = getCookie("erjiName");
+	alert("erjiName:"+erjiName);
+});
+/*获取cookie 内的值*/
+function getCookie(c_name)
+{
+if (document.cookie.length>0)
+  {
+  c_start=document.cookie.indexOf(c_name + "=")
+  if (c_start!=-1)
+    { 
+    c_start=c_start + c_name.length+1 
+    c_end=document.cookie.indexOf(";",c_start)
+    if (c_end==-1) c_end=document.cookie.length
+    return decodeURI(document.cookie.substring(c_start,c_end))
+    } 
+  }
+return ""
+}
+</script>
 </head>
 <body>
 		<div class="ops_nav">

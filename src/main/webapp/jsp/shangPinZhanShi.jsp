@@ -337,6 +337,9 @@ a {
 		var name= url.substr(f+5);
 		document.getElementById('div_spml_span').value = erjiId;
 		document.getElementById('div_spml_span').innerHTML = name;
+		// 存储数据到cookie
+		 var c  = encodeURI(name); 
+		setCookie("erjiName",c,1);
 		// 获取查询排序条件
 		var orderBy = $("#ob_id").val();
 		// 获取排序规则
@@ -626,6 +629,14 @@ a {
 			}
 		}
 		return str;
+	}
+	
+	function setCookie(name, value, day)
+	{	
+		var expires = day * 24 * 60 * 60 * 1000;
+		  var exp = new Date();
+		  exp.setTime(exp.getTime() + expires);
+		  document.cookie = name + "=" + value + ";expires=" + exp.toUTCString();
 	}
 </script>
 </head>
