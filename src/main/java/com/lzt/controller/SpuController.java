@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.lzt.entity.ProdVo;
 import com.lzt.entity.ShuxingVo;
@@ -31,6 +32,10 @@ public class SpuController {
 	
 	@Autowired(required=false)
 	private ShuxingService shuxingService;
+	
+	@Autowired(required=false)
+	HttpServletRequest request;
+	
 	private static Logger log=LoggerFactory.getLogger(SpuController.class);
 	
 	/**
@@ -122,9 +127,24 @@ public class SpuController {
 			
 		map1.put("sv", sv);
 		map1.put("prodVos", prodVos);
-		System.out.println("sv"+sv);
+		System.out.println("prodVos"+prodVos);
 		map1.put("prodVos1", prodVos1);
 		/*System.out.println("map1:"+map1);*/
 		return map1;
+	}
+	
+	//根据 skuId 查询商品信息
+	@RequestMapping(value="/selectProdBySkuId") 
+	public ModelAndView  selectProdBySkuId(@RequestParam Map<String,Object> map) throws Exception{
+		List<ProdVo> prodVos = spuService.selectProdBySkuId(map);
+		System.out.println(prodVos);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("forward:/jsp/oneProdShow.jsp");
+        //封装要显示到视图的数据
+        mv.addObject("prodVos",prodVos);
+        //视图名
+       /* mv.setViewName("oneProdShow");*/
+        return mv;
+		
 	}
 }

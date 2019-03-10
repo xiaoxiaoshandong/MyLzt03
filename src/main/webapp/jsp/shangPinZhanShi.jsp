@@ -338,7 +338,7 @@ a {
 		document.getElementById('div_spml_span').value = erjiId;
 		document.getElementById('div_spml_span').innerHTML = name;
 		// 存储数据到cookie
-		 var c  = encodeURI(name); 
+		 var c  = encodeURI(name);
 		setCookie("erjiName",c,1);
 		// 获取查询排序条件
 		var orderBy = $("#ob_id").val();
@@ -390,12 +390,13 @@ a {
 					var pic  =p.myPicture[0].tupianName;
 					var jg = p.jiage;
 					var name = p.chanpinName+" "+p.skuName;
+					var skuId = p.skuId;
 					/* var name="ceshi"; */
 					
 					var c ='<div>'
-								+'<div><a href=""><img src= "'+pic+'" /></a></div>'
+								+'<div><a href="http://localhost:8080/lzt03/spu/selectProdBySkuId?skuId='+skuId+'"><img src= "'+pic+'" /></a></div>'
 								+'<div>¥'+jg+'</div>'
-								+'<div><a href="">'+name+'</a></div>'
+								+'<div><a href="http://localhost:8080/lzt03/spu/selectProdBySkuId?skuId='+skuId+'">'+name+'</a></div>'
 								+'<div>'
 										+'<i class="icon-user"></i>'
 										+'<input type="button" value="添加购物车" onClick="location.href='+"#"+'"/>'
@@ -409,13 +410,14 @@ a {
 					var pic  =p.myPicture[0].tupianName;
 					var jg = p.jiage;
 					var name = p.chanpinName+" "+p.skuName;
+					var skuId = p.skuId;
 					var c ='<li>'
 								+'<div class="left_sp">'
 									+'<div class="left_sp_01">'
-										+'<a  href=""><img class="left_sp_01_img" src="'+pic+'"></a>'
+										+'<a  href="http://localhost:8080/lzt03/spu/selectProdBySkuId?skuId='+skuId+'"><img class="left_sp_01_img" src="'+pic+'"></a>'
 									+'</div>'
 									+'<div class="left_sp_02">¥'+jg+'</div>'
-									+'<div class="left_sp_03"><a class="left_sp_03_name" href="">'+name+'</a></div>'
+									+'<div class="left_sp_03"><a class="left_sp_03_name" href="http://localhost:8080/lzt03/spu/selectProdBySkuId?skuId='+skuId+'">'+name+'</a></div>'
 								+'</div>'
 							+'</li>';
 			$("#div_left_ul").append(c);

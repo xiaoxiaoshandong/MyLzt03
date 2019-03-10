@@ -21,4 +21,6 @@ public interface SpuService {
 
 	Integer selectProdCount(Spu spu);
 
+	List<ProdVo> selectProdBySkuId(Map<String, Object> map);
+
 }

@@ -202,8 +202,11 @@ a {
 <script type="text/javascript">
 $(function (){
 	var erjiName = getCookie("erjiName");
-	alert("erjiName:"+erjiName);
+	document.getElementById('spejfl').innerHTML = erjiName+">";
+	
 });
+
+
 /*获取cookie 内的值*/
 function getCookie(c_name)
 {
@@ -224,9 +227,8 @@ return ""
 </head>
 <body>
 		<div class="ops_nav">
-			<a href="javascript:;" >商品一级分类></a>
-			<a href="javascript:;" >商品二级分类></a>
-			<a href="javascript:;" >商品spuname></a>
+			<a href="javascript:;" id="spejfl"></a>
+			<a href="javascript:;" >${prodVos[0].skuId}</a>
 		</div>
 		<div class="ops_content">
 			<div class="ops_preview_wrap">

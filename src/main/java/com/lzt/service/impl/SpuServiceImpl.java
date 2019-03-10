@@ -1,8 +1,6 @@
 package com.lzt.service.impl;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -112,6 +110,12 @@ public class SpuServiceImpl implements SpuService {
 	public Integer selectProdCount(Spu spu) {
 		// TODO Auto-generated method stub
 		return spuMapper.selectProdCount( spu);
+	}
+
+	public List<ProdVo> selectProdBySkuId(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		List<ProdVo> prodVos = spuMapper.selectProdBySkuId(map);
+		return prodVos;
 	}
 
 }
