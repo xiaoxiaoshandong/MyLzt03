@@ -339,7 +339,7 @@ a {
 		document.getElementById('div_spml_span').innerHTML = name;
 		// 存储数据到cookie
 		 var c  = encodeURI(name);
-		setCookie("erjiName",c,1);
+		
 		// 获取查询排序条件
 		var orderBy = $("#ob_id").val();
 		// 获取排序规则
@@ -394,9 +394,9 @@ a {
 					/* var name="ceshi"; */
 					
 					var c ='<div>'
-								+'<div><a href="http://localhost:8080/lzt03/spu/selectProdBySkuId?skuId='+skuId+'"><img src= "'+pic+'" /></a></div>'
+								+'<div><a href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);"><img src= "'+pic+'" /></a></div>'
 								+'<div>¥'+jg+'</div>'
-								+'<div><a href="http://localhost:8080/lzt03/spu/selectProdBySkuId?skuId='+skuId+'">'+name+'</a></div>'
+								+'<div><a href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);">'+name+'</a></div>'
 								+'<div>'
 										+'<i class="icon-user"></i>'
 										+'<input type="button" value="添加购物车" onClick="location.href='+"#"+'"/>'
@@ -414,10 +414,10 @@ a {
 					var c ='<li>'
 								+'<div class="left_sp">'
 									+'<div class="left_sp_01">'
-										+'<a  href="http://localhost:8080/lzt03/spu/selectProdBySkuId?skuId='+skuId+'"><img class="left_sp_01_img" src="'+pic+'"></a>'
+										+'<a  href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);"><img class="left_sp_01_img" src="'+pic+'"></a>'
 									+'</div>'
 									+'<div class="left_sp_02">¥'+jg+'</div>'
-									+'<div class="left_sp_03"><a class="left_sp_03_name" href="http://localhost:8080/lzt03/spu/selectProdBySkuId?skuId='+skuId+'">'+name+'</a></div>'
+									+'<div class="left_sp_03"><a class="left_sp_03_name" href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);">'+name+'</a></div>'
 								+'</div>'
 							+'</li>';
 			$("#div_left_ul").append(c);
@@ -640,6 +640,23 @@ a {
 		  exp.setTime(exp.getTime() + expires);
 		  document.cookie = name + "=" + value + ";expires=" + exp.toUTCString();
 	}
+	
+	function oneProdShow(data){
+		var erjiName = document.getElementById('div_spml_span').innerHTML;
+		/* var  erjiName = encodeURI(ejn); */
+		var skuId = data.name;
+		alert("data:"+data+" erjiName:"+erjiName+" skuId:"+skuId);
+		$.ajax({
+			type:"post",
+			data: {"erjiName":erjiName,"skuId":skuId},
+			url:"/lzt03/spu/selectProdBySkuId", 
+			dataType:"json",
+			contentType:"application/json;charset=utf-8",
+			success : function(result) {
+				alert(result);
+			}
+		});
+	};
 </script>
 </head>
 	
@@ -686,7 +703,7 @@ a {
 				<em>共<b id="total_page"></b>页&nbsp;&nbsp;到第</em>
 				<input id="input-txt" class="input-txt"  value="1"/>
 				<em>页</em>
-				<a class="btn" href="javascript:;" onclick="fy_xz(this);">确定</a>
+				<a class="btn" href="javascript:;" onclick="fy_xz(this);" >确定</a>
 			</span>
 		</div>
 	</div>

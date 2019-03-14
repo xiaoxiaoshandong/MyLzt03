@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -134,7 +135,7 @@ public class SpuController {
 	}
 	
 	//根据 skuId 查询商品信息
-	@RequestMapping(value="/selectProdBySkuId") 
+	@RequestMapping(value="/selectProdBySkuId",method=RequestMethod.POST,produces = {"text/html;charset=utf-8"}) 
 	public ModelAndView  selectProdBySkuId(@RequestParam Map<String,Object> map) throws Exception{
 		List<ProdVo> prodVos = spuService.selectProdBySkuId(map);
 		System.out.println(prodVos);
