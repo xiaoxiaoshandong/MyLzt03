@@ -37,7 +37,7 @@ public class SkuController {
 		if(spuId=="" ||spuId==null || skuName=="" || skuName==null || kucun==null || jiage==null || shuxingSId==null || shuxingSId==""){
 			return "0";
 		}
-		 Random random = new Random();
+		/* Random random = new Random();
 		 int cont =0;
 		 for(int i=0;i<50;i++){
 		
@@ -124,9 +124,9 @@ public class SkuController {
 		 integer = skuService.insertSku(spuId,skuName,kucun,jiage,shuxingSId);
 		 cont++;
 		 }
-		 System.out.println("总共执行次数："+cont);
+		 System.out.println("总共执行次数："+cont);*/
 		 
-		/*integer = skuService.insertSku(spuId,skuName,kucun,jiage,shuxingSId);*/
+		integer = skuService.insertSku(spuId,skuName,kucun,jiage,shuxingSId);
 		return integer+"";
 	}
 }
