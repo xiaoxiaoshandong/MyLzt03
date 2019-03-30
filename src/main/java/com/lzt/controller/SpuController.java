@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,17 +133,17 @@ public class SpuController {
 	}
 	
 	//根据 skuId 查询商品信息
-	@RequestMapping(value="/selectProdBySkuId",method=RequestMethod.POST,produces = {"text/html;charset=utf-8"}) 
-	public ModelAndView  selectProdBySkuId(@RequestParam Map<String,Object> map) throws Exception{
+	@RequestMapping(value="/selectProdBySkuId",method=RequestMethod.GET,produces = {"text/html;charset=utf-8"}) 
+	public ModelAndView  selectProdBySkuId(@RequestParam Map<String,Object> map,HttpServletRequest request) throws Exception{
+		String erjiName = (String)map.get("erjiName");
 		List<ProdVo> prodVos = spuService.selectProdBySkuId(map);
 		System.out.println(prodVos);
+		String name = java.net.URLDecoder.decode(erjiName,"utf-8");
+		request.setAttribute("erjiName", name);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("forward:/jsp/oneProdShow.jsp");
         //封装要显示到视图的数据
         mv.addObject("prodVos",prodVos);
-        //视图名
-       /* mv.setViewName("oneProdShow");*/
         return mv;
-		
 	}
 }

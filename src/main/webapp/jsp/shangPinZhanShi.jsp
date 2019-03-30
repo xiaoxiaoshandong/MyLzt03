@@ -87,14 +87,13 @@ li{
 .div_test{
 	width:1200px;
 	height:30px;
-	background: #FFD700;
 	margin-top:10px;
 	margin-left: 70px;
+	border-bottom:1px dashed #CCCCCC;
 }
 .div_test_1{
 	width:100px;
 	 height: 30px;
-	background: #FFB6C1;
 	float: left;
 	line-height:30px;/* 改变DIV内字的位置 */
 }
@@ -102,7 +101,6 @@ li{
 	position: relative;
 	width:1000px;
 	height: 30px;
-	background: #FFA07A;
 	float: left;
 }
 .div_test_2 li{
@@ -113,38 +111,45 @@ li{
 }
 .div_centre {
 	width: 970px;
-	height: 950px;
-	background: #FFA07A;
+	height: 955px;
 	float: left;
 	margin-left: 20px;
 }
-.div_centre >div {
+.div_centre .dc {
 	width: 220px;
 	height: 302px;
-	background: #FFB6C1;
 	float: left;
-	margin-top:10px;
-	margin-left: 14px;
+	margin-top:3px;
+	margin-left: 3px;
+	margin-right:2px;
+	margin-bottom:2px;
+	padding: 5px;
+	border:1px solid white;
+	
 }
-.div_centre >div :nth-child(1) {
+.div_centre .dc:hover {
+	border:1px solid #CCCCCC;
+}
+.div_centre .dc :nth-child(1) {
 	width: 218px;
 	height: 200px;
-	background: red;
 }
-.div_centre >div :nth-child(1) img{
+.div_centre .dc :nth-child(1) img{
 	border:0;
 }
-.div_centre >div :nth-child(2) {
+.div_centre .dc :nth-child(2) {
 	width: 218px;
 	height: 20px;
-	background: red;
 	margin-top:2px;
 	margin-left: 1px;
 }
-.div_centre >div :nth-child(3) {
+.dc :nth-child(2) a {
+	color: #e4393c;
+    font-size: 20px;
+}
+.div_centre .dc :nth-child(3) {
 	width: 218px;
 	height: 40px;
-	background: red;
 	margin-top:3px;
 	margin-left: 1px;
 	overflow: hidden;
@@ -153,18 +158,16 @@ li{
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 }
-.div_centre >div :nth-child(4) {
+.div_centre .dc :nth-child(4) {
 	width: 218px;
 	height: 30px;
-	background: red;
 	margin-top:2px;
 	margin-left: 1px;
 	position: relative;
 }
-.div_centre >div :nth-child(4) input {
+.div_centre .dc :nth-child(4) input {
 	width: 218px;
 	height: 30px;
-	background: #f6f6f6;
 	text-align: right; /*placeholder文字居右*/
 	padding-right:20px; /*placeholder文字距右20px*/
 	color: red;
@@ -213,6 +216,8 @@ li{
 }
 a {
 	text-decoration: none; /*去掉下划线*/
+	color: black;
+	font-size: 16px;
 }
 .div_page a em{
 	vertical-align: middle;/*把此元素放置在父元素的中部。*/
@@ -246,8 +251,8 @@ a {
 	height: 990px;
 	margin-left:70px;
 	margin-top:50px;
-	background: red;
 	float: left;
+	
 } 
 .div_left .mt {
 	line-height: 36px;
@@ -270,39 +275,42 @@ a {
 .div_left ul{
 	width: 210px;
 	height: 945px;
-	background-color: #f7f7f7;
 	padding: 0px;
 	margin: 0px;
 }
 .div_left li{
 	width: 210px;
 	height: 228px;
-	background-color: red;
 	padding: 0px;
 	margin: 10px 0px 0px 0px;
 }
 .div_left .left_sp{
 	width: 210px;
 	height: 228px;
-	background: #FFB6C1;
 	float: left;
+	border:1px solid white;
 }
+.left_sp:hover {
+	border:1px solid #CCCCCC;
+}
+
 .div_left .left_sp_01{
 	width: 190px;
 	height: 158px;
-	background: yellow;
 	margin: 0px 10px 0px 10px;
 }
 .div_left .left_sp_02{
 	width: 190px;
 	height: 20px;
-	background: #dd7e6b;
 	margin: 0px 10px 0px 10px;
+}
+.left_sp_02 a {
+	color: #e4393c;
+    font-size: 20px;
 }
 .div_left .left_sp_03{
 	width: 190px;
 	height: 45px;
-	background: #9b6e65;
 	margin: 0px 10px 0px 10px;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -387,22 +395,7 @@ a {
 				/*商品遍历*/
 				for(var i = 0; i < prod.length; i++){
 					var p = prod[i];
-					var pic  =p.myPicture[0].tupianName;
-					var jg = p.jiage;
-					var name = p.chanpinName+" "+p.skuName;
-					var skuId = p.skuId;
-					/* var name="ceshi"; */
-					
-					var c ='<div>'
-								+'<div><a href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);"><img src= "'+pic+'" /></a></div>'
-								+'<div>¥'+jg+'</div>'
-								+'<div><a href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);">'+name+'</a></div>'
-								+'<div>'
-										+'<i class="icon-user"></i>'
-										+'<input type="button" value="添加购物车" onClick="location.href='+"#"+'"/>'
-								+'</div>'
-							+'</div>';
-					$("#div_centre").append(c);
+					spzs(p);
 				}
 				/*左侧商品遍历*/
 				for(var i=0;i<prod1.length; i++){
@@ -416,7 +409,7 @@ a {
 									+'<div class="left_sp_01">'
 										+'<a  href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);"><img class="left_sp_01_img" src="'+pic+'"></a>'
 									+'</div>'
-									+'<div class="left_sp_02">¥'+jg+'</div>'
+									+'<div class="left_sp_02"><a class="left_sp_03_name" href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);">¥'+jg+'</a></div>'
 									+'<div class="left_sp_03"><a class="left_sp_03_name" href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);">'+name+'</a></div>'
 								+'</div>'
 							+'</li>';
@@ -496,22 +489,27 @@ a {
 				$("#div_centre").empty();
 				for(var i = 0; i < prod.length; i++){
 					var p = prod[i];
-					var pic  =p.myPicture[0].tupianName;
-					var jg = p.jiage;
-					var name = p.chanpinName+" "+p.skuName;
-					var c ='<div>'
-								+'<div><a href=""><img src= "'+pic+'" /></a></div>'
-								+'<div>¥'+jg+'</div>'
-								+'<div><a href="">'+name+'</a></div>'
-								+'<div>'
-										+'<i class="icon-user"></i>'
-										+'<input type="button" value="添加购物车" onClick="location.href='+"#"+'"/>'
-								+'</div>'
-							+'</div>';
-					$("#div_centre").append(c);
+					spzs(p);
 				}
 			}
 		});
+	};
+	
+	function spzs(p){
+		var pic  =p.myPicture[0].tupianName;
+		var jg = p.jiage;
+		var name = p.chanpinName+" "+p.skuName;
+		var skuId = p.skuId;
+		var c ='<div class="dc">'
+			+'<div><a href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);"><img src= "'+pic+'" /></a></div>'
+			+'<div class="dc_jg"><a href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);">¥'+jg+'</a></div>'
+			+'<div><a href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);">'+name+'</a></div>'
+			+'<div>'
+					+'<i class="icon-user"></i>'
+					+'<input type="button" value="添加购物车" onClick="location.href='+"#"+'"/>'
+			+'</div>'
+		+'</div>';
+		$("#div_centre").append(c);
 	};
 	
 	/*分页功能*/
@@ -645,17 +643,17 @@ a {
 		var erjiName = document.getElementById('div_spml_span').innerHTML;
 		/* var  erjiName = encodeURI(ejn); */
 		var skuId = data.name;
-		alert("data:"+data+" erjiName:"+erjiName+" skuId:"+skuId);
-		$.ajax({
+		/* $.ajax({
 			type:"post",
 			data: {"erjiName":erjiName,"skuId":skuId},
 			url:"/lzt03/spu/selectProdBySkuId", 
 			dataType:"json",
-			contentType:"application/json;charset=utf-8",
+			contentType:"application/x-www-form-urlencoded;charset=utf-8",
 			success : function(result) {
 				alert(result);
 			}
-		});
+		}); */
+		window.location.href="${pageContext.request.contextPath}/spu/selectProdBySkuId?skuId="+skuId+"&erjiName="+encodeURI(encodeURI(erjiName))+"";
 	};
 </script>
 </head>

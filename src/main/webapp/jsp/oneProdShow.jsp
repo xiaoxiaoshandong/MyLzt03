@@ -227,26 +227,26 @@ return ""
 </head>
 <body>
 		<div class="ops_nav">
-			<a href="javascript:;" id="spejfl"></a>
-			<a href="javascript:;" >${prodVos[0].skuId}</a>
+			<a href="javascript:;" id="spejfl">q111</a>
+			<a href="javascript:;" >${requestScope.erjiName}</a>
 		</div>
 		<div class="ops_content">
 			<div class="ops_preview_wrap">
 				<div class="ops_preview">
-					<img alt="" src="">
+					<img alt="" src="${prodVos[0].myPicture[0].tupianName}">
 				</div>
 				<div class="ops_imglist">ops_imglist</div>
 			</div>
 			
 			<div class="ops_info_wrap">
 				<div class="ops_sku_name">
-					联想(Lenovo)拯救者Y7000P英特尔酷睿 i7 15.6英寸高色域游戏笔记本电脑(i7-8750H 8G 512G GTX1060 144Hz)
+					${prodVos[0].skuName} ${prodVos[0].chanpinName}
 				</div>
 				<div class="ops_jiage">
 					<div class="jgn">价格:</div>
 					<div class="jgv">
 						<span class="jgv_1">￥</span>
-						<span class="jgv_2">5999</span>
+						<span class="jgv_2">${prodVos[0].jiage}</span>
 					</div>
 				</div>
 				<div class="ops_weight">
