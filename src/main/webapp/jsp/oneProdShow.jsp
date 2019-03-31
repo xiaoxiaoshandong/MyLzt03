@@ -38,13 +38,6 @@
 	width: 450px; 
 	height: 450px;
 }
-.ops_imglist {
-	position: relative;
-	background:#00ff33;
-	width: 452px;
-	height: 58px; 
-	margin-bottom: 18px;
-}
 .ops_info_wrap {
 	width: 738px;
 	height: 975px; 
@@ -197,6 +190,60 @@
 a {
 	text-decoration: none; /*去掉下划线*/
 }
+li {
+	list-style:none;
+}
+.ops_imglist {
+	position: relative;
+	background:#00ff33;
+	width: 452px;
+	height: 58px; 
+	margin-bottom: 18px;
+}
+.imglist_a_left {
+	position:relative;
+	width: 22px;
+    height: 32px;
+	display: block;
+	padding: 13px 0px;
+	float:left;
+	}
+.imglist_a_right {
+	position:relative;
+	width: 22px;
+    height: 32px;
+	display: block;
+	padding: 13px 0px;
+	float:right;
+	}
+.imglist_i_left {
+	width: 22px;
+    height: 32px;
+	display: block;
+ 	background: url(${pageContext.request.contextPath}/static/img/zuo.png);
+ 	background-repeat: no-repeat;
+}
+.imglist_i_right {
+	width: 22px;
+    height: 32px;
+	display: block;
+ 	background: url(${pageContext.request.contextPath}/static/img/you.png);
+ 	background-repeat: no-repeat;
+}
+.imglist_div {
+	width: 408px;
+    height: 58px;
+    overflow: hidden;
+}
+.ops_imglist img {
+	width: 54px;
+    height: 54px;
+    border-left:10px solid #fff;
+    border-right:10px solid #fff;
+    border-top:2px solid #fff;
+    border-bottom:2px solid #fff;
+    vertical-align: middle;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -235,7 +282,20 @@ return ""
 				<div class="ops_preview">
 					<img alt="" src="${prodVos[0].myPicture[0].tupianName}">
 				</div>
-				<div class="ops_imglist">ops_imglist</div>
+				<div class="ops_imglist">
+					<a class="imglist_a_left">
+						<i class="imglist_i_left"></i>
+					</a>
+					<a class="imglist_a_right">
+						<i class="imglist_i_right"></i>
+					</a>
+					<div class="imglist_div">
+								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
+								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
+								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
+								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
+					</div>
+				</div>
 			</div>
 			
 			<div class="ops_info_wrap">
