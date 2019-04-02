@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -238,12 +239,19 @@ li {
 .ops_imglist img {
 	width: 54px;
     height: 54px;
-    border-left:10px solid #fff;
-    border-right:10px solid #fff;
+    border-left:2px solid #fff;
+    border-right:2px solid #fff;
     border-top:2px solid #fff;
     border-bottom:2px solid #fff;
     vertical-align: middle;
+    margin-left: 10px;
+    margin-right:9px;
+    mar
 }
+/* .ops_imglist img:hover {
+	border: 2px solid red;
+} */
+
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -270,6 +278,19 @@ if (document.cookie.length>0)
   }
 return ""
 }
+// 修改图片边框颜色样式并替换图片
+ function imgRed(data){
+	 $(data).css("border","2px solid red");
+	 var newSrc = $(data).attr("src");
+	 $(".ops_preview img").attr("src",newSrc);
+	 var parent = data.parentNode;
+	 var childs = parent.children;
+	 for(var i = 0; i < childs.length;i++){
+	        if (childs[i] !== data){
+	        	$(childs[i]).css("border","2px solid #fff");
+	        }
+	    }
+ };
 </script>
 </head>
 <body>
@@ -280,7 +301,7 @@ return ""
 		<div class="ops_content">
 			<div class="ops_preview_wrap">
 				<div class="ops_preview">
-					<img alt="" src="${prodVos[0].myPicture[0].tupianName}">
+					<img alt="" src="${prodVos[0].myPicture[0].tupianName}" id="pre_id">
 				</div>
 				<div class="ops_imglist">
 					<a class="imglist_a_left">
@@ -290,10 +311,16 @@ return ""
 						<i class="imglist_i_right"></i>
 					</a>
 					<div class="imglist_div">
+								<!-- <img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
 								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
 								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
 								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
 								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
+								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg"> -->
+						<c:forEach items="${prodVos[0].myPicture}" var="item">
+								<img alt="" src="${item.tupianName}" onmousemove="imgRed(this);">
+						</c:forEach>		
+								
 					</div>
 				</div>
 			</div>

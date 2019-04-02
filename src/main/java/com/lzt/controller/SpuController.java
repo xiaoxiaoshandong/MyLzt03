@@ -135,11 +135,14 @@ public class SpuController {
 	//根据 skuId 查询商品信息
 	@RequestMapping(value="/selectProdBySkuId",method=RequestMethod.GET,produces = {"text/html;charset=utf-8"}) 
 	public ModelAndView  selectProdBySkuId(@RequestParam Map<String,Object> map,HttpServletRequest request) throws Exception{
-		String erjiName = (String)map.get("erjiName");
+		boolean key = map.containsKey("erjiName");
+		if(key){
+			String erjiName = (String)map.get("erjiName");
+			String name = java.net.URLDecoder.decode(erjiName,"utf-8");
+			request.setAttribute("erjiName", name);
+		}
 		List<ProdVo> prodVos = spuService.selectProdBySkuId(map);
 		System.out.println(prodVos);
-		String name = java.net.URLDecoder.decode(erjiName,"utf-8");
-		request.setAttribute("erjiName", name);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("forward:/jsp/oneProdShow.jsp");
         //封装要显示到视图的数据
