@@ -251,7 +251,18 @@ li {
 /* .ops_imglist img:hover {
 	border: 2px solid red;
 } */
-
+.ops_bigimg {
+	position:absolute;
+	width: 550px;
+    height: 530px;
+    background-color:red;
+    margin-left: 450px;
+    display:none;
+}
+.ops_bigimg img {
+	width: 550px;
+    height: 530px;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -291,6 +302,15 @@ return ""
 	        }
 	    }
  };
+ function bigImg_start(){
+	var src =  $("#pre_id").attr("src");
+	 $("#bigimg_id").attr("src",src);
+	 
+	 $(".ops_bigimg").css("display","inline");
+ }
+ function bigImg_end(){
+	 $(".ops_bigimg").css("display","none");
+ }
 </script>
 </head>
 <body>
@@ -299,8 +319,11 @@ return ""
 			<a href="javascript:;" >${requestScope.erjiName}</a>
 		</div>
 		<div class="ops_content">
+			<div class="ops_bigimg">
+				 <img alt="" src="${prodVos[0].myPicture[0].tupianName}" id="bigimg_id">
+			</div>
 			<div class="ops_preview_wrap">
-				<div class="ops_preview">
+				<div class="ops_preview" onmouseover="bigImg_start();" onmouseout="bigImg_end();">
 					<img alt="" src="${prodVos[0].myPicture[0].tupianName}" id="pre_id">
 				</div>
 				<div class="ops_imglist">
