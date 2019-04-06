@@ -56,7 +56,7 @@ input::-webkit-input-placeholder{
 		var params = $("#loginForm").serialize(); 
 		$.ajax({
 			type:"POST",
-			url:"user/test",
+			url:"user/login",
 			data: params,
 			dataType:"json",
 			success : function(data) {  

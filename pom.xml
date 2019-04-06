@@ -192,6 +192,20 @@
 		    <artifactId>mybatis-generator-maven-plugin</artifactId>
 		    <version>1.3.7</version>
 		</dependency>
+		
+		<!--做token验证 引入  jwt-->
+		<dependency>
+		    <groupId>com.auth0</groupId>
+		    <artifactId>java-jwt</artifactId>
+		    <version>3.3.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid</artifactId>
+		    <version>1.0.20</version>
+		</dependency>
+		
     
   </dependencies>
   
