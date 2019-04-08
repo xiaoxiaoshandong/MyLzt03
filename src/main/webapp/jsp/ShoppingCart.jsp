@@ -6,14 +6,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
+html body{
+	height: 100%;
+}
 #div{
-      width: 400px;
+	  width:40%;
       height: 400px;
       background-color: yellow;
       display: flex;
 }
 #div div{
-      width: 100px;
+	  width:10%;
       height: 100px;
       background-color: blue;
       color: white;
