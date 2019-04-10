@@ -4,24 +4,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
 <style>
-html body{
+html,body{
 	height: 100%;
+	font: normal 100% Helvetica, Arial, sans-serif;
+	
 }
-#div{
-	  width:40%;
-      height: 400px;
-      background-color: yellow;
-      display: flex;
+body {
+	padding: 0;
+    margin: 0;
 }
-#div div{
-	  width:10%;
-      height: 100px;
-      background-color: blue;
-      color: white;
-      font-size: 30px;
+.gwc_top {
+	line-height:30px;
+	background-color: red;
 }
+/* .test {
+	height:95%;
+} */
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -29,12 +30,6 @@ html body{
 </script>
 </head>
 <body>
-		
-		<div id="div">
-            <div class="div1">1</div>
-            <div class="div2">2</div>
-            <div class="div3">3</div>
-            <div class="div4">4</div>
-        </div>
+		<div class="gwc_top">gwc_top</div>
 </body>
 </html>
