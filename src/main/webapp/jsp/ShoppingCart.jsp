@@ -9,20 +9,54 @@
 <style>
 html,body{
 	height: 100%;
-	font: normal 100% Helvetica, Arial, sans-serif;
+	font-size:62.5%;
 	
 }
 body {
 	padding: 0;
     margin: 0;
+    font:normal 100% Arial,sans-serif;font-size:14px; font-size:1.4rem;
 }
 .gwc_top {
 	line-height:30px;
 	background-color: red;
 }
-/* .test {
-	height:95%;
-} */
+.test_a1 {
+	position:fixed;
+	display: block;
+	padding: 10% ;
+	background-color: red;
+	margin-left: 5%;
+	
+}
+.test_a2 {
+	position:fixed;
+	display: block;
+	padding: 10% ;
+	background-color: red;
+	margin-left: 55%;
+}
+.div1{
+	position:fixed;
+	padding: 10% ;
+	background-color: red;
+	margin-left: 5%;
+}
+.div2{
+	position:fixed;
+	width:30%;
+	height:400px;
+	background-color: red;
+	margin-left: 55%;
+	
+}
+.div2 div{
+	width:8%;
+	height: 50px;
+	background-color: #d9d9d9;
+	float: left;
+	margin: 5%;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -30,6 +64,20 @@ body {
 </script>
 </head>
 <body>
-		<div class="gwc_top">gwc_top</div>
+		<!-- <div class="gwc_top">gwc_top</div>
+		<div class="gwc_logo">gwc_logo</div> -->
+		<!-- <a href="" class="test_a1">测试1</a> <a href="" class="test_a2">测试2</a> -->
+		<div class="div1">div1</div>
+		<div class="div2">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
 </body>
 </html>
