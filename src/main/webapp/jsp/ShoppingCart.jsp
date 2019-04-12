@@ -36,6 +36,12 @@ body {
 	background-color: red;
 	margin-left: 55%;
 }
+.div0{
+	width:100%;
+	min-width:700px;
+	height: 80%;
+	background-color: #e4393c;
+}
 .div1{
 	position:fixed;
 	padding: 10% ;
@@ -43,6 +49,7 @@ body {
 	margin-left: 5%;
 }
 .div2{
+	/* min-width:200px; */
 	position:fixed;
 	width:30%;
 	height:400px;
@@ -67,6 +74,7 @@ body {
 		<!-- <div class="gwc_top">gwc_top</div>
 		<div class="gwc_logo">gwc_logo</div> -->
 		<!-- <a href="" class="test_a1">测试1</a> <a href="" class="test_a2">测试2</a> -->
+	<div class="div0">
 		<div class="div1">div1</div>
 		<div class="div2">
 			<div></div>
@@ -79,5 +87,6 @@ body {
 			<div></div>
 			<div></div>
 		</div>
+	</div>
 </body>
 </html>
