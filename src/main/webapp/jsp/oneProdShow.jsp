@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -37,13 +38,6 @@
 .ops_preview img {
 	width: 450px; 
 	height: 450px;
-}
-.ops_imglist {
-	position: relative;
-	background:#00ff33;
-	width: 452px;
-	height: 58px; 
-	margin-bottom: 18px;
 }
 .ops_info_wrap {
 	width: 738px;
@@ -197,6 +191,78 @@
 a {
 	text-decoration: none; /*去掉下划线*/
 }
+li {
+	list-style:none;
+}
+.ops_imglist {
+	position: relative;
+	background:#00ff33;
+	width: 452px;
+	height: 58px; 
+	margin-bottom: 18px;
+}
+.imglist_a_left {
+	position:relative;
+	width: 22px;
+    height: 32px;
+	display: block;
+	padding: 13px 0px;
+	float:left;
+	}
+.imglist_a_right {
+	position:relative;
+	width: 22px;
+    height: 32px;
+	display: block;
+	padding: 13px 0px;
+	float:right;
+	}
+.imglist_i_left {
+	width: 22px;
+    height: 32px;
+	display: block;
+ 	background: url(${pageContext.request.contextPath}/static/img/zuo.png);
+ 	background-repeat: no-repeat;
+}
+.imglist_i_right {
+	width: 22px;
+    height: 32px;
+	display: block;
+ 	background: url(${pageContext.request.contextPath}/static/img/you.png);
+ 	background-repeat: no-repeat;
+}
+.imglist_div {
+	width: 408px;
+    height: 58px;
+    overflow: hidden;
+}
+.ops_imglist img {
+	width: 54px;
+    height: 54px;
+    border-left:2px solid #fff;
+    border-right:2px solid #fff;
+    border-top:2px solid #fff;
+    border-bottom:2px solid #fff;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-right:9px;
+    mar
+}
+/* .ops_imglist img:hover {
+	border: 2px solid red;
+} */
+.ops_bigimg {
+	position:absolute;
+	width: 550px;
+    height: 530px;
+    background-color:red;
+    margin-left: 450px;
+    display:none;
+}
+.ops_bigimg img {
+	width: 550px;
+    height: 530px;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -223,30 +289,74 @@ if (document.cookie.length>0)
   }
 return ""
 }
+// 修改图片边框颜色样式并替换图片
+ function imgRed(data){
+	 $(data).css("border","2px solid red");
+	 var newSrc = $(data).attr("src");
+	 $(".ops_preview img").attr("src",newSrc);
+	 var parent = data.parentNode;
+	 var childs = parent.children;
+	 for(var i = 0; i < childs.length;i++){
+	        if (childs[i] !== data){
+	        	$(childs[i]).css("border","2px solid #fff");
+	        }
+	    }
+ };
+ function bigImg_start(){
+	var src =  $("#pre_id").attr("src");
+	 $("#bigimg_id").attr("src",src);
+	 
+	 $(".ops_bigimg").css("display","inline");
+ }
+ function bigImg_end(){
+	 $(".ops_bigimg").css("display","none");
+ }
 </script>
 </head>
 <body>
 		<div class="ops_nav">
-			<a href="javascript:;" id="spejfl"></a>
-			<a href="javascript:;" >${prodVos[0].skuId}</a>
+			<a href="javascript:;" id="spejfl">q111</a>
+			<a href="javascript:;" >${requestScope.erjiName}</a>
 		</div>
 		<div class="ops_content">
+			<div class="ops_bigimg">
+				 <img alt="" src="${prodVos[0].myPicture[0].tupianName}" id="bigimg_id">
+			</div>
 			<div class="ops_preview_wrap">
-				<div class="ops_preview">
-					<img alt="" src="">
+				<div class="ops_preview" onmouseover="bigImg_start();" onmouseout="bigImg_end();">
+					<img alt="" src="${prodVos[0].myPicture[0].tupianName}" id="pre_id">
 				</div>
-				<div class="ops_imglist">ops_imglist</div>
+				<div class="ops_imglist">
+					<a class="imglist_a_left">
+						<i class="imglist_i_left"></i>
+					</a>
+					<a class="imglist_a_right">
+						<i class="imglist_i_right"></i>
+					</a>
+					<div class="imglist_div">
+								<!-- <img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
+								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
+								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
+								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
+								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg">
+								<img alt="" src="http://localhost:8080/lzt03/upload/imgs/20181226/1545802916282_772.jpg"> -->
+						<c:forEach items="${prodVos[0].myPicture}" var="item">
+								<img alt="" src="${item.tupianName}" onmousemove="imgRed(this);">
+						</c:forEach>		
+								
+					</div>
+				</div>
 			</div>
 			
 			<div class="ops_info_wrap">
 				<div class="ops_sku_name">
-					联想(Lenovo)拯救者Y7000P英特尔酷睿 i7 15.6英寸高色域游戏笔记本电脑(i7-8750H 8G 512G GTX1060 144Hz)
+					${prodVos[0].skuName} ${prodVos[0].chanpinName}
 				</div>
 				<div class="ops_jiage">
 					<div class="jgn">价格:</div>
 					<div class="jgv">
 						<span class="jgv_1">￥</span>
-						<span class="jgv_2">5999</span>
+						<span class="jgv_2">${prodVos[0].jiage}</span>
 					</div>
 				</div>
 				<div class="ops_weight">

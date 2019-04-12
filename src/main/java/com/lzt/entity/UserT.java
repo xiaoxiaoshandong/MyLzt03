@@ -3,27 +3,27 @@ package com.lzt.entity;
 public class UserT {
     private Integer id;
     /**
-     * ÕËºÅ
+     *ç”¨æˆ·å
      */
     private String userName;
     /**
-     * ÃÜÂë
+     * ç”¨æˆ·å¯†ç 
      */
     private String password;
     /**
-     * ÄêÁä
+     * å¹´é¾„
      */
     private Integer age;
     /**
-     * ĞÔ±ğ
+     * æ€§åˆ«
      */
     private Integer sex;
      /**
-      * °®ºÃ
+      * çˆ±å¥½
       */
     private String aihao;
     /**
-     * Ãñ×å
+     * æ°‘æ—
      */
     private String minzu;
 
