@@ -33,12 +33,12 @@ body {
 .gwc_login{
 	border: 1px solid #edd28b;
 	background: #fffdee;
-	padding: 10px 20px;
+	padding: 10px 2%;
     line-height: 25px;
     margin-bottom: 20px;
     color: #f70;
     margin-left: 13%;
-     width: 71%; 
+     width: 71.8%; 
      /* display: none; */
 }
 .gwc_title{
@@ -46,7 +46,7 @@ body {
 	color: red;
 	margin-left: 13%;
 	background-color: #ccff66;
-	width: 74.2%; 
+	width: 75.93%; 
 	font-size:2rem;
 	margin-bottom: 10px;
 }
@@ -60,21 +60,18 @@ body {
     border: 1px solid #e9e9e9;
     border-top: 0;
     margin-left: 13%;
-    width: 74.05%; 
+    width: 75.8%; 
     float: left;
-}
-.gwc_show{}
-.gwc_cast{}
-em {
-	font-style: normal;
 }
 .column_checkbox {
 	height: 18px;
     line-height: 18px;
     padding-top: 7px;
-    width: 122px;
-    padding-left: 11px;
+    width: 12.4%;
+    padding-left: 1.1%;
     float: left;
+    white-space: nowrap;
+    overflow:hidden;
 }
 .cart_checkbox {
 	position: relative;
@@ -102,9 +99,108 @@ em {
     background-color: #99ffcc;
     float: left;
 }
-.cart_quantity{}
-.cart_sum{}
-.cart_action{}
+.cart_quantity{
+	width: 10.8%;
+    text-align: center;
+    float: left;
+    line-height: 32px;
+    background-color: #006699;
+}
+.cart_sum{
+	width: 10.4%;
+    padding-right: 4.1%;
+    text-align: right;
+    float: left;
+    line-height: 32px;
+    background-color: #FFE4B5;
+}
+.cart_action{
+	width: 7.5%;
+	float: left;
+	background-color: #D8BFD8;
+	white-space: nowrap;
+}
+.gwc_show {}
+.gwc_cast {
+	display: block;
+    height: 52px;
+    line-height: 32px;
+    background: #f3f3f3;
+    border: 1px solid #e9e9e9;
+    border-top: 0;
+    margin-left: 13%;
+    width: 75.8%; 
+    float: left;
+}
+.select_all {
+    float: left;
+    height: 18px;
+    width: 4.5%;
+    line-height: 18px;
+    padding: 16px 0 16px 9px;
+    white-space: nowrap;
+}
+.operation {
+	float: left;
+    height: 50px;
+    width: 31.4%;
+    line-height: 50px;
+    background-color: #E3E3E3;
+}
+.operation a{
+	float: left;
+    margin-left: 3.24%;
+    color: #666;
+}
+.comm_right {
+	float: right;
+    width: 600px;
+    background-color: #CD8500;
+    height: 52px;
+}
+.btn-area {
+	float: right;
+}
+.btn-area a{
+	display: block;
+    position: relative;
+    width: 94px;
+    height: 52px;
+    line-height: 52px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Microsoft YaHei";
+    background: #e54346;
+    overflow: hidden;
+}
+a {
+    text-decoration: none;
+}
+.price_sum {
+	float: right;
+    height: 43px;
+    line-height: 20px;
+    margin: 7px 20px 0 10px;
+    color: #666;
+    width: auto;
+    position: relative;
+    background: #C1C1C1;
+}
+.total {
+	/* position:relative; */
+	width: 50px;
+	 height: 20px;
+	 margin-top: 10px;
+	 display:block;
+}
+.sum_price {
+	display: inline-block;
+    display: inline;
+    zoom: 1;
+    text-align: right;
+    font-family: verdana;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -131,12 +227,33 @@ em {
 			<div class="cart_prod">商品</div>
 			<div class="cart_props"></div>
 			<div class="cart_price">单价</div>
-			<!-- <div class="cart_quantity">数量</div>
+			<div class="cart_quantity">数量</div>
 			<div class="cart_sum">小计</div>
-			<div class="cart_action">操作</div> -->
+			<div class="cart_action">操作</div>
 		</div>
 		<div class="gwc_show">gwc_show</div>
-		<div class="gwc_cast">gwc_cast</div>
+		<div class="gwc_cast">
+			<div class="select_all">
+				<div class="cart_checkbox">
+					<input type="checkbox" id="toggle-checkboxes_up" name="toggle-checkboxes" class="jdcheckbox" checked="checked">
+				</div>
+				全选
+			</div>
+			<div class="operation">
+				<a>删除选中的商品</a>
+				<a>清理购物车</a>
+			</div>
+			<div class="comm_right">
+				<div class="btn-area">
+					<a href="">去结算</a>
+				</div>
+				<div class="price_sum">
+					<span class="total">总价</span>
+					<span class="sum_price">¥0.00</span>
+				</div>
+			</div>
+			
+		</div>
 	
 </body>
 </html>
