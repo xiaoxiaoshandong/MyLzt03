@@ -119,7 +119,6 @@ body {
 	background-color: #D8BFD8;
 	white-space: nowrap;
 }
-.gwc_show {}
 .gwc_cast {
 	display: block;
     height: 52px;
@@ -128,6 +127,7 @@ body {
     border: 1px solid #e9e9e9;
     border-top: 0;
     margin-left: 13%;
+    margin-top:10px;
     width: 75.8%; 
     float: left;
 }
@@ -206,6 +206,63 @@ a {
     color: #E2231A;
     font-weight: 700;
 }
+
+.gwc_show {
+	margin-left: 13%;
+	background: #66cccc;
+	padding: 0 0 1px 0;
+	line-height: 20px;
+	min-height: 118px; 
+	width: 76%;  
+	margin-top: 10px;
+	float: left;
+	font-size: 2rem;
+	text-align: center;
+}
+
+.gwc_show span {
+	font-size: 2rem;
+	text-align: center;
+	line-height:3.5em;
+}
+.goods{
+	width: 30%;
+	height:82px;
+	background-color: #669999;
+	float: left;
+	padding: 15px 0 10px 0;
+	margin-right:15%; 
+}
+.goods_img {
+	float: left;
+    width: 34%;
+    height: 80px;
+    border: 1px solid #eee;
+    margin-right: 3.5%;
+    margin-bottom:10px;
+    background: #fff;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+}
+.goods_name {
+	width:60%;
+	height: 40px;
+    line-height: 20px;
+    overflow: hidden;
+   	float: left; 
+   	font-size: 1.5rem;
+}
+.goods_price {
+	width: 16%;
+	padding-right: 40px;
+    font-family: verdana;
+    text-align: right;
+    float: left;
+    padding: 15px 0 10px;
+    overflow: hidden;
+    line-height: 20px;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -236,7 +293,24 @@ a {
 			<div class="cart_sum">小计</div>
 			<div class="cart_action">操作</div>
 		</div>
-		<div class="gwc_show">gwc_show</div>
+		<!-- <div class="gwc_show">
+			<span>购物车空空如也！买点东西吧</span>
+		</div> -->
+		<div class="gwc_show">
+			<div class="select_all">
+				<div class="cart_checkbox">
+					<input type="checkbox" id="toggle-checkboxes_up" name="toggle-checkboxes" class="jdcheckbox" checked="checked">
+				</div>
+			</div>
+			<div class="goods">
+				<div class="goods_img">
+					<a href=""></a>
+				</div>
+				<div class="goods_name">商品测试名称商品测试名称商品测试名称商品测试名称商品测试名称</div>
+				<div class="goods_props"></div>
+			</div>
+			<div class="goods_price">¥7000.00</div>
+		</div>
 		<div class="gwc_cast">
 			<div class="select_all">
 				<div class="cart_checkbox">
