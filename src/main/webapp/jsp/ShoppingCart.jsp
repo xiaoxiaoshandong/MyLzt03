@@ -10,7 +10,6 @@
 html,body{
 	height: 100%;
 	font-size:62.5%;
-	
 }
 body {
 	padding: 0;
@@ -137,7 +136,7 @@ body {
     height: 18px;
     width: 4.5%;
     line-height: 18px;
-    padding: 16px 0 16px 9px;
+    padding: 16px 0 16px 0.9%;
     white-space: nowrap;
 }
 .operation {
@@ -146,6 +145,8 @@ body {
     width: 31.4%;
     line-height: 50px;
     background-color: #E3E3E3;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .operation a{
 	float: left;
@@ -154,22 +155,23 @@ body {
 }
 .comm_right {
 	float: right;
-    width: 600px;
+    width: 60%;
     background-color: #CD8500;
     height: 52px;
 }
 .btn-area {
 	float: right;
+	width: 15.6%;
+	height: 52px;
+	white-space: nowrap;
 }
 .btn-area a{
 	display: block;
     position: relative;
-    width: 94px;
-    height: 52px;
     line-height: 52px;
     color: #fff;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-family: "Microsoft YaHei";
     background: #e54346;
     overflow: hidden;
@@ -180,26 +182,29 @@ a {
 .price_sum {
 	float: right;
     height: 43px;
+    width:13% !important;
     line-height: 20px;
-    margin: 7px 20px 0 10px;
+    margin: 7px 3% 0 2%;
     color: #666;
-    width: auto;
     position: relative;
     background: #C1C1C1;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .total {
-	/* position:relative; */
-	width: 50px;
 	 height: 20px;
 	 margin-top: 10px;
+	 margin-right:4%; 
 	 display:block;
+	 float: left;
+	 
 }
 .sum_price {
-	display: inline-block;
-    display: inline;
-    zoom: 1;
-    text-align: right;
-    font-family: verdana;
+    float: left;
+    margin-top: 10px;
+    font-size: 1.6rem;
+    color: #E2231A;
+    font-weight: 700;
 }
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
@@ -248,7 +253,7 @@ a {
 					<a href="">去结算</a>
 				</div>
 				<div class="price_sum">
-					<span class="total">总价</span>
+					<span class="total">总价:</span>
 					<span class="sum_price">¥0.00</span>
 				</div>
 			</div>
