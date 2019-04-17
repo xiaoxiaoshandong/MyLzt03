@@ -10,6 +10,7 @@
 html,body{
 	height: 100%;
 	font-size:62.5%;
+	min-width: 768px; 
 }
 body {
 	padding: 0;
@@ -18,12 +19,11 @@ body {
 }
 .gwc_top {
 	height:30px;
-	background-color: red;
+	background: #e3e4e5;
 }
 .gwc_logo {
 	width: 20.8%;
-	height: 50px;
-	background-color: #ffff33;
+	height: 120px;
 	margin-left: 13%;
 	margin-top: 15px;
 	margin-bottom: 22px;
@@ -44,7 +44,6 @@ body {
 	margin-top: 10px;
 	color: red;
 	margin-left: 13%;
-	background-color: #ccff66;
 	width: 75.93%; 
 	font-size:2rem;
 	margin-bottom: 10px;
@@ -82,7 +81,6 @@ body {
 .cart_prod {
 	line-height: 32px;
 	width: 20%;
-	background-color: #cccc99;
 	float: left;
 }
 .cart_props{
@@ -90,12 +88,10 @@ body {
     padding: 0 1% 0 2%;
     float: left;
     width: 14.152%;
-    background-color: #cc9999;
 }
 .cart_price{
 	width: 16.174%;
     text-align: right;
-    background-color: #99ffcc;
     float: left;
 }
 .cart_quantity{
@@ -103,7 +99,6 @@ body {
     text-align: center;
     float: left;
     line-height: 32px;
-    background-color: #006699;
 }
 .cart_sum{
 	width: 10.4%;
@@ -111,12 +106,10 @@ body {
     text-align: right;
     float: left;
     line-height: 32px;
-    background-color: #FFE4B5;
 }
 .cart_action{
 	width: 7.5%;
 	float: left;
-	background-color: #D8BFD8;
 	white-space: nowrap;
 }
 .gwc_cast {
@@ -144,7 +137,6 @@ body {
     height: 50px;
     width: 31.4%;
     line-height: 50px;
-    background-color: #E3E3E3;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -156,7 +148,6 @@ body {
 .comm_right {
 	float: right;
     width: 60%;
-    background-color: #CD8500;
     height: 52px;
 }
 .btn-area {
@@ -187,7 +178,6 @@ a {
     margin: 7px 3% 0 2%;
     color: #666;
     position: relative;
-    background: #C1C1C1;
     white-space: nowrap;
     overflow: hidden;
 }
@@ -209,7 +199,7 @@ a {
 
 .gwc_show {
 	margin-left: 13%;
-	background: #66cccc;
+	background: #fff4e8;
 	padding: 0 0 1px 0;
 	line-height: 20px;
 	min-height: 118px; 
@@ -228,7 +218,6 @@ a {
 .goods{
 	width: 30%;
 	height:82px;
-	background-color: #669999;
 	float: left;
 	padding: 15px 0 10px 0;
 	margin-right:15%; 
@@ -255,13 +244,101 @@ a {
 }
 .goods_price {
 	width: 16%;
-	padding-right: 40px;
     font-family: verdana;
     text-align: right;
     float: left;
     padding: 15px 0 10px;
     overflow: hidden;
     line-height: 20px;
+}
+.quantity {
+	width: 8.2%;
+	float: left;
+    padding: 15px 0 10px 1.3rem;
+    height:18px;
+}
+.number {
+    border: 0.1rem solid #cacbcb;
+    width: 52.5%;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    overflow: hidden;
+    font-size: 1.2rem;
+    font-family: verdana;
+    color: #333;
+    float: left;
+    display:block; 
+}
+.add_sub {
+	color: #e9e9e9;
+	float: left;
+	border: 0.1rem solid #cacbcb;
+    border-right: 0;
+    border-left:0;
+    height: 18px;
+    line-height: 18px;
+    padding: 1px 0;
+    width: 20%;
+    text-align: center;
+    background: #fff;
+    overflow: hidden;
+    white-space:nowrap; 
+    display:block; 
+}
+.subtotal {
+	width: 12%;
+    text-align: right;
+    font-family: verdana;
+    float: left;
+    padding: 15px 0 10px;
+    line-height: 20px;
+}
+.del {
+	width: 7%;
+    position: relative;
+    float: left;
+    padding: 15px 0 10px;
+    line-height: 20px;
+    text-align:right;
+    min-height: 20px;
+    font-size: 1.5rem;
+    text-overflow: ellipsis;
+	white-space:nowrap; 
+   
+}
+.top_small {
+	margin-left: 13%;
+	height: 30px;
+	width: 75.9%;
+}
+.kefu {
+	float: right;
+    padding: 0 8px;
+    line-height: 30px;
+}
+.dingdan {
+	float: right;
+    padding: 0 8px;
+    line-height: 30px;
+}
+.denglu_zhuce {
+	float: right;
+    padding: 0 8px;
+    line-height: 30px;
+}
+.spacer {
+	width: 1px;
+    height: 12px;
+    margin-top: 9px;
+    padding: 0;
+    background: #ccc;
+    overflow: hidden;
+    float: right;
+}
+.gwc_logo img{
+	width: 100%;
+	height: 120px;
 }
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
@@ -270,8 +347,25 @@ a {
 </script>
 </head>
 <body>
-		<div class="gwc_top">gwc_top</div>
-		<div class="gwc_logo">gwc_logo</div>
+		<div class="gwc_top">
+			<div class="top_small">
+				<div class="kefu">
+					<a href="">客服服务</a>
+				</div>
+				<div class="spacer" ></div>
+				<div class="dingdan">
+					<a href="">我的订单</a>
+				</div>
+				<div class="spacer" ></div>
+				<div class="denglu_zhuce">
+					<a href="">你好，请登录</a>
+					<a href="">免费注册</a>
+				</div>
+			</div>
+		</div>
+		<div class="gwc_logo">
+			<img alt="" src="/lzt03/static/img/lizhentao_logo.jpg" >
+		</div>
 		<div class="gwc_login">
 			您还没有登录！登录后购物车的商品将保存到您账号中
 			<a class="" href="#none" >立即登录</a>
@@ -310,7 +404,17 @@ a {
 				<div class="goods_props"></div>
 			</div>
 			<div class="goods_price">¥7000.00</div>
+			<div class="quantity" id="clearfix">
+				<a href="" class="add_sub">-</a>
+				<input class="number"  value="55"/>
+				<a href="" class="add_sub">+</a>
+			</div>
+			<div class="subtotal">129.00</div>
+			<div class="del">
+				<a href="" class="">删除</a>
+			</div>
 		</div>
+		
 		<div class="gwc_cast">
 			<div class="select_all">
 				<div class="cart_checkbox">
@@ -319,8 +423,8 @@ a {
 				全选
 			</div>
 			<div class="operation">
-				<a>删除选中的商品</a>
-				<a>清理购物车</a>
+				<a href="">删除选中的商品</a>
+				<a href="">清理购物车</a>
 			</div>
 			<div class="comm_right">
 				<div class="btn-area">
