@@ -507,12 +507,28 @@ a {
 			+'<div><a href="javascript:;" name="'+skuId+'" onclick="oneProdShow(this);">'+name+'</a></div>'
 			+'<div>'
 					+'<i class="icon-user"></i>'
-					+'<input type="button" value="添加购物车" onClick="location.href='+"#"+'"/>'
+					+'<input type="button" value="添加购物车" onClick="addGwc(this);"/>'
 			+'</div>'
 		+'</div>';
 		$("#div_centre").append(c);
 	};
 	
+	function addGwc(data){
+		var par = data.parentNode.parentNode;
+		var p = par.firstChild.firstChild;
+		var skuId= p.getAttribute("name");
+		$.ajax({
+			type:"get",
+			url:"/lzt03/cart/addCart",
+			data: {"skuId":skuId},
+			dataType:"json",
+			success : function(result) {
+				
+			}
+			
+		});
+		
+	};
 	/*分页功能*/
 	function fy_show(total,sel_page){
 		/*

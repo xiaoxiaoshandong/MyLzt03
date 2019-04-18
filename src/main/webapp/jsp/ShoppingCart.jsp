@@ -435,7 +435,6 @@ a {
 					<span class="sum_price">¥0.00</span>
 				</div>
 			</div>
-			
 		</div>
 	
 </body>
