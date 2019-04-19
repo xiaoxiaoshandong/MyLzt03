@@ -10,6 +10,8 @@ public interface CartMapper {
     int insertSelective(Cart record);
 
     Cart selectByPrimaryKey(String cartId);
+    
+    Cart selectByColumn(String cartId);
 
     int updateByPrimaryKeySelective(Cart record);
 

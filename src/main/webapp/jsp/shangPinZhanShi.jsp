@@ -520,7 +520,7 @@ a {
 		$.ajax({
 			type:"get",
 			url:"/lzt03/cart/addCart",
-			data: {"skuId":skuId},
+			data: {"skuId":skuId,"num":1},
 			dataType:"json",
 			success : function(result) {
 				

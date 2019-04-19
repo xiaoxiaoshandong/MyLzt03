@@ -17,6 +17,30 @@
     from cart
     where cart_id = #{cartId,jdbcType=VARCHAR}
   </select>
+  <select id="selectByColumn" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    <where>
+	    <trim suffixOverrides="AND">
+	    	<if test="cartId != null">
+	    		cart_id = #{cartId} AND
+	    	</if>
+	    	<if test="userId != null">
+	    		user_id = #{userId} AND
+	    	</if>
+	    	<if test="createTime != null">
+	    		create_time = #{createTime} AND
+	    	</if>
+	    	<if test="updateTime != null">
+	    		update_time = #{updateTime} AND
+	    	</if>
+	    	<if test="addressId != null">
+	    		address_id = #{addressId} AND
+	    	</if>
+    	</trim>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from cart
     where cart_id = #{cartId,jdbcType=VARCHAR}

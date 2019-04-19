@@ -9,6 +9,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.lzt.myexception.TokenException;
 import com.alibaba.druid.util.StringUtils;
 
 /**
@@ -58,9 +59,10 @@ public class JwtToken {
 	 * 
 	 * @param token
 	 * @return
+	 * @throws TokenException 
 	 * @throws Exception
 	 */
-	public static Map<String, Claim> verifyToken(String token) {
+	public static Map<String, Claim> verifyToken(String token) throws TokenException {
 		DecodedJWT jwt = null;
 		try {
 			JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
@@ -68,6 +70,7 @@ public class JwtToken {
 		} catch (Exception e) {
 			// e.printStackTrace();
 			// token 校验失败, 抛出Token验证非法异常
+			throw new TokenException("token 校验失败");
 		}
 		return jwt.getClaims();
 	}
@@ -77,14 +80,16 @@ public class JwtToken {
 	 * 
 	 * @param token
 	 * @return user_id
+	 * @throws TokenException 
 	 */
-	public static Long getAppUID(String token) {
+	public static Integer getAppUID(String token) throws TokenException {
 		Map<String, Claim> claims = verifyToken(token);
 		Claim user_id_claim = claims.get("user_id");
 		if (null == user_id_claim || StringUtils.isEmpty(user_id_claim.asString())) {
 			// token 校验失败, 抛出Token验证非法异常
+			throw new TokenException("token 校验失败");
 		}
-		return Long.valueOf(user_id_claim.asString());
+		return Integer.valueOf(user_id_claim.asString());
 	}
 
 }

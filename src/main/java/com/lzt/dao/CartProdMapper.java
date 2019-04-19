@@ -14,4 +14,6 @@ public interface CartProdMapper {
     int updateByPrimaryKeySelective(CartProd record);
 
     int updateByPrimaryKey(CartProd record);
+
+	CartProd selectByColumn(String cartId);
 }
