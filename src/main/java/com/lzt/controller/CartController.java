@@ -16,6 +16,7 @@ import com.lzt.entity.Cart;
 import com.lzt.entity.CartProd;
 import com.lzt.myexception.TokenException;
 import com.lzt.myutils.CookieUtil;
+import com.lzt.myutils.DateUtil;
 import com.lzt.myutils.JwtToken;
 import com.lzt.myutils.MyId;
 @RestController  
@@ -67,29 +68,35 @@ public class CartController {
 				e.printStackTrace();
 			}
 			//获取购物车ID 并添加购物车商品信息
-			
-			Cart cart = cartService.selectByColumn(userId+"");
+			Cart cart2 = new Cart();
+			cart2.setUserId(userId+"");
+			Cart cart = cartService.selectByColumn(cart2);
 			String cartId = cart.getCartId();
 			if(cartId == null ){
 				return 0;
 			}
 			// 查询此商品是否存在 存在：更新 不存在：添加
-			CartProd cp= cartProdService.selectSkuId(cartId);
-			if(cp.getSkuId() == null){
+			CartProd prod = new CartProd();
+			prod.setCartId(cartId);
+			CartProd cp= cartProdService.selectByColumn(prod);
+			if(cp == null){
 				CartProd cartProd = new CartProd();
 				cartProd.setCpId(MyId.getMyId());
 				cartProd.setCartId(cartId);
 				cartProd.setSkuId(skuId);
-				cartProd.setCreateTime(new Date());
+				Date date = DateUtil.getTimeFormatDate("yyyy-MM-dd HH:mm:ss");
+				cartProd.setCreateTime(date);
 				cartProd.setNum(num);
 				Integer cps = cartProdService.insertCartProd(cartProd);
 				if(cps==0){
 					return 0;
 				}
 			}else{
-				
+				String cpId = cp.getCpId();
 				CartProd cartProd = new CartProd();
-				cartProd.setUpdateTime(new Date());
+				cartProd.setCpId(cpId);
+				Date date = DateUtil.getTimeFormatDate("yyyy-MM-dd HH:mm:ss");
+				cartProd.setUpdateTime(date);
 				Integer num2 = cp.getNum();
 				cartProd.setNum(num2+1);
 				Integer ucp = cartProdService.updateCartProd(cartProd);

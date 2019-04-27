@@ -121,29 +121,9 @@
         num = #{num,jdbcType=INTEGER},
       </if>
     </set>
-    <where>
-	    <trim suffixOverrides=",">
-	    	<if test="cpId != null">
-	    		cp_id = #{cpId} ,
-	    	</if>
-	    	<if test="cartId != null">
-	    		cart_id = #{cartId} ,
-	    	</if>
-	    	<if test="skuId != null">
-	    		sku_id = #{skuId} ,
-	    	</if>
-	    	<if test="createTime != null">
-	    		create_time = #{createTime} ,
-	    	</if>
-	    	<if test="updateTime != null">
-	    		update_time = #{updateTime} ,
-	    	</if>
-	    	<if test="num != null">
-	    		num = #{num} ,
-	    	</if>
-    	</trim>
-    </where>
+   	where cp_id = #{cpId} 
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.lzt.entity.CartProd">
     update cart_prod
     set cart_id = #{cartId,jdbcType=VARCHAR},

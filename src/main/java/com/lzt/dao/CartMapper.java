@@ -11,7 +11,7 @@ public interface CartMapper {
 
     Cart selectByPrimaryKey(String cartId);
     
-    Cart selectByColumn(String cartId);
+    Cart selectByColumn(Cart cart);
 
     int updateByPrimaryKeySelective(Cart record);
 

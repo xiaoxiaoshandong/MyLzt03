@@ -23,7 +23,7 @@
     from cart
     <where>
 	    <trim suffixOverrides="AND">
-	    	<if test="cartId != null">
+	    	<if test="cartId != null and cartId !=''">
 	    		cart_id = #{cartId} AND
 	    	</if>
 	    	<if test="userId != null">

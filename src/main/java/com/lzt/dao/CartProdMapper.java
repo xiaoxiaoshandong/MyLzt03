@@ -15,5 +15,5 @@ public interface CartProdMapper {
 
     int updateByPrimaryKey(CartProd record);
 
-	CartProd selectByColumn(String cartId);
+	CartProd selectByColumn(CartProd csartProd);
 }

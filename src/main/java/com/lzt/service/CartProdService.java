@@ -6,8 +6,10 @@ public interface CartProdService {
 
 	public Integer insertCartProd(CartProd cartProd);
 
-	public CartProd selectSkuId(String cartId);
-
+	
 	public Integer updateCartProd(CartProd cartProd);
+
+
+	public CartProd selectByColumn(CartProd prod);
 
 }

@@ -16,9 +16,9 @@ public class CartProdServiceImpl implements CartProdService {
 		 int i = cartProdMapper.insertSelective(cartProd);
 		 return i;
 	}
-	public CartProd selectSkuId(String cartId) {
+	public CartProd selectByColumn(CartProd cartProd) {
 		// TODO Auto-generated method stub
-		CartProd cp = cartProdMapper.selectByColumn(cartId);
+		CartProd cp = cartProdMapper.selectByColumn(cartProd);
 		return cp;
 	}
 	public Integer updateCartProd(CartProd cartProd) {

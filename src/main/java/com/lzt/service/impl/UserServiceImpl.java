@@ -10,6 +10,7 @@ import com.lzt.dao.CartMapper;
 import com.lzt.dao.UserTMapper;
 import com.lzt.entity.Cart;
 import com.lzt.entity.UserT;
+import com.lzt.myutils.DateUtil;
 import com.lzt.myutils.MyId;
 import com.lzt.service.UserService;
 @Service
@@ -39,7 +40,8 @@ public class UserServiceImpl implements UserService {
 		Integer userId = user2.getId();
 		Cart cart = new Cart();
 		cart.setCartId(MyId.getMyId());
-		cart.setCreateTime(new Date());
+		Date date = DateUtil.getTimeFormatDate("yyyy-MM-dd HH:mm:ss");
+		cart.setCreateTime(date);
 		cart.setUserId(userId+"");
 		int i = cartMapper.insertSelective(cart);
 		if(i==0){
