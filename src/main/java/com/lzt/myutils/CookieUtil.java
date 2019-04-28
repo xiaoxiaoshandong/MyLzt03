@@ -35,7 +35,7 @@ public class CookieUtil {
      *  @param num 商品被更新的个数
      *  @param addOrSub 0:减 1：加
      */
-    public static void updCookieGwc(String gwc,int num,String skuId,int addOrSub){
+    public static String updOrAddCookieGwc(String gwc,int num,String skuId,int addOrSub){
     	String[] spList = gwc.split(",");
     	List<String> asList = Arrays.asList(spList);
     	ArrayList<String> arrayList = new ArrayList<String>(asList);
@@ -47,17 +47,20 @@ public class CookieUtil {
     			int subNum = 0;
     			if(addOrSub == 0){
     				subNum = Integer.parseInt(cookieNum)-num;
+    				if(subNum<0){
+    					return gwc;
+    				}
     			}else{
     				subNum = Integer.parseInt(cookieNum)+num;
     			}
     			String newSp = cookieSkuId+"="+subNum;
     			arrayList.set(i, newSp);
-    			arrayList.toArray();
-    			return ;
+    			String join = StringUtils.join(arrayList,",");
+    			return join;
     		}
     	}
-    	
+    	String newSp = skuId+"="+num;
+    	String newGwc =gwc+","+newSp;
+    	return newGwc;
     }
-    
-    
 }

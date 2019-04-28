@@ -1,5 +1,7 @@
 package com.lzt.service;
 
+import javax.servlet.http.Cookie;
+
 import com.lzt.entity.CartProd;
 
 public interface CartProdService {
@@ -11,5 +13,8 @@ public interface CartProdService {
 
 
 	public CartProd selectByColumn(CartProd prod);
+
+
+	public int addCookieSpToDB(String cookieVal);
 
 }

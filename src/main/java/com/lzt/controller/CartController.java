@@ -33,14 +33,15 @@ public class CartController {
 	
 	/**
 	 * 
-	 * @param skuId
-	 * @param num
+	 * @param skuId 商品ID
+	 * @param num 商品数量
+	 * @param addOrSub 0：减商品数量 1：加商品数量
 	 * @param request
 	 * @param response
 	 * @return  1:购物车添加成功  0：购物车添加失败
 	 */
 	@RequestMapping(value="/addCart")  
-	public Integer addCart(String skuId,Integer num,HttpServletRequest request,HttpServletResponse response){
+	public Integer addCart(int addOrSub, String skuId,Integer num,HttpServletRequest request,HttpServletResponse response){
 		//验证用户是否登录  未登录 存入cookie  已登录 存入数据库 
 		Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
 		Cookie tokenCookie = cookieMap.get("login_token_id");
@@ -48,31 +49,14 @@ public class CartController {
 		String gwcVal = null;
 		if(tokenCookie == null){//用户 未登录
 			Cookie cookie =null;
-			if(spCoodie==null){// 没有购物车信息
+			if(spCoodie==null){// cookie没有购物车信息
 				gwcVal=skuId+"="+num;
-				cookie = new Cookie("gwcId",gwcVal);
-			}else{ //有购物车 信息
+			}else{ //cookie有购物车 信息
 				
 				String gwcVals = spCoodie.getValue();
-				/*String[] gwcList = gwcVals.split(",");
-				for (String str : gwcList) {
-					String cookieSkuId = StringUtils.substringBefore(str, "=");
-					String cookieNum = StringUtils.substringAfter(str, "=");
-					if(cookieSkuId.equals(skuId)){ // 被添加的商品在cooKie 里存在  更新数量
-						int parseInt = Integer.parseInt(cookieNum);
-						int sum1 = parseInt+num;
-					}else{ // 被添加的商品在cookie 里不存在 添加
-						
-					}
-				}*/
-				
-				/*int newNum = Integer.parseInt(num1)+num;
-				gwcVal=skuId+"="+newNum;
-				String gwcVals = spCoodie.getValue();
-				gwcVal = gwcVals+","+gwcVal;
-				cookie = new Cookie("gwcId",gwcVal);*/  
-				
+				gwcVal = CookieUtil.updOrAddCookieGwc(gwcVals, num, skuId, addOrSub);
 			}
+			cookie = new Cookie("gwcId",gwcVal);
 			// 关闭浏览器就失效
 			cookie.setMaxAge(-1);
 			 //可在同一应用服务器内共享cookie
