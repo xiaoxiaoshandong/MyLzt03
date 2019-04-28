@@ -66,11 +66,11 @@ public class CartController {
 					}
 				}*/
 				
-				int newNum = Integer.parseInt(num1)+num;
+				/*int newNum = Integer.parseInt(num1)+num;
 				gwcVal=skuId+"="+newNum;
 				String gwcVals = spCoodie.getValue();
 				gwcVal = gwcVals+","+gwcVal;
-				cookie = new Cookie("gwcId",gwcVal);
+				cookie = new Cookie("gwcId",gwcVal);*/
 			}
 			// 关闭浏览器就失效
 			cookie.setMaxAge(-1);
