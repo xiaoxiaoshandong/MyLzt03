@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,15 +44,33 @@ public class CartController {
 		//验证用户是否登录  未登录 存入cookie  已登录 存入数据库 
 		Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
 		Cookie tokenCookie = cookieMap.get("login_token_id");
-		Cookie spCoodie = cookieMap.get(skuId);
-		if(tokenCookie == null){
+		Cookie spCoodie = cookieMap.get("gwcId");
+		String gwcVal = null;
+		if(tokenCookie == null){//用户 未登录
 			Cookie cookie =null;
-			if(spCoodie==null){
-				cookie = new Cookie(skuId,num+"");
-			}else{
-				String num1 = spCoodie.getValue();
+			if(spCoodie==null){// 没有购物车信息
+				gwcVal=skuId+"="+num;
+				cookie = new Cookie("gwcId",gwcVal);
+			}else{ //有购物车 信息
+				
+				String gwcVals = spCoodie.getValue();
+				/*String[] gwcList = gwcVals.split(",");
+				for (String str : gwcList) {
+					String cookieSkuId = StringUtils.substringBefore(str, "=");
+					String cookieNum = StringUtils.substringAfter(str, "=");
+					if(cookieSkuId.equals(skuId)){ // 被添加的商品在cooKie 里存在  更新数量
+						int parseInt = Integer.parseInt(cookieNum);
+						int sum1 = parseInt+num;
+					}else{ // 被添加的商品在cookie 里不存在 添加
+						
+					}
+				}*/
+				
 				int newNum = Integer.parseInt(num1)+num;
-				cookie = new Cookie(skuId,newNum+"");
+				gwcVal=skuId+"="+newNum;
+				String gwcVals = spCoodie.getValue();
+				gwcVal = gwcVals+","+gwcVal;
+				cookie = new Cookie("gwcId",gwcVal);
 			}
 			// 关闭浏览器就失效
 			cookie.setMaxAge(-1);
@@ -77,7 +97,7 @@ public class CartController {
 			}
 			// 查询此商品是否存在 存在：更新 不存在：添加
 			CartProd prod = new CartProd();
-			prod.setCartId(cartId);
+			prod.setSkuId(skuId);
 			CartProd cp= cartProdService.selectByColumn(prod);
 			if(cp == null){
 				CartProd cartProd = new CartProd();
