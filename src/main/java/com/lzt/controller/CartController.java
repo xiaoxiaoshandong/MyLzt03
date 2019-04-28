@@ -70,7 +70,8 @@ public class CartController {
 				gwcVal=skuId+"="+newNum;
 				String gwcVals = spCoodie.getValue();
 				gwcVal = gwcVals+","+gwcVal;
-				cookie = new Cookie("gwcId",gwcVal);*/
+				cookie = new Cookie("gwcId",gwcVal);*/  
+				
 			}
 			// 关闭浏览器就失效
 			cookie.setMaxAge(-1);
