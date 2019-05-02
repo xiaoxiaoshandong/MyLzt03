@@ -134,6 +134,21 @@
 	height: 34px;
 	list-style-type: none;/* 去掉小黑点 */
 }
+.gwc_btn {
+	width: 138px;
+	height: 38px;
+	background-color: #e4e4e4;
+	display: inline-block;
+	margin-left: 100px;
+	text-align: center;
+	overflow: hidden;
+	cursor: pointer;
+	line-height: 38px;
+	color:red;
+}
+a {
+	 text-decoration:none; 
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -200,7 +215,7 @@
 				<li><img alt="" src="${pageContext.request.contextPath}/static/img/linggouwang.jpg" width="200" height="70"></li>
 				<li><input onmousemove=""></input></li>
 				<li><button>搜索</button></li>
-				<li><button>购物车</button></li>
+				<li><a class="gwc_btn" href="${pageContext.request.contextPath}/cart/selCartAll">购物车</a></li>
 			</ul>
 		</div>
 		<div class="div3">

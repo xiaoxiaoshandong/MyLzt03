@@ -23,4 +23,6 @@ public interface SpuService {
 
 	List<ProdVo> selectProdBySkuId(Map<String, Object> map);
 
+	List<ProdVo> selCartAll(String userId);
+
 }

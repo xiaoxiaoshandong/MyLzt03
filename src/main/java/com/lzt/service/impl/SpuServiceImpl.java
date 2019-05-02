@@ -118,4 +118,10 @@ public class SpuServiceImpl implements SpuService {
 		return prodVos;
 	}
 
+	public List<ProdVo> selCartAll(String userId) {
+		// TODO Auto-generated method stub
+		List<ProdVo> pv = spuMapper.selCartAll(userId);
+		return pv;
+	}
+
 }

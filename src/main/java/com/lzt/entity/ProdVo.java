@@ -13,6 +13,7 @@ public class ProdVo {
 	private String skuName;
 	private BigDecimal jiage;
 	private List<MyPicture> myPicture;
+	private String num;
 	
 	
 	public String getSkuId() {
@@ -45,10 +46,16 @@ public class ProdVo {
 	public void setMyPicture(List<MyPicture> myPicture) {
 		this.myPicture = myPicture;
 	}
+	public String getNum() {
+		return num;
+	}
+	public void setNum(String num) {
+		this.num = num;
+	}
 	@Override
 	public String toString() {
 		return "ProdVo [skuId=" + skuId + ", chanpinName=" + chanpinName + ", skuName=" + skuName + ", jiage=" + jiage
-				+ ", myPicture=" + myPicture + "]";
+				+ ", myPicture=" + myPicture + ", num=" + num + "]";
 	}
 	
 }

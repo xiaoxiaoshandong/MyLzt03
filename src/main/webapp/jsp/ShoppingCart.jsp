@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -173,7 +174,7 @@ a {
 .price_sum {
 	float: right;
     height: 43px;
-    width:13% !important;
+   /*  width:13% !important; */
     line-height: 20px;
     margin: 7px 3% 0 2%;
     color: #666;
@@ -195,6 +196,8 @@ a {
     font-size: 1.6rem;
     color: #E2231A;
     font-weight: 700;
+    overflow: hidden;
+    background-color: #666;
 }
 
 .gwc_show {
@@ -222,7 +225,7 @@ a {
 	padding: 15px 0 10px 0;
 	margin-right:15%; 
 }
-.goods_img {
+.goods_img img{
 	float: left;
     width: 34%;
     height: 80px;
@@ -390,31 +393,35 @@ a {
 		<!-- <div class="gwc_show">
 			<span>购物车空空如也！买点东西吧</span>
 		</div> -->
-		<div class="gwc_show">
-			<div class="select_all">
-				<div class="cart_checkbox">
-					<input type="checkbox" id="toggle-checkboxes_up" name="toggle-checkboxes" class="jdcheckbox" checked="checked">
-				</div>
-			</div>
-			<div class="goods">
-				<div class="goods_img">
-					<a href=""></a>
-				</div>
-				<div class="goods_name">商品测试名称商品测试名称商品测试名称商品测试名称商品测试名称</div>
-				<div class="goods_props"></div>
-			</div>
-			<div class="goods_price">¥7000.00</div>
-			<div class="quantity" id="clearfix">
-				<a href="" class="add_sub">-</a>
-				<input class="number"  value="55"/>
-				<a href="" class="add_sub">+</a>
-			</div>
-			<div class="subtotal">129.00</div>
-			<div class="del">
-				<a href="" class="">删除</a>
-			</div>
-		</div>
 		
+		<c:forEach items="${pvs}" var="item">
+			<div class="gwc_show">
+				<div class="select_all">
+					<div class="cart_checkbox">
+						<input type="checkbox" id="toggle-checkboxes_up" name="toggle-checkboxes" class="jdcheckbox" checked="checked">
+					</div>
+				</div>
+				<div class="goods">
+					<div class="goods_img">
+						<a href=""></a>
+						<img src="${item.myPicture[0].tupianName}">
+					</div>
+					<div class="goods_name">${item.chanpinName } ${item.skuName}</div>
+					<div class="goods_props"></div>
+				</div>
+				<div class="goods_price">¥${item.jiage }</div>
+				<div class="quantity" id="clearfix">
+					<a href="" class="add_sub">-</a>
+					<input class="number"  value="${item.num}"/>
+					<a href="" class="add_sub">+</a>
+				</div>
+				<div class="subtotal">${item.num*item.jiage}</div>
+				<div class="del">
+					<a href="" class="">删除</a>
+				</div>
+			</div>
+		</c:forEach>	
+			
 		<div class="gwc_cast">
 			<div class="select_all">
 				<div class="cart_checkbox">
@@ -432,7 +439,7 @@ a {
 				</div>
 				<div class="price_sum">
 					<span class="total">总价:</span>
-					<span class="sum_price">¥0.00</span>
+					<div class="sum_price">¥ 1111</div>
 				</div>
 			</div>
 		</div>

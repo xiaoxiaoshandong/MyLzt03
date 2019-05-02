@@ -27,4 +27,6 @@ public interface SpuMapper {
 	Integer selectProdCount(Spu spu);
 
 	List<ProdVo> selectProdBySkuId(Map<String, Object> map);
+
+	List<ProdVo> selCartAll(String userId);
 }

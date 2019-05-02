@@ -1,21 +1,29 @@
 package com.lzt.controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.lzt.service.CartProdService;
 import com.lzt.service.CartService;
+import com.lzt.service.SpuService;
 import com.lzt.entity.Cart;
 import com.lzt.entity.CartProd;
+import com.lzt.entity.ProdVo;
 import com.lzt.myexception.TokenException;
 import com.lzt.myutils.CookieUtil;
 import com.lzt.myutils.DateUtil;
@@ -28,7 +36,9 @@ public class CartController {
 	@Autowired(required=false)
 	private CartService cartService;
 	@Autowired(required=false)
-	private CartProdService cartProdService;
+	private CartProdService cartProdService;  
+	@Autowired(required=false)
+	private SpuService spuService;
 	private static Logger log=LoggerFactory.getLogger(CartController.class);
 	
 	/**
@@ -91,6 +101,7 @@ public class CartController {
 				cartProd.setSkuId(skuId);
 				Date date = DateUtil.getTimeFormatDate("yyyy-MM-dd HH:mm:ss");
 				cartProd.setCreateTime(date);
+				cartProd.setUpdateTime(date);
 				cartProd.setNum(num);
 				Integer cps = cartProdService.insertCartProd(cartProd);
 				if(cps==0){
@@ -112,5 +123,44 @@ public class CartController {
 			
 		}
 		return 1;
+	}
+	
+	/**
+	 * 查询购物车
+	 * @return 购物车集合 按更新时间排序
+	 */
+	@RequestMapping(value="/selCartAll")  
+	public ModelAndView selCartAll(){
+		List<ProdVo> pvs = null;
+		ModelAndView mav =new ModelAndView();
+		mav.setViewName("forward:/jsp/ShoppingCart.jsp");
+		// 用户未登录 查询cookie购物车信息
+		
+		//用户已登录 查询数据库中购物车信息
+		
+		// 判断用户是否登录
+		HttpServletRequest request = 
+				((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		HttpSession session = request.getSession();
+		String userId = (String)session.getAttribute("userId");
+		if(userId==null){
+			
+		}else{
+			pvs = spuService.selCartAll(userId);
+			BigDecimal total = new BigDecimal("0");
+			if(pvs != null){
+				for(int i=0;i<pvs.size();i++){
+					ProdVo vo = pvs.get(i);
+					BigDecimal jiage = vo.getJiage();
+					String num = vo.getNum();
+					BigDecimal bdnum = new BigDecimal(num);
+					BigDecimal total1 = jiage.multiply(bdnum);
+					total = total.add(total1);
+				}
+			}
+			mav.addObject("pvs",pvs);
+			mav.addObject("zongHe",total);
+		}
+		return mav;
 	}
 }

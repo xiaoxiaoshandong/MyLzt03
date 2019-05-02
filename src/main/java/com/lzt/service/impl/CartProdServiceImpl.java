@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +17,7 @@ import com.lzt.dao.CartMapper;
 import com.lzt.dao.CartProdMapper;
 import com.lzt.entity.Cart;
 import com.lzt.entity.CartProd;
+import com.lzt.entity.ProdVo;
 import com.lzt.myutils.DateUtil;
 import com.lzt.myutils.MyId;
 import com.lzt.service.CartProdService;

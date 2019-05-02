@@ -133,4 +133,5 @@
       num = #{num,jdbcType=INTEGER}
     where cp_id = #{cpId,jdbcType=VARCHAR}
   </update>
+  
 </mapper>
