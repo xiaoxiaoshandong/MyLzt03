@@ -29,4 +29,6 @@ public interface SpuMapper {
 	List<ProdVo> selectProdBySkuId(Map<String, Object> map);
 
 	List<ProdVo> selCartAll(String userId);
+
+	ProdVo selCartProdByskuId(String skuId);
 }

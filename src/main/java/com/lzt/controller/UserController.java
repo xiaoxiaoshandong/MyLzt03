@@ -37,7 +37,7 @@ public class UserController {
 	 * @return 0:账号或密码错误 1：登录成功 -1:cookie商品入库失败
 	 */
 	@RequestMapping(value="/login")  
-    public String test(UserT user,HttpServletResponse response,HttpServletRequest request){ 
+    public String login(UserT user,HttpServletResponse response,HttpServletRequest request){ 
 		String token = null;
 		int acstdb = -1;
 		if(user.getUserName()==null || user.getPassword()==null){
@@ -47,9 +47,10 @@ public class UserController {
 		if(us==null){
 			return "0";
 		}
+		Integer userId = us.getId();
 		/*登录成功 生成token*/
 		try {
-			 token = JwtToken.createToken(us.getId().longValue());
+			 token = JwtToken.createToken(userId.longValue());
 			 Cookie tokenCookie = new Cookie("login_token_id", token);
 			 // 关闭浏览器就失效
 			 tokenCookie.setMaxAge(-1);
@@ -57,16 +58,12 @@ public class UserController {
 			 tokenCookie.setPath("/");
 		     response.addCookie(tokenCookie);
 		     
-		     // 用户ID 放入session
-		     Integer id = us.getId();
-		     request.getSession().setAttribute("userId", id+"");
-		     
 		     // 判断cookie中是否有商品信息  有：添加进数据库 没有：不操作
 		     Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
 		     Cookie spCoodie = cookieMap.get("gwcId");
 		     if(spCoodie != null){
 		    	  String cookieVal = spCoodie.getValue();
-		    	  acstdb = cartProdService.addCookieSpToDB(cookieVal);
+		    	  acstdb = cartProdService.addCookieSpToDB(cookieVal,userId);
 		    	  if(acstdb ==-1){
 		    		  return "-1";
 		    	  }else{
@@ -77,7 +74,6 @@ public class UserController {
 		  			  response.addCookie(cookie);
 		    	  }
 		     }
-		     
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,7 +88,6 @@ public class UserController {
 	 */
 	@RequestMapping(value="/registered")
 	public String registered(UserT user){
-		System.out.print("user"+user);
 		if(StringUtils.isEmpty(user) || user.getUserName()== null || user.getUserName() == ""){
 			return "0";
 		}

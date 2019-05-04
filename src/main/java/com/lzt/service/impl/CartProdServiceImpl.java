@@ -19,6 +19,7 @@ import com.lzt.entity.Cart;
 import com.lzt.entity.CartProd;
 import com.lzt.entity.ProdVo;
 import com.lzt.myutils.DateUtil;
+import com.lzt.myutils.JwtToken;
 import com.lzt.myutils.MyId;
 import com.lzt.service.CartProdService;
 @Service
@@ -45,19 +46,11 @@ public class CartProdServiceImpl implements CartProdService {
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
-	public int addCookieSpToDB(String gwc) {
+	public int addCookieSpToDB(String gwc,Integer userId) {
 		// TODO Auto-generated method stub
 		String[] spList = gwc.split(",");
     	List<String> asList = Arrays.asList(spList);
     	ArrayList<String> arrayList = new ArrayList<String>(asList);
-    	
-    	HttpServletRequest request = 
-				((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-		HttpSession session = request.getSession();
-		String userId = (String)session.getAttribute("userId");
-		if(userId == null || userId==""){
-			return -1;
-		}
     	
     	for(int i=0; i<arrayList.size();i++){
     		String sp = arrayList.get(i);
@@ -68,7 +61,7 @@ public class CartProdServiceImpl implements CartProdService {
     		CartProd prod = cartProdMapper.selectByColumn(cartProd);
     		if(prod == null){ // 添加购物车商品信息
     			Cart cart = new Cart();
-    			cart.setUserId(userId);
+    			cart.setUserId(userId+"");
     			Cart cart2 = cartMapper.selectByColumn(cart);
     			CartProd CartProd2 = new CartProd();
     			CartProd2.setCpId(MyId.getMyId());
@@ -95,6 +88,11 @@ public class CartProdServiceImpl implements CartProdService {
     		}
     	}
 		return 0;
+	}
+	public Integer updCartProd(CartProd prod) {
+		// TODO Auto-generated method stub
+		int selective = cartProdMapper.updateByPrimaryKeySelective(prod);
+		return selective;
 	}
 	
 }

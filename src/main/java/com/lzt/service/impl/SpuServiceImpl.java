@@ -124,4 +124,10 @@ public class SpuServiceImpl implements SpuService {
 		return pv;
 	}
 
+	public ProdVo selCartProdByskuId(String skuId) {
+		// TODO Auto-generated method stub
+		ProdVo pv = spuMapper.selCartProdByskuId(skuId);
+		return pv;
+	}
+
 }

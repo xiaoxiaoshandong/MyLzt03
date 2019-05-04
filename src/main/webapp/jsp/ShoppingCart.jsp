@@ -124,6 +124,7 @@ body {
     margin-top:10px;
     width: 75.8%; 
     float: left;
+    margin-bottom: 50px;
 }
 .select_all {
     float: left;
@@ -181,14 +182,16 @@ a {
     position: relative;
     white-space: nowrap;
     overflow: hidden;
+    width:auto;
+    min-width: 60px;
 }
 .total {
 	 height: 20px;
 	 margin-top: 10px;
-	 margin-right:4%; 
+	/*  margin-right:4%;  */
 	 display:block;
 	 float: left;
-	 
+	 margin-right:5px;
 }
 .sum_price {
     float: left;
@@ -197,7 +200,7 @@ a {
     color: #E2231A;
     font-weight: 700;
     overflow: hidden;
-    background-color: #666;
+    display: block;
 }
 
 .gwc_show {
@@ -369,10 +372,13 @@ a {
 		<div class="gwc_logo">
 			<img alt="" src="/lzt03/static/img/lizhentao_logo.jpg" >
 		</div>
-		<div class="gwc_login">
-			您还没有登录！登录后购物车的商品将保存到您账号中
-			<a class="" href="#none" >立即登录</a>
-		</div>
+		<c:if test="${ynlogin==0 }">
+			<div class="gwc_login">
+				您还没有登录！登录后购物车的商品将保存到您账号中
+				<a href="${pageContext.request.contextPath}/index.jsp" >立即登录</a>
+			</div>
+		</c:if>
+		
 		<div class="gwc_title">
 			<em>全部商品</em>
 		</div>
@@ -411,9 +417,9 @@ a {
 				</div>
 				<div class="goods_price">¥${item.jiage }</div>
 				<div class="quantity" id="clearfix">
-					<a href="" class="add_sub">-</a>
+					<a href="${pageContext.request.contextPath}/cart/updNum?addOrSub=0&num=1&skuId=${item.skuId}" class="add_sub">-</a>
 					<input class="number"  value="${item.num}"/>
-					<a href="" class="add_sub">+</a>
+					<a href="${pageContext.request.contextPath}/cart/updNum?addOrSub=1&num=1&skuId=${item.skuId}"  class="add_sub">+</a>
 				</div>
 				<div class="subtotal">${item.num*item.jiage}</div>
 				<div class="del">
@@ -439,7 +445,7 @@ a {
 				</div>
 				<div class="price_sum">
 					<span class="total">总价:</span>
-					<div class="sum_price">¥ 1111</div>
+					<span class="sum_price">¥ ${zongHe }</span>
 				</div>
 			</div>
 		</div>

@@ -206,4 +206,9 @@
 				ON a.sku_id=b.sku_id 
 			) d INNER JOIN my_picture mp ON d.spu_id=mp.spu_id;
   </select>
+  
+    <select id="selCartProdByskuId" parameterType="java.lang.String" resultMap="ProdMap">
+		SELECT sk.sku_id,sp.chanpin_name,sk.sku_name,sk.jiage,mp.tupian_name FROM spu sp INNER JOIN sku sk ON sp.spu_id=sk.spu_id INNER JOIN my_picture mp ON mp.spu_id=sk.spu_id
+ 		WHERE sk.sku_id = #{skuId} GROUP BY sk.sku_id;
+  </select>
 </mapper>

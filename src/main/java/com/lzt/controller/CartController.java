@@ -1,6 +1,7 @@
 package com.lzt.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -130,37 +131,152 @@ public class CartController {
 	 * @return 购物车集合 按更新时间排序
 	 */
 	@RequestMapping(value="/selCartAll")  
-	public ModelAndView selCartAll(){
-		List<ProdVo> pvs = null;
-		ModelAndView mav =new ModelAndView();
-		mav.setViewName("forward:/jsp/ShoppingCart.jsp");
+	public ModelAndView selCartAll(HttpServletRequest request){
+		ModelAndView mav =null;
 		// 用户未登录 查询cookie购物车信息
 		
 		//用户已登录 查询数据库中购物车信息
 		
 		// 判断用户是否登录
-		HttpServletRequest request = 
-				((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-		HttpSession session = request.getSession();
-		String userId = (String)session.getAttribute("userId");
-		if(userId==null){
-			
-		}else{
-			pvs = spuService.selCartAll(userId);
-			BigDecimal total = new BigDecimal("0");
-			if(pvs != null){
-				for(int i=0;i<pvs.size();i++){
-					ProdVo vo = pvs.get(i);
-					BigDecimal jiage = vo.getJiage();
-					String num = vo.getNum();
-					BigDecimal bdnum = new BigDecimal(num);
-					BigDecimal total1 = jiage.multiply(bdnum);
-					total = total.add(total1);
-				}
+		Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
+	     Cookie tokenCoodie = cookieMap.get("login_token_id");
+	    
+		if(tokenCoodie==null){ // 从cookie中获取购物车信息
+			Cookie gwcCookie = cookieMap.get("gwcId");
+			if(gwcCookie != null){
+				String gwcVals = gwcCookie.getValue();
+				 mav = gwcCookieToMAV(gwcVals);
+			}else{
+				ModelAndView view = new ModelAndView();
+				view.setViewName("forward:/jsp/ShoppingCart.jsp");
+				view.addObject("ynlogin",0);
+				return view;
 			}
-			mav.addObject("pvs",pvs);
-			mav.addObject("zongHe",total);
+		}else{
+			     mav= gwcDBToMAV(tokenCoodie);
 		}
+		return mav;
+	}
+	
+	/**
+	 * 
+	 * @param addOrSub 0:减数量 1：加数量
+	 * @param skuId 商品skuId
+	 * @return 0：失败 1：成功
+	 */
+	@RequestMapping(value="/updNum")  
+	public ModelAndView updNum(int addOrSub,Integer num,String skuId,HttpServletRequest request,HttpServletResponse response){
+		ModelAndView mav =null;
+		// 判断 用户是否登录 
+		Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
+	     Cookie tokenCoodie = cookieMap.get("login_token_id");
+	    
+		if(tokenCoodie==null){ // 用户未登录 修改cookie中商品数量
+			Cookie gwcCookie = cookieMap.get("gwcId");
+			Cookie cookie =null;
+			if(gwcCookie != null){
+				String gwcVals = gwcCookie.getValue();
+				String gwcVal = CookieUtil.updOrAddCookieGwc(gwcVals, num, skuId, addOrSub);
+				cookie = new Cookie("gwcId",gwcVal);
+				// 关闭浏览器就失效
+				cookie.setMaxAge(-1);
+				 //可在同一应用服务器内共享cookie
+				cookie.setPath("/");
+				response.addCookie(cookie);
+				
+				// 视图渲染
+				mav = gwcCookieToMAV( gwcVal);
+			}else{
+				ModelAndView view = new ModelAndView();
+				view.setViewName("forward:/jsp/ShoppingCart.jsp");
+				view.addObject("ynlogin",0);
+				return view;
+			}
+		}else{ // 用户已登录 修改数据库中商品数量
+			CartProd prod = new CartProd();
+			prod.setSkuId(skuId);
+			CartProd cp = cartProdService.selectByColumn(prod);
+			String cpId = cp.getCpId();
+			Integer num2 = cp.getNum();
+			if(addOrSub == 0){
+				num2 =num2-num;
+				if(num2<=0){
+					num2=num;
+				}
+			}else{
+				num2 =num2+num;
+			}
+			prod.setNum(num2);
+			prod.setCpId(cpId);
+			Integer cps = cartProdService.updCartProd(prod);
+			mav = gwcDBToMAV(tokenCoodie );
+		}
+		return mav;
+	}
+	
+	/**
+	 * 用户未登录时 视图渲染
+	 * @param gwcVal cookie内的购物车信息 格式：skuId1=num1,skuId2=num2 ...;
+	 * @return ModelAndView
+	 */
+	public ModelAndView gwcCookieToMAV(String gwcVal){
+		ModelAndView mav =new ModelAndView();
+		mav.setViewName("forward:/jsp/ShoppingCart.jsp");
+		BigDecimal total = new BigDecimal("0");
+		List<ProdVo> pvList = new ArrayList<ProdVo>();
+		List<Map<String,Object>> list = CookieUtil.gwcCookieToList(gwcVal);
+		for(int i=0;i<list.size();i++){
+			Map<String, Object> map = list.get(i);
+			String skuId1 = (String)map.get("skuId");
+			String num1 = (String)map.get("num");
+			ProdVo pv = spuService.selCartProdByskuId(skuId1);
+			pv.setNum(num1);
+			
+			BigDecimal jiage = pv.getJiage();
+			BigDecimal cookieNum = new BigDecimal(num1);
+			BigDecimal total1 = jiage.multiply(cookieNum);
+			total = total.add(total1);
+			pvList.add(pv);
+		}
+		mav.addObject("pvs",pvList);
+		mav.addObject("zongHe",total);
+		mav.addObject("ynlogin",0);
+		return mav;
+	}
+	
+	/**
+	 * 用户登录时 视图渲染
+	 * @param tokenCoodie 
+	 * @return ModelAndView
+	 */
+	public  ModelAndView gwcDBToMAV(Cookie tokenCoodie ){
+		ModelAndView mav =new ModelAndView();
+		mav.setViewName("forward:/jsp/ShoppingCart.jsp");
+		
+		 String token = tokenCoodie.getValue();
+			Integer userId = null;
+			try {
+				userId = JwtToken.getAppUID(token);
+			} catch (TokenException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		List<ProdVo> pvs = spuService.selCartAll(userId+"");
+		BigDecimal total = new BigDecimal("0");
+		if(pvs != null){
+			for(int i=0;i<pvs.size();i++){
+				ProdVo vo = pvs.get(i);
+				BigDecimal jiage = vo.getJiage();
+				String num = vo.getNum();
+				BigDecimal bdnum = new BigDecimal(num);
+				BigDecimal total1 = jiage.multiply(bdnum);
+				total = total.add(total1);
+			}
+		}
+		mav.addObject("pvs",pvs);
+		mav.addObject("zongHe",total);
+		mav.addObject("ynlogin",1);
 		return mav;
 	}
 }

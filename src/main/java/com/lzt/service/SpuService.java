@@ -25,4 +25,6 @@ public interface SpuService {
 
 	List<ProdVo> selCartAll(String userId);
 
+	ProdVo selCartProdByskuId(String skuId);
+
 }
