@@ -37,9 +37,7 @@ public class CookieUtil {
      *  @param addOrSub 0:减 1：加
      */
     public static String updOrAddCookieGwc(String gwc,int num,String skuId,int addOrSub){
-    	String[] spList = gwc.split(",");
-    	List<String> asList = Arrays.asList(spList);
-    	ArrayList<String> arrayList = new ArrayList<String>(asList);
+    	ArrayList<String> arrayList = gwcToList(gwc);
     	for(int i=0; i<arrayList.size() ; i++){
     		String sp = arrayList.get(i);
     		String cookieSkuId = StringUtils.substringBefore(sp, "=");
@@ -75,9 +73,7 @@ public class CookieUtil {
     	if(gwc == null || gwc ==""){
     		return null;
     	}
-    	String[] spList = gwc.split(",");
-    	List<String> asList = Arrays.asList(spList);
-    	ArrayList<String> arrayList = new ArrayList<String>(asList);
+    	ArrayList<String> arrayList = gwcToList(gwc);
     	List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
     	for(int i=0; i<arrayList.size() ; i++){
     		String sp = arrayList.get(i);
@@ -89,6 +85,47 @@ public class CookieUtil {
     		list.add(map);
     	}
     	return list;
+    }
+
+	/**
+	 * @param gwc
+	 * @return
+	 */
+	private static ArrayList<String> gwcToList(String gwc) {
+		String[] spList = gwc.split(",");
+    	List<String> asList = Arrays.asList(spList);
+    	ArrayList<String> arrayList = new ArrayList<String>(asList);
+		return arrayList;
+	}
+    
+    /**
+     * 
+     * @param gwc 从浏览器获取的购物车信息字符串 格式：skuId1=num1,skuId2=num2 ...;
+     * @param skuId 商品Id
+     * @return 0:删除失败 1：删除成功
+     */
+    public static String delGwcFromCookie(String gwc,String skuId){
+    	if(gwc == null || gwc ==""){
+    		return null;
+    	}
+    	String join = null;
+    	ArrayList<String> arrayList = gwcToList(gwc);
+    	for(int i=0;i<arrayList.size();i++){
+    		String sp = arrayList.get(i);
+    		String cookieSkuId = StringUtils.substringBefore(sp, "=");
+    		if(cookieSkuId.equals(skuId)){
+    			arrayList.remove(i);
+    			boolean e = arrayList.isEmpty();
+    			if(!e){
+    				join = StringUtils.join(arrayList,",");
+        			return join;
+    			}else{
+    				return null;
+    			}
+    				
+    		}
+    	}
+    	return gwc;
     }
 }
 

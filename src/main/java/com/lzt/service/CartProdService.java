@@ -18,4 +18,7 @@ public interface CartProdService {
 
 	public Integer updCartProd(CartProd prod);
 
+
+	public Integer delGwcBySkuId(String skuId);
+
 }

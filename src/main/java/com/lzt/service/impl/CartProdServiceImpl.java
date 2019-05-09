@@ -94,5 +94,10 @@ public class CartProdServiceImpl implements CartProdService {
 		int selective = cartProdMapper.updateByPrimaryKeySelective(prod);
 		return selective;
 	}
+	public Integer delGwcBySkuId(String skuId) {
+		// TODO Auto-generated method stub
+		int i = cartProdMapper.deleteBySkuId(skuId);
+		return i;
+	}
 	
 }

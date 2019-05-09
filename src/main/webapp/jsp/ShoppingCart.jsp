@@ -423,7 +423,7 @@ a {
 				</div>
 				<div class="subtotal">${item.num*item.jiage}</div>
 				<div class="del">
-					<a href="" class="">删除</a>
+					<a href="${pageContext.request.contextPath}/cart/delGwc?skuId=${item.skuId}" class="">删除</a>
 				</div>
 			</div>
 		</c:forEach>	
