@@ -349,7 +349,65 @@ a {
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script type="text/javascript">
-
+	 $(function(){
+		$("#toggle-checkboxes_01").click(function(){
+			var a = $("#toggle-checkboxes_01").attr("checked");
+			if(a == undefined ){
+				$("input:checkbox").removeAttr("checked");
+			}else{
+				$("input:checkbox").attr("checked","checked");
+			}
+			
+		});
+		
+		$("#toggle-checkboxes_02").click(function(){
+			var a = $("#toggle-checkboxes_02").attr("checked");
+			if(a == undefined ){
+				$("input:checkbox").removeAttr("checked");
+			}else{
+				$("input:checkbox").prop("checked","checked");
+			}
+			
+		});
+	});
+	
+	function selGwc(data){
+		var cbl = checkboxList();
+		 $.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/cart/getTotalByCheck",
+			data: {"cbl":cbl},
+			dataType:"json",
+			success : function(result) {
+				$("#sumPrice").html(result);
+			} 
+		}); 
+		/* window.location.href="${pageContext.request.contextPath}/cart/selCartAll?cbl="+cbl+"";  */
+	};
+	// 被选中复选框 集合的字符串
+	function checkboxList(){
+		var d ="";
+		var childs = $("#assist").children(".gwc_show");
+		var c = childs.find(".jdcheckbox");
+		for(var i=0;i<childs.length;i++){
+			var text = c.get(i);
+			var b = text.checked;
+			if(b){
+				var id = text.id;
+				if(i<childs.length-1){
+					d = d+id+",";
+				}else{
+					d = d+id;
+				}
+			}
+		}
+		return d;
+	};
+	function delNum(data){
+		var skuId = data.name;
+		var cbl = checkboxList();
+		window.location.href="${pageContext.request.contextPath}/cart/updNum?addOrSub=0&num=1&skuId="+skuId+"&checkboxList="+cbl+"";
+	};
 </script>
 </head>
 <body>
@@ -385,7 +443,7 @@ a {
 		<div class="gwc_head">
 			<div class="column_checkbox">
 				<div class="cart_checkbox">
-					<input type="checkbox" id="toggle-checkboxes_up" name="toggle-checkboxes" class="jdcheckbox" checked="checked">
+					<input type="checkbox" id="toggle-checkboxes_01" name="toggle-checkboxes" class="jdcheckbox"  checked="checked" >
 				</div>
 				全选
 			</div>
@@ -399,12 +457,12 @@ a {
 		<!-- <div class="gwc_show">
 			<span>购物车空空如也！买点东西吧</span>
 		</div> -->
-		
+		<div id="assist">
 		<c:forEach items="${pvs}" var="item">
 			<div class="gwc_show">
 				<div class="select_all">
 					<div class="cart_checkbox">
-						<input type="checkbox" id="toggle-checkboxes_up" name="toggle-checkboxes" class="jdcheckbox" checked="checked">
+						<input type="checkbox" id="${item.skuId}" name="toggle-checkboxes" class="jdcheckbox" checked="checked" onclick="selGwc(this);" >
 					</div>
 				</div>
 				<div class="goods">
@@ -417,7 +475,7 @@ a {
 				</div>
 				<div class="goods_price">¥${item.jiage }</div>
 				<div class="quantity" id="clearfix">
-					<a href="${pageContext.request.contextPath}/cart/updNum?addOrSub=0&num=1&skuId=${item.skuId}" class="add_sub">-</a>
+					<a href="#" name="${item.skuId}" class="add_sub" onclick="delNum(this);">-</a>
 					<input class="number"  value="${item.num}"/>
 					<a href="${pageContext.request.contextPath}/cart/updNum?addOrSub=1&num=1&skuId=${item.skuId}"  class="add_sub">+</a>
 				</div>
@@ -427,11 +485,12 @@ a {
 				</div>
 			</div>
 		</c:forEach>	
-			
+		</div>	
+		
 		<div class="gwc_cast">
 			<div class="select_all">
 				<div class="cart_checkbox">
-					<input type="checkbox" id="toggle-checkboxes_up" name="toggle-checkboxes" class="jdcheckbox" checked="checked">
+					<input type="checkbox" id="toggle-checkboxes_02" name="toggle-checkboxes" class="jdcheckbox" checked="checked" >
 				</div>
 				全选
 			</div>
@@ -445,7 +504,7 @@ a {
 				</div>
 				<div class="price_sum">
 					<span class="total">总价:</span>
-					<span class="sum_price">¥ ${zongHe }</span>
+					<span class="sum_price" id="sumPrice">¥ ${zongHe }</span>
 				</div>
 			</div>
 		</div>

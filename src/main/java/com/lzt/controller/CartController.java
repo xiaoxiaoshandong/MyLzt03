@@ -131,7 +131,7 @@ public class CartController {
 	 * @return 购物车集合 按更新时间排序
 	 */
 	@RequestMapping(value="/selCartAll")  
-	public ModelAndView selCartAll(HttpServletRequest request){
+	public ModelAndView selCartAll(String cbl,HttpServletRequest request){
 		ModelAndView mav =null;
 		// 用户未登录 查询cookie购物车信息
 		
@@ -145,7 +145,7 @@ public class CartController {
 			Cookie gwcCookie = cookieMap.get("gwcId");
 			if(gwcCookie != null){
 				String gwcVals = gwcCookie.getValue();
-				 mav = gwcCookieToMAV(gwcVals);
+				 mav = gwcCookieToMAV(gwcVals,cbl);
 			}else{
 				return newMAV();
 			}
@@ -159,10 +159,11 @@ public class CartController {
 	 * 
 	 * @param addOrSub 0:减数量 1：加数量
 	 * @param skuId 商品skuId
+	 * @param cbl 复选框被选中的元素组成的字符串 格式：111,222,333...
 	 * @return 0：失败 1：成功
 	 */
 	@RequestMapping(value="/updNum")  
-	public ModelAndView updNum(int addOrSub,Integer num,String skuId,HttpServletRequest request,HttpServletResponse response){
+	public ModelAndView updNum(String cbl,int addOrSub,Integer num,String skuId,HttpServletRequest request,HttpServletResponse response){
 		ModelAndView mav =null;
 		// 判断 用户是否登录 
 		Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
@@ -182,7 +183,7 @@ public class CartController {
 				response.addCookie(cookie);
 				
 				// 视图渲染
-				mav = gwcCookieToMAV( gwcVal);
+				mav = gwcCookieToMAV( gwcVal,cbl);
 			}else{
 				return newMAV();
 			}
@@ -212,9 +213,10 @@ public class CartController {
 	/**
 	 * 用户未登录时 视图渲染
 	 * @param gwcVal cookie内的购物车信息 格式：skuId1=num1,skuId2=num2 ...;
+	 * @param cbl 复选框被选中的skuId集合字符串 格式：111,222,333...
 	 * @return ModelAndView
 	 */
-	public ModelAndView gwcCookieToMAV(String gwcVal){
+	public ModelAndView gwcCookieToMAV(String gwcVal,String cbl){
 		if(gwcVal == null || gwcVal==""){
 			ModelAndView mav1 =new ModelAndView();
 			mav1.setViewName("forward:/jsp/ShoppingCart.jsp");
@@ -235,8 +237,17 @@ public class CartController {
 			
 			BigDecimal jiage = pv.getJiage();
 			BigDecimal cookieNum = new BigDecimal(num1);
-			BigDecimal total1 = jiage.multiply(cookieNum);
-			total = total.add(total1);
+			if(cbl == null || cbl==""){
+				BigDecimal total1 = jiage.multiply(cookieNum);
+				total = total.add(total1);
+			}else{
+				ArrayList<String> cblToList = CookieUtil.gwcToList(cbl);
+				boolean contains = cblToList.contains(skuId1);
+				if(contains){
+					BigDecimal total1 = jiage.multiply(cookieNum);
+					total = total.add(total1);
+				}
+			}
 			pvList.add(pv);
 		}
 		mav.addObject("pvs",pvList);
@@ -287,7 +298,7 @@ public class CartController {
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value="/delGwc")  
-	public ModelAndView delGwcBySkuId(String skuId,HttpServletRequest request,HttpServletResponse response){
+	public ModelAndView delGwcBySkuId(String cbl,String skuId,HttpServletRequest request,HttpServletResponse response){
 		// 判断用户是否登录  
 		Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
 	     Cookie tokenCoodie = cookieMap.get("login_token_id");
@@ -309,7 +320,7 @@ public class CartController {
 	    		 	//可在同一应用服务器内共享cookie
 					cookie.setPath("/");
 					response.addCookie(cookie);
-					mav = gwcCookieToMAV(gwcVal);
+					mav = gwcCookieToMAV(gwcVal,cbl);
 	    	 }else{// 未有购物车信息 返回空的ModelAndView 对象
 	    		 	return newMAV();
 	    	 }
@@ -335,4 +346,12 @@ public class CartController {
 		view.addObject("ynlogin",0);
 		return view;
 	}
+	
+	@RequestMapping(value="/getTotalByCheck")  
+	public Object getTotalByCheck(String cbl,HttpServletRequest request){
+		ModelAndView view = selCartAll(cbl,request);
+		Object tt = view.getModel().get("zongHe");
+		return tt;
+	}
 }
+

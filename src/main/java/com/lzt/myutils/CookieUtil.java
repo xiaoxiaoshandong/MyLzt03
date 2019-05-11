@@ -86,12 +86,12 @@ public class CookieUtil {
     	}
     	return list;
     }
-
+    
 	/**
 	 * @param gwc
 	 * @return
 	 */
-	private static ArrayList<String> gwcToList(String gwc) {
+	public static ArrayList<String> gwcToList(String gwc) {
 		String[] spList = gwc.split(",");
     	List<String> asList = Arrays.asList(spList);
     	ArrayList<String> arrayList = new ArrayList<String>(asList);
