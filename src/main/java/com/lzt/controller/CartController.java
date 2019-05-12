@@ -150,7 +150,7 @@ public class CartController {
 				return newMAV();
 			}
 		}else{
-			     mav= gwcDBToMAV(tokenCoodie);
+			     mav= gwcDBToMAV(tokenCoodie,cbl);
 		}
 		return mav;
 	}
@@ -204,7 +204,7 @@ public class CartController {
 			prod.setNum(num2);
 			prod.setCpId(cpId);
 			Integer cps = cartProdService.updCartProd(prod);
-			mav = gwcDBToMAV(tokenCoodie );
+			mav = gwcDBToMAV(tokenCoodie,cbl );
 		}
 		return mav;
 	}
@@ -240,6 +240,7 @@ public class CartController {
 			if(cbl == null || cbl==""){
 				BigDecimal total1 = jiage.multiply(cookieNum);
 				total = total.add(total1);
+			}else if(cbl=="-1"){
 			}else{
 				ArrayList<String> cblToList = CookieUtil.gwcToList(cbl);
 				boolean contains = cblToList.contains(skuId1);
@@ -252,6 +253,7 @@ public class CartController {
 		}
 		mav.addObject("pvs",pvList);
 		mav.addObject("zongHe",total);
+		mav.addObject("cbl",cbl);
 		mav.addObject("ynlogin",0);
 		return mav;
 	}
@@ -259,9 +261,10 @@ public class CartController {
 	/**
 	 * 用户登录时 视图渲染
 	 * @param tokenCoodie 
+	 * @param cbl 复选框被选中的skuId集合字符串 格式：111,222,333...
 	 * @return ModelAndView
 	 */
-	public  ModelAndView gwcDBToMAV(Cookie tokenCoodie ){
+	public  ModelAndView gwcDBToMAV(Cookie tokenCoodie,String cbl ){
 		ModelAndView mav =new ModelAndView();
 		mav.setViewName("forward:/jsp/ShoppingCart.jsp");
 		
@@ -279,26 +282,40 @@ public class CartController {
 		if(pvs != null){
 			for(int i=0;i<pvs.size();i++){
 				ProdVo vo = pvs.get(i);
+				String skuId1 = vo.getSkuId();
 				BigDecimal jiage = vo.getJiage();
 				String num = vo.getNum();
 				BigDecimal bdnum = new BigDecimal(num);
-				BigDecimal total1 = jiage.multiply(bdnum);
-				total = total.add(total1);
+				
+				if(cbl == null || cbl==""){
+					BigDecimal total1 = jiage.multiply(bdnum);
+					total = total.add(total1);
+				}else if(cbl=="-1"){
+				}else{
+					ArrayList<String> cblToList = CookieUtil.gwcToList(cbl);
+					boolean contains = cblToList.contains(skuId1);
+					if(contains){
+						BigDecimal total1 = jiage.multiply(bdnum);
+						total = total.add(total1);
+					}
+				}
 			}
 		}
 		mav.addObject("pvs",pvs);
 		mav.addObject("zongHe",total);
+		mav.addObject("cbl",cbl);
 		mav.addObject("ynlogin",1);
 		return mav;
 	}
 	/**
 	 * 
-	 * @param SkuId  商品信息ID
+	 * @param SkuId  商品信息ID或集合字符串 格式：111,222,333...
 	 * @param request
 	 * @return ModelAndView
 	 */
 	@RequestMapping(value="/delGwc")  
 	public ModelAndView delGwcBySkuId(String cbl,String skuId,HttpServletRequest request,HttpServletResponse response){
+		ArrayList<String> skuIdList = CookieUtil.gwcToList(skuId);
 		// 判断用户是否登录  
 		Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
 	     Cookie tokenCoodie = cookieMap.get("login_token_id");
@@ -307,8 +324,13 @@ public class CartController {
 	     if(tokenCoodie == null){ // 未登录 查询cookie是否有购物车信息
 	    	 Cookie gwcCookie = cookieMap.get("gwcId");
 	    	 if(gwcCookie != null){ // 有购物车信息 删除指定商品信息 并返回视图
-	    		 String gwcVals = gwcCookie.getValue();
-	    		 String gwcVal = CookieUtil.delGwcFromCookie(gwcVals, skuId);
+	    		 String gwcVal = gwcCookie.getValue();
+	    		/* String gwcVal = null;*/
+	    		 for(int i=0;i<skuIdList.size();i++){
+	    			 String skuID = skuIdList.get(i);
+	    			 gwcVal = CookieUtil.delGwcFromCookie(gwcVal, skuID);
+	    			
+	    		 }
 	    		 if(gwcVal == null){
 	    			 cookie = new Cookie("gwcId",gwcVal);
                      cookie.setMaxAge(0);// 立即销毁cookie  
@@ -325,11 +347,18 @@ public class CartController {
 	    		 	return newMAV();
 	    	 }
 	     }else{// 已登录 数据库删除指定购物车信息 并返回视图
-	    	 Integer i = cartProdService.delGwcBySkuId(skuId);
-	    	 if(i==0){
-	    		 	return newMAV();
+	    	 Integer a =  null;
+	    	 for(int i=0;i<skuIdList.size();i++){
+	    		 String skuID = skuIdList.get(i);
+	    		 a = cartProdService.delGwcBySkuId(skuID);
+	    	 }
+	    	 if(a==0){
+	    		 ModelAndView mav1 =new ModelAndView();
+	    		 mav1.setViewName("forward:/jsp/ShoppingCart.jsp");
+	 			 mav1.addObject("ynlogin",1);
+	    		 	return mav1;
 	    	 }else{
-	    		 mav = gwcDBToMAV(tokenCoodie ); 
+	    		 mav = gwcDBToMAV(tokenCoodie,cbl); 
 	    	 }
 	    	 
 	     }
@@ -352,6 +381,47 @@ public class CartController {
 		ModelAndView view = selCartAll(cbl,request);
 		Object tt = view.getModel().get("zongHe");
 		return tt;
+	}
+	
+	@RequestMapping(value="/cleanGwc")  
+	public ModelAndView cleanGwc(HttpServletRequest request,HttpServletResponse response){
+		// 验证用户是否登录
+		Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
+		Cookie tokenCookie = cookieMap.get("login_token_id");
+		Cookie cookie = null;
+		ModelAndView mav =null;
+		if(tokenCookie == null){ //用户未登录
+			Cookie spCoodie = cookieMap.get("gwcId");
+			if(spCoodie != null){
+				cookie = new Cookie("gwcId","");
+				// 立即失效
+				cookie.setMaxAge(0);
+				 //可在同一应用服务器内共享cookie
+				cookie.setPath("/");
+				response.addCookie(cookie);
+			}
+				return newMAV();
+		}else{ // 用户已登录
+			//获取用户ID
+			String token = tokenCookie.getValue();
+			Integer userId=null;
+			try {
+				userId = JwtToken.getAppUID(token);
+			} catch (TokenException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// 根据用户ID 删除DB所有购物车商品信息
+			Integer i = cartProdService.cleanGwc(userId+"");
+			if(i==0){
+				ModelAndView view = new ModelAndView();
+				view.setViewName("forward:/jsp/ShoppingCart.jsp");
+				view.addObject("ynlogin",1);
+				return view;
+			}
+		}
+		mav = gwcDBToMAV(tokenCookie,"2" );
+		return mav;
 	}
 }
 

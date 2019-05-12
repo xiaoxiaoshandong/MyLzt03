@@ -17,4 +17,6 @@ public interface CartProdMapper {
     int updateByPrimaryKey(CartProd record);
 
 	CartProd selectByColumn(CartProd csartProd);
+
+	Integer cleanGwc(String userId);
 }

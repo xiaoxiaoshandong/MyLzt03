@@ -51,6 +51,10 @@
     delete from cart_prod
     where sku_id = #{skuId,jdbcType=VARCHAR}
   </delete>
+  
+  <delete id="cleanGwc" parameterType="java.lang.String">
+   DELETE  cp FROM cart_prod cp INNER JOIN cart c ON cp.cart_id=c.cart_id WHERE c.user_id=#{uerId};
+  </delete>
   <insert id="insert" parameterType="com.lzt.entity.CartProd">
     insert into cart_prod (cp_id, cart_id, sku_id, 
       create_time, update_time, num

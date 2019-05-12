@@ -21,4 +21,7 @@ public interface CartProdService {
 
 	public Integer delGwcBySkuId(String skuId);
 
+
+	public Integer cleanGwc(String userId);
+
 }

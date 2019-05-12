@@ -99,5 +99,10 @@ public class CartProdServiceImpl implements CartProdService {
 		int i = cartProdMapper.deleteBySkuId(skuId);
 		return i;
 	}
+	public Integer cleanGwc(String userId) {
+		// TODO Auto-generated method stub
+		Integer i = cartProdMapper.cleanGwc(userId);
+		return i;
+	}
 	
 }

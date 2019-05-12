@@ -352,37 +352,54 @@ a {
 	 $(function(){
 		$("#toggle-checkboxes_01").click(function(){
 			var a = $("#toggle-checkboxes_01").attr("checked");
-			if(a == undefined ){
+			if(a == undefined ){//非全选
 				$("input:checkbox").removeAttr("checked");
-			}else{
+				window.location.href="${pageContext.request.contextPath}/cart/selCartAll?cbl=-1"; 
+			}else{ // 全选
 				$("input:checkbox").attr("checked","checked");
+				var cbl  = fxkAll();
+				window.location.href="${pageContext.request.contextPath}/cart/selCartAll?cbl="+cbl+""; 
 			}
-			
 		});
 		
 		$("#toggle-checkboxes_02").click(function(){
 			var a = $("#toggle-checkboxes_02").attr("checked");
 			if(a == undefined ){
 				$("input:checkbox").removeAttr("checked");
+				window.location.href="${pageContext.request.contextPath}/cart/selCartAll?cbl=-1"; 
 			}else{
-				$("input:checkbox").prop("checked","checked");
+				$("input:checkbox").attr("checked","checked");
+				var cbl  = fxkAll();
+				window.location.href="${pageContext.request.contextPath}/cart/selCartAll?cbl="+cbl+""; 
 			}
 			
 		});
+		
+ 		// 所有复选框
+		var list1 = fxkAll();
+		var list  = list1.split(',');
+		// 被选中的复选框
+		var strList = $("#fxkjh").val();
+		var arr  = strList.split(',');
+		if(strList!=""){
+			for(var i=0;i<list.length;i++){
+				var a = list[i];
+				var b=arr.indexOf(a);
+				if(b==-1){
+					$("#"+a).removeAttr("checked");
+					$("#"+a).parent().parent().parent().css("background-color","white");
+					$("#toggle-checkboxes_01").removeAttr("checked");
+					$("#toggle-checkboxes_02").removeAttr("checked");
+				}else{
+					$("#"+a).attr("checked","checked");
+				}
+			}
+		}
 	});
 	
 	function selGwc(data){
-		var cbl = checkboxList();
-		 $.ajax({
-			type:"get",
-			url:"${pageContext.request.contextPath}/cart/getTotalByCheck",
-			data: {"cbl":cbl},
-			dataType:"json",
-			success : function(result) {
-				$("#sumPrice").html(result);
-			} 
-		}); 
-		/* window.location.href="${pageContext.request.contextPath}/cart/selCartAll?cbl="+cbl+"";  */
+		var cbl = checkboxList();  
+		window.location.href="${pageContext.request.contextPath}/cart/selCartAll?cbl="+cbl+""; 
 	};
 	// 被选中复选框 集合的字符串
 	function checkboxList(){
@@ -401,13 +418,52 @@ a {
 				}
 			}
 		}
+		if(d==""){
+			d=-1;
+		}
 		return d;
 	};
+	// 所有复选框的集合
+	function fxkAll(){
+		var d ="";
+		var childs = $("#assist").children(".gwc_show");
+		var c = childs.find(".jdcheckbox");
+		for(var i=0;i<childs.length;i++){
+			var text = c.get(i);
+			var id = text.id;
+			if(i<childs.length-1){
+				d = d+id+",";
+			}else{
+				d = d+id;
+			}
+		}
+		return d;
+	}
+	
+	// 判断复选框是否全选
+	function checkAllIsOrNo(){
+		var childs = $("#assist").children(".gwc_show");
+		var c = childs.find(".jdcheckbox");
+		for(var i=0;i<childs.length;i++){
+			var text = c.get(i);
+			var b = text.checked;
+			if(!b){
+				return false;
+			}
+		}
+		return true; 
+	}
 	function delNum(data){
 		var skuId = data.name;
 		var cbl = checkboxList();
 		window.location.href="${pageContext.request.contextPath}/cart/updNum?addOrSub=0&num=1&skuId="+skuId+"&checkboxList="+cbl+"";
 	};
+	
+	// 删除选中的商品
+	function delSelItem(){
+		 var skuId = checkboxList();
+		 window.location.href="${pageContext.request.contextPath}/cart/delGwc?cbl=2&skuId="+skuId+""; 
+	}
 </script>
 </head>
 <body>
@@ -459,7 +515,7 @@ a {
 		</div> -->
 		<div id="assist">
 		<c:forEach items="${pvs}" var="item">
-			<div class="gwc_show">
+			<div class="gwc_show" >
 				<div class="select_all">
 					<div class="cart_checkbox">
 						<input type="checkbox" id="${item.skuId}" name="toggle-checkboxes" class="jdcheckbox" checked="checked" onclick="selGwc(this);" >
@@ -495,8 +551,8 @@ a {
 				全选
 			</div>
 			<div class="operation">
-				<a href="">删除选中的商品</a>
-				<a href="">清理购物车</a>
+				<a href="#" onclick="delSelItem();">删除选中的商品</a>
+				<a href="${pageContext.request.contextPath}/cart/cleanGwc">清理购物车</a>
 			</div>
 			<div class="comm_right">
 				<div class="btn-area">
@@ -508,6 +564,6 @@ a {
 				</div>
 			</div>
 		</div>
-	
+		<input type="text" id="fxkjh" name="fxkjh"   value="${cbl}" />
 </body>
 </html>
