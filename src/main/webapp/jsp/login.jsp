@@ -13,6 +13,8 @@ html,body{
 }
 body {
 	font: 12px/150% tahoma,arial,Microsoft YaHei,Hiragino Sans GB,"\u5b8b\u4f53",sans-serif;
+	padding: 0;
+    margin: 0;
 }
 /* #bg{
 		width:100%;
@@ -63,23 +65,29 @@ input::-webkit-input-placeholder{
 	width:100%;
 	height:100%;
 } */
-.div1 {
-	position:absolute;
-	left: 75%;
-    top: 80%;
+.login_box {
+	position:relative;
+	margin-left:80%;
+	margin-top:30%;
+	background-color: red;
+	/* width: 300px;
+	height: 300px; */
+	
+}
+ .div1 {
+    position:relative;
+	padding-top: 10%;
+	padding-bottom: 10%;
 }
 .div2 {
-	position:absolute;
 	left: 75%;
     top: 85%;
 }
 .div3 {
-	position:absolute;
   	left: 78%;
     top: 90%;
 }
 .div4 {
-   position:absolute;
    left:87%;
    top: 90%;
 }
@@ -90,7 +98,7 @@ input::-webkit-input-placeholder{
 }
 input::-webkit-input-placeholder{ 
 	color: black;
-}
+} 
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script>
@@ -150,21 +158,23 @@ input::-webkit-input-placeholder{
 				<!-- 音乐播放 --> 
 				<EMBED src="${pageContext.request.contextPath}/static/music/fengZhengWu.mp3" 
 				 loop="true" autostart="true"  hidden="true"></EMBED>
-				 
-				 <form id="loginForm" name="loginForm" method="post">
-				 	<div class="div1">
-				 		账号 : <input type="text"  name="userName"  placeholder="请输入账号" class="round"/>  
-				 	</div>
-				 	<div class="div2">
-				 		密码 : <input type="password"  name="password"  placeholder="请输入密码" class="round"/>  
-				 	</div>
-				 	<div class="div3">
-				 		<button type="button" onclick="loginCheck();" >登录</button>
-				 	</div>
-				 	<div class="div4">
-				 		<button type="button" onclick="registerCheck();">注册</button>
-				 	</div>
-				 </form>
+				 <div class="login_box">
+				 		 <form id="loginForm" name="loginForm" method="post">
+						 	<div class="div1">
+						 		账号 : <input type="text"  name="userName"  placeholder="请输入账号" class="round"/>  
+						 	</div>
+						 	<div class="div2">
+						 		密码 : <input type="password"  name="password"  placeholder="请输入密码" class="round"/>  
+						 	</div>
+						 	<div class="div3">
+						 		<button type="button" onclick="loginCheck();" >登录</button>
+						 	</div>
+						 	<div class="div4">
+						 		<button type="button" onclick="registerCheck();">注册</button>
+						 	</div>
+				 		</form>
+				 </div>
+				
 		</div>
 </body>
 </html>
