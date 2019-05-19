@@ -6,32 +6,42 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+html,body{
+	font-size:62.5%;
+	min-width: 768px; 
+	height:100%;
+}
 body{
+	font: 12px/150% tahoma,arial,Microsoft YaHei,Hiragino Sans GB,"\u5b8b\u4f53",sans-serif;
 	padding:0;
 	margin:0;
-	margin:0 auto;
-	width:100%;
-	height:100%;
-	border:1px solid #F00;
-	background-image: url(${pageContext.request.contextPath}/static/img/mainpage.jpg);
+}
+.content{
+	background: url(${pageContext.request.contextPath}/static/img/mainpage.jpg) no-repeat 4px 5px;
+	background-size:100% 100%;
+	overflow: hidden;
 }
 .a0{
 height:150px;
-width:200px;
+width:15%;
 background-color:red;
-margin-left: 110px;
-margin-top: 40px;
+margin-left: 7%;
 float: left;
 }
 .button0 {
-    background-color: #4CAF50; /* Green */
     height:150px;
-	width:200px;
+	width:100%;
 	font-size: 35px;
 }
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js" charset="utf-8"></script>
 <script>
+	$(function(){
+		var hight = $(window).height();  
+		$(".content").css("height",hight);
+		$(".a0").css("margin-top",hight*0.066);
+		
+	});
 	function gouWuShangCheng(){
 		window.location.href="${pageContext.request.contextPath}/jsp/gouWuShangCheng.jsp";
 		return false;
@@ -46,24 +56,25 @@ float: left;
 <body>
 		<!-- <div ><h1>欢迎进入主页面</h1></div> -->
 
+<div class="content">
 
-<div class="a0">
-<button class="button0" onclick="gouWuShangCheng();" >购物商城</button>
+	<div class="a0">
+	<button class="button0" onclick="gouWuShangCheng();" >购物商城</button>
+	</div>
+	<div class="a0">
+	<button class="button0" onclick="shangChengHouTai();" >商城后台</button>
+	</div>
+	<div class="a0">待开发中。。。</div>
+	<div class="a0">待开发中。。。</div>
+	<div class="a0">待开发中。。。</div>
+	<div class="a0">待开发中。。。</div>
+	<div class="a0">待开发中。。。</div>
+	<div class="a0">待开发中。。。</div>
+	<div class="a0">待开发中。。。</div>
+	<div class="a0">待开发中。。。</div>
+	<div class="a0">待开发中。。。</div>
+	<div class="a0">待开发中。。。</div>
 </div>
-<div class="a0">
-<button class="button0" onclick="shangChengHouTai();" >商城后台</button>
-</div>
-<div class="a0">待开发中。。。</div>
-<div class="a0">待开发中。。。</div>
-<div class="a0">待开发中。。。</div>
-<div class="a0">待开发中。。。</div>
-<div class="a0">待开发中。。。</div>
-<div class="a0">待开发中。。。</div>
-<div class="a0">待开发中。。。</div>
-<div class="a0">待开发中。。。</div>
-<div class="a0">待开发中。。。</div>
-<div class="a0">待开发中。。。</div>
-
 
 </body>
 </html>

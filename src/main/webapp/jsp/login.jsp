@@ -16,7 +16,6 @@ body {
     margin: 0;
 }
 .content{
-    background-color: #ffff99;
 	background: url(${pageContext.request.contextPath}/static/img/login.jpg) no-repeat 4px 5px;
 	background-size:100% 100%;
 }
