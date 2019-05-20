@@ -12,14 +12,18 @@ import cn.com.WebXml.WeatherWebServiceSoapStub;
 public class TestWeather {
 	
 	
-	// 调用查询某个城市天气的接口  https://www.cnblogs.com/zhangzonghua/p/9221461.html
-		@RequestMapping("/invokeGetWeatherByOneCity") 
-	     public static void invokeGetWeatherByOneCity(
-	            WeatherWebServiceSoapStub service) throws RemoteException {
-	         String cityName = "南京";
-	         String[] weatherInfo = service.getWeatherbyCityName(cityName);
-	         for (String str : weatherInfo) {
-	             System.out.println(str);
-	         }
-	     }
+	 // 调用获取支持查询某个省份内的城市接口
+	@RequestMapping("/invokeGetSupportCity") 
+    public static void invokeGetSupportCity(WeatherWebServiceSoapStub service)
+            throws RemoteException {
+        String provinceName = "江苏";
+        String[] cities = service.getSupportCity(provinceName);
+        System.out.println("总共" + cities.length + "个市");
+        for (int i = 0; i < cities.length; i++) {
+            if (0 != i && i % 5 == 0) {
+                System.out.println();
+            }
+            System.out.print(cities[i] + "\t");
+        }
+    }
 }
