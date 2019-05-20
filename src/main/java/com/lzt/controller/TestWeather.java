@@ -2,6 +2,8 @@ package com.lzt.controller;
 
 import java.rmi.RemoteException;
 
+import javax.jws.WebService;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +11,7 @@ import cn.com.WebXml.WeatherWebServiceSoapStub;
 
 @RestController  
 @RequestMapping("/weather") 
+@WebService
 public class TestWeather {
 	
 	
