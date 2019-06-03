@@ -17,12 +17,70 @@
 <script
 	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 <style>
+.col-md-12{
+ 	background-color: red;
+}
+.row{
+	
+}
 </style>
+<script type="text/javascript">
+	function xztj(){
+		var params = $("#xztjForm").serialize(); 
+		
+	};
+</script>
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid ">
+		<form id="xztjForm" method="post" > 
+		<div class="row" style="margin-top: 30px">
+		  <div class="col-md-6 col-md-offset-3"><font size="4">选择题题目</font></div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+		  <div class="col-md-6 col-md-offset-3"><textarea name="tmAdd" class="form-control" rows="2" style="min-width: 50%"></textarea></div>
+		</div>
 		
+		<div class="row" style="margin-top: 10px">
+		  <div class="col-md-6 col-md-offset-3"><font size="4">A:</font></div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+		  <div class="col-md-6 col-md-offset-3"><textarea name="A" class="form-control" rows="1" style="min-width: 50%"></textarea></div>
+		</div>
+		
+		<div class="row" style="margin-top: 10px">
+		  <div class="col-md-6 col-md-offset-3"><font size="4">B:</font></div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+		  <div class="col-md-6 col-md-offset-3"><textarea name="B" class="form-control" rows="1" style="min-width: 50%"></textarea></div>
+		</div>
+		
+		<div class="row" style="margin-top: 10px">
+		  <div class="col-md-6 col-md-offset-3"><font size="4">C:</font></div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+		  <div class="col-md-6 col-md-offset-3"><textarea name="C" class="form-control" rows="1" style="min-width: 50%"></textarea></div>
+		</div>
+		
+		<div class="row" style="margin-top: 10px">
+		  <div class="col-md-6 col-md-offset-3"><font size="4">D:</font></div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+		  <div class="col-md-6 col-md-offset-3"><textarea name="D" class="form-control" rows="1" style="min-width: 50%"></textarea></div>
+		</div>
+		
+		<div class="row" style="margin-top: 10px">
+		  <div class="col-md-6 col-md-offset-3"><font size="4">正确答案：</font></div>
+		</div>
+		<div class="row" style="margin-top: 10px">
+			<div class="col-md-2 col-md-offset-3">
+			  	<input class="form-control" type="text" name="daAn" style=" width: 50%"></input>
+			</div>
+			<div class="col-md-2 col-md-offset-3">
+			  	 <button type="button" class="btn btn-info active" onclick="xztj();">提交</button> 
+			</div>
+		</div>
+		</form>
 	</div>
-
 </body>
 </html>

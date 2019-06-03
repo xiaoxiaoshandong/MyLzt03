@@ -25,13 +25,24 @@
 	
 </style>
 <script type="text/javascript">
-		function examAdd() {
-			
-			var content = '<iframe src="/lzt03/jsp/fenLei.jsp" height="100%"  width="100%" '
+		
+		function xzQuestAdd() {
+			var content = '<iframe src="/lzt03/jsp/xzQuestAdd.jsp" height="100%"  width="100%" '
 					+ ' frameborder="1"  scrolling="0" ></iframe>';
 			//添加一个新的选项卡
 			$("#mytabs").tabs('add', {
-				title : '试卷后台加题',
+				title : '选择题',
+				content : content,
+				closable : true
+			});
+		};
+		
+		function wdQuestAdd() {
+			var content = '<iframe src="/lzt03/jsp/wdQuestAdd.jsp" height="100%"  width="100%" '
+					+ ' frameborder="1"  scrolling="0" ></iframe>';
+			//添加一个新的选项卡
+			$("#mytabs").tabs('add', {
+				title : '问答题',
 				content : content,
 				closable : true
 			});
