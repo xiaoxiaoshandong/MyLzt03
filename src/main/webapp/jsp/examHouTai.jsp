@@ -47,6 +47,17 @@
 				closable : true
 			});
 		};
+		
+		function dtQuestAdd() {
+			var content = '<iframe src="/lzt03/jsp/dtQuestAdd.jsp" height="100%"  width="100%" '
+					+ ' frameborder="1"  scrolling="0" ></iframe>';
+			//添加一个新的选项卡
+			$("#mytabs").tabs('add', {
+				title : '大题',
+				content : content,
+				closable : true
+			});
+		};
 	
 </script>
 </head>
@@ -62,7 +73,7 @@
 							<ul>
 								<li><a onclick="xzQuestAdd();">选择题添加</a></li>
 								<li><a onclick="wdQuestAdd();">问答题添加</a></li>
-								<li><a onclick="dQuestAdd();">大题添加</a></li>
+								<li><a onclick="dtQuestAdd();">大题添加</a></li>
 							</ul>
 						</li>
 						<li><a onclick="examSel();">试卷查询管理</a></li>
