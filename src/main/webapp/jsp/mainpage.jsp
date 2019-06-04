@@ -51,6 +51,14 @@ float: left;
 		window.location.href="${pageContext.request.contextPath}/jsp/shangChengHouTai.jsp";
 		return false;
 	};
+	function examHouTai(){
+		window.location.href="${pageContext.request.contextPath}/jsp/examHouTai.jsp";
+		return false;
+	};
+	function javaExam(){
+		window.location.href="${pageContext.request.contextPath}/jsp/javaExam.jsp";
+		return false;
+	};
 </script>
 </head>
 <body>
@@ -64,8 +72,12 @@ float: left;
 	<div class="a0">
 	<button class="button0" onclick="shangChengHouTai();" >商城后台</button>
 	</div>
-	<div class="a0">待开发中。。。</div>
-	<div class="a0">待开发中。。。</div>
+	<div class="a0">
+	<button class="button0" onclick="javaExam();" >java面试题试卷</button>
+	</div>
+	<div class="a0">
+	<button class="button0" onclick="examHouTai();" >java面试题系统后台</button>
+	</div>
 	<div class="a0">待开发中。。。</div>
 	<div class="a0">待开发中。。。</div>
 	<div class="a0">待开发中。。。</div>

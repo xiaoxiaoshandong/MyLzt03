@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.KsrDaAnMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.KsrDaAn">
+    <id column="kda_id" jdbcType="VARCHAR" property="kdaId" />
+    <result column="sj_id" jdbcType="VARCHAR" property="sjId" />
+    <result column="quest_id" jdbcType="VARCHAR" property="questId" />
+    <result column="ksr_content" jdbcType="VARCHAR" property="ksrContent" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    kda_id, sj_id, quest_id, ksr_content, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ksr_da_an
+    where kda_id = #{kdaId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ksr_da_an
+    where kda_id = #{kdaId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.KsrDaAn">
+    insert into ksr_da_an (kda_id, sj_id, quest_id, 
+      ksr_content, create_time, update_time
+      )
+    values (#{kdaId,jdbcType=VARCHAR}, #{sjId,jdbcType=VARCHAR}, #{questId,jdbcType=VARCHAR}, 
+      #{ksrContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.KsrDaAn">
+    insert into ksr_da_an
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="kdaId != null">
+        kda_id,
+      </if>
+      <if test="sjId != null">
+        sj_id,
+      </if>
+      <if test="questId != null">
+        quest_id,
+      </if>
+      <if test="ksrContent != null">
+        ksr_content,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="kdaId != null">
+        #{kdaId,jdbcType=VARCHAR},
+      </if>
+      <if test="sjId != null">
+        #{sjId,jdbcType=VARCHAR},
+      </if>
+      <if test="questId != null">
+        #{questId,jdbcType=VARCHAR},
+      </if>
+      <if test="ksrContent != null">
+        #{ksrContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.KsrDaAn">
+    update ksr_da_an
+    <set>
+      <if test="sjId != null">
+        sj_id = #{sjId,jdbcType=VARCHAR},
+      </if>
+      <if test="questId != null">
+        quest_id = #{questId,jdbcType=VARCHAR},
+      </if>
+      <if test="ksrContent != null">
+        ksr_content = #{ksrContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where kda_id = #{kdaId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.KsrDaAn">
+    update ksr_da_an
+    set sj_id = #{sjId,jdbcType=VARCHAR},
+      quest_id = #{questId,jdbcType=VARCHAR},
+      ksr_content = #{ksrContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where kda_id = #{kdaId,jdbcType=VARCHAR}
+  </update>
+</mapper>

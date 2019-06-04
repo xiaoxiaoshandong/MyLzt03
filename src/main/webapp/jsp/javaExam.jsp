@@ -22,6 +22,18 @@
 	margin-bottom: 10px;
 }
 </style>
+<script type="text/javascript">
+		$(function(){
+			$.ajax({
+				type:"POST",
+				url:"${pageContext.request.contextPath}/shijuan/addShiJuan",
+				dataType:"json",
+				success : function(data) { 
+					alert(data);
+				}
+			});		
+		});
+</script>
 </head>
 <body>
 	<div class="container-fluid">

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.ShiJuanMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.ShiJuan">
+    <id column="sj_id" jdbcType="VARCHAR" property="sjId" />
+    <result column="ksr_name" jdbcType="VARCHAR" property="ksrName" />
+    <result column="ksr_quest_ids" jdbcType="VARCHAR" property="ksrQuestIds" />
+    <result column="ksr_sj_num" jdbcType="VARCHAR" property="ksrSjNum" />
+    <result column="ksr_total" jdbcType="VARCHAR" property="ksrTotal" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sj_id, ksr_name, ksr_quest_ids, ksr_sj_num, ksr_total, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shi_juan
+    where sj_id = #{sjId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from shi_juan
+    where sj_id = #{sjId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.ShiJuan">
+    insert into shi_juan (sj_id, ksr_name, ksr_quest_ids, 
+      ksr_sj_num, ksr_total, create_time, 
+      update_time)
+    values (#{sjId,jdbcType=VARCHAR}, #{ksrName,jdbcType=VARCHAR}, #{ksrQuestIds,jdbcType=VARCHAR}, 
+      #{ksrSjNum,jdbcType=VARCHAR}, #{ksrTotal,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.ShiJuan">
+    insert into shi_juan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sjId != null">
+        sj_id,
+      </if>
+      <if test="ksrName != null">
+        ksr_name,
+      </if>
+      <if test="ksrQuestIds != null">
+        ksr_quest_ids,
+      </if>
+      <if test="ksrSjNum != null">
+        ksr_sj_num,
+      </if>
+      <if test="ksrTotal != null">
+        ksr_total,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sjId != null">
+        #{sjId,jdbcType=VARCHAR},
+      </if>
+      <if test="ksrName != null">
+        #{ksrName,jdbcType=VARCHAR},
+      </if>
+      <if test="ksrQuestIds != null">
+        #{ksrQuestIds,jdbcType=VARCHAR},
+      </if>
+      <if test="ksrSjNum != null">
+        #{ksrSjNum,jdbcType=VARCHAR},
+      </if>
+      <if test="ksrTotal != null">
+        #{ksrTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.ShiJuan">
+    update shi_juan
+    <set>
+      <if test="ksrName != null">
+        ksr_name = #{ksrName,jdbcType=VARCHAR},
+      </if>
+      <if test="ksrQuestIds != null">
+        ksr_quest_ids = #{ksrQuestIds,jdbcType=VARCHAR},
+      </if>
+      <if test="ksrSjNum != null">
+        ksr_sj_num = #{ksrSjNum,jdbcType=VARCHAR},
+      </if>
+      <if test="ksrTotal != null">
+        ksr_total = #{ksrTotal,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sj_id = #{sjId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.ShiJuan">
+    update shi_juan
+    set ksr_name = #{ksrName,jdbcType=VARCHAR},
+      ksr_quest_ids = #{ksrQuestIds,jdbcType=VARCHAR},
+      ksr_sj_num = #{ksrSjNum,jdbcType=VARCHAR},
+      ksr_total = #{ksrTotal,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where sj_id = #{sjId,jdbcType=VARCHAR}
+  </update>
+</mapper>

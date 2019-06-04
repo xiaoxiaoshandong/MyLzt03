@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.DaAnMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.DaAn">
+    <id column="ans_id" jdbcType="VARCHAR" property="ansId" />
+    <result column="quest_id" jdbcType="VARCHAR" property="questId" />
+    <result column="ans_content" jdbcType="VARCHAR" property="ansContent" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ans_id, quest_id, ans_content, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from da_an
+    where ans_id = #{ansId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from da_an
+    where ans_id = #{ansId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.DaAn">
+    insert into da_an (ans_id, quest_id, ans_content, 
+      create_time, update_time)
+    values (#{ansId,jdbcType=VARCHAR}, #{questId,jdbcType=VARCHAR}, #{ansContent,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.DaAn">
+    insert into da_an
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ansId != null">
+        ans_id,
+      </if>
+      <if test="questId != null">
+        quest_id,
+      </if>
+      <if test="ansContent != null">
+        ans_content,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ansId != null">
+        #{ansId,jdbcType=VARCHAR},
+      </if>
+      <if test="questId != null">
+        #{questId,jdbcType=VARCHAR},
+      </if>
+      <if test="ansContent != null">
+        #{ansContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.DaAn">
+    update da_an
+    <set>
+      <if test="questId != null">
+        quest_id = #{questId,jdbcType=VARCHAR},
+      </if>
+      <if test="ansContent != null">
+        ans_content = #{ansContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ans_id = #{ansId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.DaAn">
+    update da_an
+    set quest_id = #{questId,jdbcType=VARCHAR},
+      ans_content = #{ansContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where ans_id = #{ansId,jdbcType=VARCHAR}
+  </update>
+</mapper>

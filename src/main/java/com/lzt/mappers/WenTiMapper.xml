@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.WenTiMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.WenTi">
+    <id column="quest_id" jdbcType="VARCHAR" property="questId" />
+    <result column="quest_content" jdbcType="VARCHAR" property="questContent" />
+    <result column="option_a" jdbcType="VARCHAR" property="optionA" />
+    <result column="option_b" jdbcType="VARCHAR" property="optionB" />
+    <result column="option_c" jdbcType="VARCHAR" property="optionC" />
+    <result column="option_d" jdbcType="VARCHAR" property="optionD" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="quest_type" jdbcType="CHAR" property="questType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    quest_id, quest_content, option_a, option_b, option_c, option_d, create_time, update_time, 
+    quest_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from wen_ti
+    where quest_id = #{questId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wen_ti
+    where quest_id = #{questId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.WenTi">
+    insert into wen_ti (quest_id, quest_content, option_a, 
+      option_b, option_c, option_d, 
+      create_time, update_time, quest_type
+      )
+    values (#{questId,jdbcType=VARCHAR}, #{questContent,jdbcType=VARCHAR}, #{optionA,jdbcType=VARCHAR}, 
+      #{optionB,jdbcType=VARCHAR}, #{optionC,jdbcType=VARCHAR}, #{optionD,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{questType,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.WenTi">
+    insert into wen_ti
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="questId != null">
+        quest_id,
+      </if>
+      <if test="questContent != null">
+        quest_content,
+      </if>
+      <if test="optionA != null">
+        option_a,
+      </if>
+      <if test="optionB != null">
+        option_b,
+      </if>
+      <if test="optionC != null">
+        option_c,
+      </if>
+      <if test="optionD != null">
+        option_d,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="questType != null">
+        quest_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="questId != null">
+        #{questId,jdbcType=VARCHAR},
+      </if>
+      <if test="questContent != null">
+        #{questContent,jdbcType=VARCHAR},
+      </if>
+      <if test="optionA != null">
+        #{optionA,jdbcType=VARCHAR},
+      </if>
+      <if test="optionB != null">
+        #{optionB,jdbcType=VARCHAR},
+      </if>
+      <if test="optionC != null">
+        #{optionC,jdbcType=VARCHAR},
+      </if>
+      <if test="optionD != null">
+        #{optionD,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questType != null">
+        #{questType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.WenTi">
+    update wen_ti
+    <set>
+      <if test="questContent != null">
+        quest_content = #{questContent,jdbcType=VARCHAR},
+      </if>
+      <if test="optionA != null">
+        option_a = #{optionA,jdbcType=VARCHAR},
+      </if>
+      <if test="optionB != null">
+        option_b = #{optionB,jdbcType=VARCHAR},
+      </if>
+      <if test="optionC != null">
+        option_c = #{optionC,jdbcType=VARCHAR},
+      </if>
+      <if test="optionD != null">
+        option_d = #{optionD,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="questType != null">
+        quest_type = #{questType,jdbcType=CHAR},
+      </if>
+    </set>
+    where quest_id = #{questId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.WenTi">
+    update wen_ti
+    set quest_content = #{questContent,jdbcType=VARCHAR},
+      option_a = #{optionA,jdbcType=VARCHAR},
+      option_b = #{optionB,jdbcType=VARCHAR},
+      option_c = #{optionC,jdbcType=VARCHAR},
+      option_d = #{optionD,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      quest_type = #{questType,jdbcType=CHAR}
+    where quest_id = #{questId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -658,18 +658,7 @@ a {
 	
 	function oneProdShow(data){
 		var erjiName = document.getElementById('div_spml_span').innerHTML;
-		/* var  erjiName = encodeURI(ejn); */
 		var skuId = data.name;
-		/* $.ajax({
-			type:"post",
-			data: {"erjiName":erjiName,"skuId":skuId},
-			url:"/lzt03/spu/selectProdBySkuId", 
-			dataType:"json",
-			contentType:"application/x-www-form-urlencoded;charset=utf-8",
-			success : function(result) {
-				alert(result);
-			}
-		}); */
 		window.location.href="${pageContext.request.contextPath}/spu/selectProdBySkuId?skuId="+skuId+"&erjiName="+encodeURI(encodeURI(erjiName))+"";
 	};
 </script>

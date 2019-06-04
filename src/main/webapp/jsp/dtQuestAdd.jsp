@@ -26,8 +26,22 @@
 </style>
 <script type="text/javascript">
 	function dttj(){
-		var params = $("#dttjForm").serialize(); 
-		alert(params);
+		var params = $("#dttjForm").serializeArray(); 
+		params.push({"name":"questType","value":"3"});
+		$.ajax({
+			type:"POST",
+			url:"${pageContext.request.contextPath}/wenti/addWenTi",
+			data: params,
+			dataType:"json",
+			success : function(data) { 
+					if(data==0){
+						alert("添加题目信息失败！");
+					}else{
+						//刷新页面
+						location.reload();
+					}
+			}
+		});
 	};
 </script>
 </head>
@@ -38,7 +52,7 @@
 		  <div class="col-md-6 col-md-offset-3"><font size="4">大题题目</font></div>
 		</div>
 		<div class="row" style="margin-top: 10px">
-		  <div class="col-md-6 col-md-offset-3"><textarea name="tmAdd" class="form-control" rows="2" style="min-width: 50%"></textarea></div>
+		  <div class="col-md-6 col-md-offset-3"><textarea name="questContent" class="form-control" rows="2" style="min-width: 50%"></textarea></div>
 		</div>
 		
 		<div class="row" style="margin-top: 10px">
@@ -46,7 +60,7 @@
 		</div>
 		<div class="row" style="margin-top: 10px">
 			<div class="col-md-2 col-md-offset-3">
-			  	<input class="form-control" type="text" name="daAn" style=" width: 100%"></input>
+			  	<input class="form-control" type="text" name="ansContent" style=" width: 100%"></input>
 			</div>
 		</div>
 		

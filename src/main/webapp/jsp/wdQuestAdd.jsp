@@ -25,8 +25,23 @@
 </style>
 <script type="text/javascript">
 	function wdtj(){
-		var params = $("#wdtjForm").serialize(); 
-		alert(params);
+		
+		var params = $("#wdtjForm").serializeArray(); 
+		params.push({"name":"questType","value":"2"});
+		$.ajax({
+			type:"POST",
+			url:"${pageContext.request.contextPath}/wenti/addWenTi",
+			data: params,
+			dataType:"json",
+			success : function(data) { 
+					if(data==0){
+						alert("添加题目信息失败！");
+					}else{
+						//刷新页面
+						location.reload();
+					}
+			}
+		});
 	};
 </script>
 </head>
@@ -37,7 +52,7 @@
 		  <div class="col-md-6 col-md-offset-3"><font size="4">问答题题目</font></div>
 		</div>
 		<div class="row" style="margin-top: 10px">
-		  <div class="col-md-6 col-md-offset-3"><textarea name="tmAdd" class="form-control" rows="2" style="min-width: 50%"></textarea></div>
+		  <div class="col-md-6 col-md-offset-3"><textarea name="questContent" class="form-control" rows="2" style="min-width: 50%"></textarea></div>
 		</div>
 		
 		<div class="row" style="margin-top: 10px">
@@ -45,7 +60,7 @@
 		</div>
 		<div class="row" style="margin-top: 10px">
 			<div class="col-md-3 col-md-offset-3">
-			  	<textarea class="form-control" type="text" name="daAn" rows="1" style=" width: 70%"></textarea>
+			  	<textarea class="form-control" type="text" name="ansContent" rows="1" style=" width: 70%"></textarea>
 			</div>
 			<div class="col-md-3" style="margin-left: 17.5%">
 			  	 <button type="button" class="btn btn-info active" onclick="wdtj();" >提交</button> 
