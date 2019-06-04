@@ -1,5 +1,9 @@
 package com.lzt.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.lzt.entity.WenTi;
 
 public interface WenTiMapper {
@@ -14,4 +18,6 @@ public interface WenTiMapper {
     int updateByPrimaryKeySelective(WenTi record);
 
     int updateByPrimaryKey(WenTi record);
+
+	List<WenTi> selectByRand(@Param("questType") String questType ,@Param("num") String num );
 }

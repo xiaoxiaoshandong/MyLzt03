@@ -20,7 +20,7 @@ public class ShiJuanController {
 	 * @param request
 	 * @return  1:成功 0：失败
 	 */
-	@RequestMapping(value="/addWenTi")  
+	@RequestMapping(value="/addShiJuan")  
 	public Integer addShiJuan(HttpServletRequest request){
 		Integer i = shiJuanService.addShiJuan(request);
 		return i;

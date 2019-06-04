@@ -1,6 +1,7 @@
 package com.lzt.service.impl;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lzt.dao.UserTMapper;
+import com.lzt.dao.WenTiMapper;
 import com.lzt.entity.UserT;
+import com.lzt.entity.WenTi;
 import com.lzt.myexception.TokenException;
 import com.lzt.myutils.CookieUtil;
 import com.lzt.myutils.JwtToken;
@@ -21,6 +24,9 @@ public class ShiJuanServiceImpl implements ShiJuanService {
 	
 	@Autowired(required=false)
 	private UserTMapper userTMapper;
+	@Autowired(required=false)
+	private WenTiMapper wenTiMapper;
+	
 	public Integer addShiJuan(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		// 获取用户名称
@@ -40,7 +46,7 @@ public class ShiJuanServiceImpl implements ShiJuanService {
 				String ksrName = t.getUserName();
 				
 			//随机选择 10个选择题 5个问答题 1个大题
-				
+				List<WenTi> xzList = wenTiMapper.selectByRand("1","10");
 		return null;
 	}
 	
