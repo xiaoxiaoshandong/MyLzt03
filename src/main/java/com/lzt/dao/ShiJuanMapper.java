@@ -1,5 +1,7 @@
 package com.lzt.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.lzt.entity.ShiJuan;
 
 public interface ShiJuanMapper {
@@ -14,4 +16,6 @@ public interface ShiJuanMapper {
     int updateByPrimaryKeySelective(ShiJuan record);
 
     int updateByPrimaryKey(ShiJuan record);
+
+	Integer selMaxByksrId(@Param("ksrId")Integer userId);
 }

@@ -26,13 +26,96 @@
 		$(function(){
 			$.ajax({
 				type:"POST",
-				url:"${pageContext.request.contextPath}/shijuan/addShiJuan",
+				url:"${pageContext.request.contextPath}/shijuan/prodShiJuan",
 				dataType:"json",
 				success : function(data) { 
-					alert(data);
+					document.getElementById('javaTitle').innerText="java软件工程师笔试题("+data.num+"期)";
+					document.getElementById('xingMing').innerText="姓名:"+data.ksrName+"";
+					var xzlist =data.xzList;
+					var wdlist =data.wdList;
+					var dtlist =data.dtList;
+					var xzStr = "";
+					var wdStr = "";
+					var dtStr = "";
+					for(var i=0;i<xzlist.length;i++){
+						var xz = xzlist[i];
+						var a = i+1;
+						var xzStr1 ='<div class="row">'+
+										'<div class="col-md-12">'+
+									'<h5>'+a+'：'+xz.questContent+'</h5>'+
+								'</div>'+
+							'</div>'+
+							'<div class="row">'+
+								'<div class="col-md-12">'+
+									'<div class="checkbox">'+
+										'<label><input type="checkbox"  name="xz'+xz.questId+'" value="A">A:'+xz.optionA+'</label>'+
+									'</div>'+
+									'<div class="checkbox">'+
+										'<label><input type="checkbox" name="xz'+xz.questId+'" value="B">B:'+xz.optionB+'</label>'+
+									'</div>'+
+									'<div class="checkbox">'+
+										'<label><input type="checkbox" name="xz'+xz.questId+'" value="C">C:'+xz.optionC+'</label>'+
+									'</div>'+
+									'<div class="checkbox">'+
+										'<label><input type="checkbox" name="xz'+xz.questId+'" value="D">D:'+xz.optionD+'</label>'+
+									'</div>'+
+								'</div>'+
+							'</div>';
+							xzStr =xzStr+xzStr1;
+					}
+					$("#row_1").after(xzStr);
+					
+					var dtStr = "";
+					for(var i=0;i<wdlist.length;i++){
+						var wd = wdlist[i];
+						var a = i+1;
+						var wdStr1 = '<div class="row">'+
+										'<div class="col-md-12">'+
+											'<h5>'+a+'：'+wd.questContent+'</h5>'+
+										'</div>'+
+									  '</div>'+
+									  '<div class="row">'+
+										'<div class="col-md-6">'+
+											'<textarea class="form-control"  name="wd'+wd.questId+'" rows="3" style="min-width: 90%"></textarea>'+
+									    '</div>'+
+									  '</div>';
+						wdStr =wdStr+wdStr1;
+					}
+					$("#row_2").after(wdStr);
+					
+					for(var i=0;i<dtlist.length;i++){
+						var dt = dtlist[i];
+						var a = i+1;
+						var dtStr1 ='<div class="row">'+
+										'<div class="col-md-12">'+
+											'<h5>'+a+'：'+dt.questContent+'</h5>'+
+										'</div>'+
+									'</div>'+
+									 '<div class="row">'+
+										'<div class="col-md-6">'+
+											'<textarea class="form-control"  name="dt'+dt.questId+'" rows="3" style="min-width: 90%"></textarea>'+
+									    '</div>'+
+									  '</div>';
+						dtStr =dtStr+dtStr1;
+					}
+					$("#row_3").after(dtStr);
 				}
 			});		
 		});
+		
+		 function sjtj(){
+			 var params = $("#examSub").serialize(); 
+			 alert(params);
+			/*  $.ajax({
+				type:"post",
+				url:"/lzt03/spu/selectProd",
+				data: params,
+				dataType:"json",
+				success : function(data) {
+				
+			}); */
+			
+		}
 </script>
 </head>
 <body>
@@ -41,7 +124,7 @@
 			<div class="row" style="margin-top: 20px">
 				<div class="col-md-12">
 					<p class="text-center">
-						<font size="5" face="微软雅黑" class="text-center">java软件工程师笔试题</font>
+						<font id="javaTitle" size="5" face="微软雅黑" class="text-center"></font>
 					</p>
 				</div>
 			</div>
@@ -55,63 +138,32 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div>
-						<h4>姓名：XXX</h4>
+						<h4 id="xingMing"></h4>
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" id="row_1">
 				<div class="col-md-12">
 					<h4>一：选择题 (选择题 3分*10 注释：单选&多选 固定每题3分)</h4>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h5>1：第一个问题？</h5>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="checkbox">
-						<label><input type="checkbox" value="">A:答案1</label>
-					</div>
-					<div class="checkbox">
-						<label><input type="checkbox" value="">B:答案2</label>
-					</div>
-					<div class="checkbox">
-						<label><input type="checkbox" value="">C:答案3</label>
-					</div>
-					<div class="checkbox">
-						<label><input type="checkbox" value="">D:答案4</label>
-					</div>
-				</div>
-			</div>
+			
 	
-			<div class="row">
+			<div class="row" id="row_2">
 				<div class="col-md-12">
 					<h4>二: 问答题 (8分*5 固定每题8分)</h4>
 				</div>
 			</div>
-	
-			<div class="row">
+			
+			<div class="row" id="row_3">
 				<div class="col-md-12">
-					<h5>1：第一个问答问题？</h5>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<textarea class="form-control" id="deblock_udid" name="deblock_udid"
-						rows="3" style="min-width: 90%"></textarea>
+					<h4>三: 大题 (数据库题，编程题，逻辑题等拔高题 共30分)</h4>
 				</div>
 			</div>
 			
 			<div class="row">
 				<div class="col-md-12">
-					<h4>三: 大题 (数据库题，编程题，逻辑题等拔高题 共30分)</h4>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h5>1：第一个大题问题？</h5>
+					<button type="button" class="btn btn-info active" onclick="sjtj();">提交答案</button> 
 				</div>
 			</div>
 		</form>

@@ -5,7 +5,7 @@ import java.util.Date;
 public class ShiJuan {
     private String sjId;
 
-    private String ksrName;
+    private String ksrId;
 
     private String ksrQuestIds;
 
@@ -25,12 +25,12 @@ public class ShiJuan {
         this.sjId = sjId == null ? null : sjId.trim();
     }
 
-    public String getKsrName() {
-        return ksrName;
+    public String getksrId() {
+        return ksrId;
     }
 
-    public void setKsrName(String ksrName) {
-        this.ksrName = ksrName == null ? null : ksrName.trim();
+    public void setksrId(String ksrId) {
+        this.ksrId = ksrId == null ? null : ksrId.trim();
     }
 
     public String getKsrQuestIds() {

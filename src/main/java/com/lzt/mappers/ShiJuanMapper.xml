@@ -3,7 +3,7 @@
 <mapper namespace="com.lzt.dao.ShiJuanMapper">
   <resultMap id="BaseResultMap" type="com.lzt.entity.ShiJuan">
     <id column="sj_id" jdbcType="VARCHAR" property="sjId" />
-    <result column="ksr_name" jdbcType="VARCHAR" property="ksrName" />
+    <result column="ksr_id" jdbcType="VARCHAR" property="ksrId" />
     <result column="ksr_quest_ids" jdbcType="VARCHAR" property="ksrQuestIds" />
     <result column="ksr_sj_num" jdbcType="VARCHAR" property="ksrSjNum" />
     <result column="ksr_total" jdbcType="VARCHAR" property="ksrTotal" />
@@ -11,7 +11,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    sj_id, ksr_name, ksr_quest_ids, ksr_sj_num, ksr_total, create_time, update_time
+    sj_id, ksr_id, ksr_quest_ids, ksr_sj_num, ksr_total, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -19,15 +19,20 @@
     from shi_juan
     where sj_id = #{sjId,jdbcType=VARCHAR}
   </select>
+  
+  <select id="selMaxByksrId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select  MAX(ksr_sj_num)  from shi_juan where ksr_id = #{ksrId}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from shi_juan
     where sj_id = #{sjId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.lzt.entity.ShiJuan">
-    insert into shi_juan (sj_id, ksr_name, ksr_quest_ids, 
+    insert into shi_juan (sj_id, ksr_id, ksr_quest_ids, 
       ksr_sj_num, ksr_total, create_time, 
       update_time)
-    values (#{sjId,jdbcType=VARCHAR}, #{ksrName,jdbcType=VARCHAR}, #{ksrQuestIds,jdbcType=VARCHAR}, 
+    values (#{sjId,jdbcType=VARCHAR}, #{ksrId,jdbcType=VARCHAR}, #{ksrQuestIds,jdbcType=VARCHAR}, 
       #{ksrSjNum,jdbcType=VARCHAR}, #{ksrTotal,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
@@ -37,8 +42,8 @@
       <if test="sjId != null">
         sj_id,
       </if>
-      <if test="ksrName != null">
-        ksr_name,
+      <if test="ksrId != null">
+        ksr_id,
       </if>
       <if test="ksrQuestIds != null">
         ksr_quest_ids,
@@ -60,8 +65,8 @@
       <if test="sjId != null">
         #{sjId,jdbcType=VARCHAR},
       </if>
-      <if test="ksrName != null">
-        #{ksrName,jdbcType=VARCHAR},
+      <if test="ksrId != null">
+        #{ksrId,jdbcType=VARCHAR},
       </if>
       <if test="ksrQuestIds != null">
         #{ksrQuestIds,jdbcType=VARCHAR},
@@ -83,8 +88,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.ShiJuan">
     update shi_juan
     <set>
-      <if test="ksrName != null">
-        ksr_name = #{ksrName,jdbcType=VARCHAR},
+      <if test="ksrId != null">
+        ksr_id = #{ksrId,jdbcType=VARCHAR},
       </if>
       <if test="ksrQuestIds != null">
         ksr_quest_ids = #{ksrQuestIds,jdbcType=VARCHAR},
@@ -106,7 +111,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lzt.entity.ShiJuan">
     update shi_juan
-    set ksr_name = #{ksrName,jdbcType=VARCHAR},
+    set ksr_id = #{ksrId,jdbcType=VARCHAR},
       ksr_quest_ids = #{ksrQuestIds,jdbcType=VARCHAR},
       ksr_sj_num = #{ksrSjNum,jdbcType=VARCHAR},
       ksr_total = #{ksrTotal,jdbcType=VARCHAR},

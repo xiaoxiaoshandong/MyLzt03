@@ -8,9 +8,10 @@
     <result column="ksr_content" jdbcType="VARCHAR" property="ksrContent" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ksr_quest_type" jdbcType="CHAR" property="ksrQuestType" />
   </resultMap>
   <sql id="Base_Column_List">
-    kda_id, sj_id, quest_id, ksr_content, create_time, update_time
+    kda_id, sj_id, quest_id, ksr_content, create_time, update_time, ksr_quest_type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -24,10 +25,11 @@
   </delete>
   <insert id="insert" parameterType="com.lzt.entity.KsrDaAn">
     insert into ksr_da_an (kda_id, sj_id, quest_id, 
-      ksr_content, create_time, update_time
+      ksr_content, create_time, update_time, ksr_quest_type
       )
     values (#{kdaId,jdbcType=VARCHAR}, #{sjId,jdbcType=VARCHAR}, #{questId,jdbcType=VARCHAR}, 
       #{ksrContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      , #{ksrQuestType,jdbcType=CHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lzt.entity.KsrDaAn">
@@ -51,6 +53,9 @@
       <if test="updateTime != null">
         update_time,
       </if>
+       <if test="updateTime != null">
+        ksr_quest_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="kdaId != null">
@@ -70,6 +75,9 @@
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{ksrQuestType,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -91,6 +99,9 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+       <if test="updateTime != null">
+        ksr_quest_type = #{ksrQuestType,jdbcType=CHAR},
+      </if>
     </set>
     where kda_id = #{kdaId,jdbcType=VARCHAR}
   </update>
@@ -100,7 +111,8 @@
       quest_id = #{questId,jdbcType=VARCHAR},
       ksr_content = #{ksrContent,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ksr_quest_type = #{ksrQuestType,jdbcType=CHAR}
     where kda_id = #{kdaId,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -1,5 +1,8 @@
 package com.lzt.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +23,11 @@ public class ShiJuanController {
 	 * @param request
 	 * @return  1:成功 0：失败
 	 */
-	@RequestMapping(value="/addShiJuan")  
-	public Integer addShiJuan(HttpServletRequest request){
-		Integer i = shiJuanService.addShiJuan(request);
-		return i;
+	@RequestMapping(value="/prodShiJuan")  
+	public HashMap<String,Object> prodShiJuan(HttpServletRequest request){
+		HashMap<String,Object> map = shiJuanService.prodShiJuan(request);
+		System.out.println(map);
+		return map;
 	}
 	
 }

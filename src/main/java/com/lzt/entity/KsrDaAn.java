@@ -14,6 +14,8 @@ public class KsrDaAn {
     private Date createTime;
 
     private Date updateTime;
+    
+    private String ksrQuestType;
 
     public String getKdaId() {
         return kdaId;
@@ -62,4 +64,14 @@ public class KsrDaAn {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+	public String getKsrQuestType() {
+		return ksrQuestType;
+	}
+
+	public void setKsrQuestType(String ksrQuestType) {
+		this.ksrQuestType = ksrQuestType;
+	}
+    
+    
 }

@@ -14,7 +14,7 @@
     id, user_name, pass_word, age,sex,aihao,minzu
   </sql>
   
-  <select id="selectByPrimaryKey" parameterType="com.lzt.entity.UserT" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.lzt.entity.UserT"  resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user_t
