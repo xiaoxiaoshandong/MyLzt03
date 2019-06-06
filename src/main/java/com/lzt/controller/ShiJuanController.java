@@ -1,14 +1,21 @@
 package com.lzt.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.lzt.entity.KsrDaAn;
+import com.lzt.entity.KsrDaAnVo;
 import com.lzt.service.ShiJuanService;
 @RestController  
 @RequestMapping("/shijuan") 
@@ -30,4 +37,16 @@ public class ShiJuanController {
 		return map;
 	}
 	
+/*	@RequestMapping(value="/submitShiJuan")  
+	public Map<String,Object> submitShiJuan(KsrDaAnVo ksrDaAnVo){
+		System.out.println(ksrDaAnVo);
+		Map<String,Object> map =  shiJuanService.submitShiJuan(ksrDaAnVo);
+		return map;
+	}*/
+	
+	@RequestMapping(value="/submitShiJuan")  
+	public Map<String,Object> submitShiJuan(ArrayList<KsrDaAn> KsrDaAn){
+		System.out.println(KsrDaAn);
+		return null;
+	}
 }

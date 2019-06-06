@@ -29,6 +29,14 @@
 				url:"${pageContext.request.contextPath}/shijuan/prodShiJuan",
 				dataType:"json",
 				success : function(data) { 
+					if(data.key==1){
+						alert("题库内题目过少，生成试卷失败！");
+						return ;
+					}
+					if(data.key==0){
+						alert("用户未登录，生成试卷失败！");
+						return ;
+					}
 					document.getElementById('javaTitle').innerText="java软件工程师笔试题("+data.num+"期)";
 					document.getElementById('xingMing').innerText="姓名:"+data.ksrName+"";
 					var xzlist =data.xzList;
@@ -46,18 +54,19 @@
 								'</div>'+
 							'</div>'+
 							'<div class="row">'+
+								'<input type="hidden" name="xzQuestId'+a+'" value="'+xz.questId+'" />'+
 								'<div class="col-md-12">'+
 									'<div class="checkbox">'+
-										'<label><input type="checkbox"  name="xz'+xz.questId+'" value="A">A:'+xz.optionA+'</label>'+
+										'<label><input type="checkbox"  name="xzContent'+a+'" value="A">A:'+xz.optionA+'</label>'+
 									'</div>'+
 									'<div class="checkbox">'+
-										'<label><input type="checkbox" name="xz'+xz.questId+'" value="B">B:'+xz.optionB+'</label>'+
+										'<label><input type="checkbox" name="xzContent'+a+'" value="B">B:'+xz.optionB+'</label>'+
 									'</div>'+
 									'<div class="checkbox">'+
-										'<label><input type="checkbox" name="xz'+xz.questId+'" value="C">C:'+xz.optionC+'</label>'+
+										'<label><input type="checkbox" name="xzContent'+a+'" value="C">C:'+xz.optionC+'</label>'+
 									'</div>'+
 									'<div class="checkbox">'+
-										'<label><input type="checkbox" name="xz'+xz.questId+'" value="D">D:'+xz.optionD+'</label>'+
+										'<label><input type="checkbox" name="xzContent'+a+'" value="D">D:'+xz.optionD+'</label>'+
 									'</div>'+
 								'</div>'+
 							'</div>';
@@ -75,8 +84,9 @@
 										'</div>'+
 									  '</div>'+
 									  '<div class="row">'+
+									  '<input type="hidden" name="wdQuestId'+a+'" value="'+wd.questId+'" />'+
 										'<div class="col-md-6">'+
-											'<textarea class="form-control"  name="wd'+wd.questId+'" rows="3" style="min-width: 90%"></textarea>'+
+											'<textarea class="form-control"  name="wdContent'+a+'" rows="3" style="min-width: 90%"></textarea>'+
 									    '</div>'+
 									  '</div>';
 						wdStr =wdStr+wdStr1;
@@ -92,30 +102,59 @@
 										'</div>'+
 									'</div>'+
 									 '<div class="row">'+
+									 '<input type="hidden" name="dtQuestId'+a+'" value="'+dt.questId+'" />'+
 										'<div class="col-md-6">'+
-											'<textarea class="form-control"  name="dt'+dt.questId+'" rows="3" style="min-width: 90%"></textarea>'+
+											'<textarea class="form-control"  name="dtContent'+a+'" rows="3" style="min-width: 90%"></textarea>'+
 									    '</div>'+
 									  '</div>';
 						dtStr =dtStr+dtStr1;
 					}
-					$("#row_3").after(dtStr);
+					$("#row_3").after(dtStr); 
 				}
 			});		
 		});
 		
 		 function sjtj(){
-			 var params = $("#examSub").serialize(); 
-			 alert(params);
-			/*  $.ajax({
+			 //  https://www.cnblogs.com/free-dom/p/5801866.html
+			 
+			 /* var params = $("#examSub").serializeArray(); 
+			 var param = JSON.stringify(params)
+			 alert(param);  */
+			var params = [{"questId":"1","ksrContent":"2"},{"questId":"11","ksrContent":"22"},{"questId":"111","ksrContent":"222"}];
+				/* params = JSON.stringify(params) ; */
+			/* params=[{"questId":"1","ksrContent":"A"},{"questId":"2","ksrContent":"B"}]; */
+			/* var params={["questId":"1","ksrContent":"A"]}; */ 
+			/* 	params = JSON.stringify(params);
+			*/
+			alert(params);
+			    $.ajax({
 				type:"post",
-				url:"/lzt03/spu/selectProd",
+				url:"/lzt03/shijuan/submitShiJuan",
 				data: params,
 				dataType:"json",
 				success : function(data) {
-				
-			}); */
+					
+				} 
+			}); 
 			
 		}
+		 
+		 $.fn.serializeObject = function()   
+		 {   
+		    var o = {};   
+		    var a = this.serializeArray();   
+		    $.each(a, function() {   
+		        if (o[this.name]) {   
+		            if (!o[this.name].push) {   
+		                o[this.name] = [o[this.name]];   
+		            }   
+		            o[this.name].push(this.value || '');   
+		        } else {   
+		            o[this.name] = this.value || '';   
+		        }   
+		    });   
+		    return o;   
+		 }
 </script>
 </head>
 <body>
@@ -128,7 +167,7 @@
 					</p>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" >
 				<div class="col-md-12">
 					<P align=right>
 						<font size="7" face="微软雅黑" style="color: red; font-style: italic">70分&nbsp&nbsp</font>

@@ -72,6 +72,12 @@ public class KsrDaAn {
 	public void setKsrQuestType(String ksrQuestType) {
 		this.ksrQuestType = ksrQuestType;
 	}
+
+	@Override
+	public String toString() {
+		return "KsrDaAn [kdaId=" + kdaId + ", sjId=" + sjId + ", questId=" + questId + ", ksrContent=" + ksrContent
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime + ", ksrQuestType=" + ksrQuestType + "]";
+	}
     
     
 }
