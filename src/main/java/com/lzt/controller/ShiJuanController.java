@@ -47,6 +47,8 @@ public class ShiJuanController {
 	@RequestMapping(value="/submitShiJuan")  
 	public Map<String,Object> submitShiJuan(ArrayList<KsrDaAn> KsrDaAn){
 		System.out.println(KsrDaAn);
+		System.out.println(KsrDaAn);
+		//ceshi11111
 		return null;
 	}
 }
