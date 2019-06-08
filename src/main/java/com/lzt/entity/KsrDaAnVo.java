@@ -39,6 +39,8 @@ public class KsrDaAnVo {
     private String dtQuestId1;
     
     private String dtContent1;
+    
+    private String sjId;
 
 	public String getXzQuestId1() {
 		return xzQuestId1;
@@ -296,6 +298,14 @@ public class KsrDaAnVo {
 		this.dtContent1 = dtContent1;
 	}
 
+	public String getSjId() {
+		return sjId;
+	}
+
+	public void setSjId(String sjId) {
+		this.sjId = sjId;
+	}
+
 	@Override
 	public String toString() {
 		return "KsrDaAnVo [xzQuestId1=" + xzQuestId1 + ", xzQuestId2=" + xzQuestId2 + ", xzQuestId3=" + xzQuestId3
@@ -308,8 +318,9 @@ public class KsrDaAnVo {
 				+ ", wdQuestId2=" + wdQuestId2 + ", wdQuestId3=" + wdQuestId3 + ", wdQuestId4=" + wdQuestId4
 				+ ", wdQuestId5=" + wdQuestId5 + ", wdContent1=" + wdContent1 + ", wdContent2=" + wdContent2
 				+ ", wdContent3=" + wdContent3 + ", wdContent4=" + wdContent4 + ", wdContent5=" + wdContent5
-				+ ", dtQuestId1=" + dtQuestId1 + ", dtContent1=" + dtContent1 + "]";
+				+ ", dtQuestId1=" + dtQuestId1 + ", dtContent1=" + dtContent1 + ", sjId=" + sjId + "]";
 	}
-
+	
+	
     
 }

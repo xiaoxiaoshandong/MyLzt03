@@ -14,4 +14,6 @@ public interface DaAnMapper {
     int updateByPrimaryKeySelective(DaAn record);
 
     int updateByPrimaryKey(DaAn record);
+
+	String selectDaAnByQuestId(String questId);
 }

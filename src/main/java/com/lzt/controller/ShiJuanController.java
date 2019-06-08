@@ -1,21 +1,23 @@
 package com.lzt.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.lzt.entity.KsrDaAn;
-import com.lzt.entity.KsrDaAnVo;
+import com.lzt.entity.ShiJuan;
+import com.lzt.entity.ShiJuanVo;
+import com.lzt.myexception.TokenException;
+import com.lzt.myutils.CookieUtil;
+import com.lzt.myutils.JwtToken;
 import com.lzt.service.ShiJuanService;
 @RestController  
 @RequestMapping("/shijuan") 
@@ -33,22 +35,42 @@ public class ShiJuanController {
 	@RequestMapping(value="/prodShiJuan")  
 	public HashMap<String,Object> prodShiJuan(HttpServletRequest request){
 		HashMap<String,Object> map = shiJuanService.prodShiJuan(request);
-		System.out.println(map);
 		return map;
 	}
 	
-/*	@RequestMapping(value="/submitShiJuan")  
-	public Map<String,Object> submitShiJuan(KsrDaAnVo ksrDaAnVo){
-		System.out.println(ksrDaAnVo);
-		Map<String,Object> map =  shiJuanService.submitShiJuan(ksrDaAnVo);
-		return map;
+	
+	@RequestMapping(value="/selByKsrSjNum")  
+	public List<ShiJuan> selByKsrSjNum(HttpServletRequest request){
+		Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
+		Cookie tokenCookie = cookieMap.get("login_token_id");
+		//获取用户ID
+		String token = tokenCookie.getValue();
+		Integer userId=null;
+		try {
+			userId = JwtToken.getAppUID(token);
+		} catch (TokenException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<ShiJuan> list = shiJuanService.selByKsrSjNum(userId);
+		return list;
+	}
+	
+	@RequestMapping(value="/selBysjId")  
+	public ModelAndView selBysjId(String sjId){
+		ModelAndView mav =new ModelAndView();
+		List<ShiJuanVo> sjv = shiJuanService.selBysjId(sjId);
+		mav.setViewName("forward:/jsp/examSel.jsp");
+		mav.addObject("sjv", sjv);
+		System.out.println(sjv);
+		return mav;
+	}
+	
+	/*@RequestMapping(value="/selBysjId")  
+	public List<ShiJuanVo> selBysjId(String sjId){
+		ModelAndView mav =new ModelAndView();
+		List<ShiJuanVo> sjv = shiJuanService.selBysjId(sjId);
+		return sjv;
 	}*/
 	
-	@RequestMapping(value="/submitShiJuan")  
-	public Map<String,Object> submitShiJuan(ArrayList<KsrDaAn> KsrDaAn){
-		System.out.println(KsrDaAn);
-		System.out.println(KsrDaAn);
-		//ceshi11111
-		return null;
-	}
 }

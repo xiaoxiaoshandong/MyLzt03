@@ -9,7 +9,7 @@ public class ShiJuan {
 
     private String ksrQuestIds;
 
-    private String ksrSjNum;
+    private int ksrSjNum;
 
     private String ksrTotal;
 
@@ -17,59 +17,67 @@ public class ShiJuan {
 
     private Date updateTime;
 
-    public String getSjId() {
-        return sjId;
-    }
+	public String getSjId() {
+		return sjId;
+	}
 
-    public void setSjId(String sjId) {
-        this.sjId = sjId == null ? null : sjId.trim();
-    }
+	public void setSjId(String sjId) {
+		this.sjId = sjId;
+	}
 
-    public String getksrId() {
-        return ksrId;
-    }
+	public String getKsrId() {
+		return ksrId;
+	}
 
-    public void setksrId(String ksrId) {
-        this.ksrId = ksrId == null ? null : ksrId.trim();
-    }
+	public void setKsrId(String ksrId) {
+		this.ksrId = ksrId;
+	}
 
-    public String getKsrQuestIds() {
-        return ksrQuestIds;
-    }
+	public String getKsrQuestIds() {
+		return ksrQuestIds;
+	}
 
-    public void setKsrQuestIds(String ksrQuestIds) {
-        this.ksrQuestIds = ksrQuestIds == null ? null : ksrQuestIds.trim();
-    }
+	public void setKsrQuestIds(String ksrQuestIds) {
+		this.ksrQuestIds = ksrQuestIds;
+	}
 
-    public String getKsrSjNum() {
-        return ksrSjNum;
-    }
+	public int getKsrSjNum() {
+		return ksrSjNum;
+	}
 
-    public void setKsrSjNum(String ksrSjNum) {
-        this.ksrSjNum = ksrSjNum == null ? null : ksrSjNum.trim();
-    }
+	public void setKsrSjNum(int ksrSjNum) {
+		this.ksrSjNum = ksrSjNum;
+	}
 
-    public String getKsrTotal() {
-        return ksrTotal;
-    }
+	public String getKsrTotal() {
+		return ksrTotal;
+	}
 
-    public void setKsrTotal(String ksrTotal) {
-        this.ksrTotal = ksrTotal == null ? null : ksrTotal.trim();
-    }
+	public void setKsrTotal(String ksrTotal) {
+		this.ksrTotal = ksrTotal;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	@Override
+	public String toString() {
+		return "ShiJuan [sjId=" + sjId + ", ksrId=" + ksrId + ", ksrQuestIds=" + ksrQuestIds + ", ksrSjNum=" + ksrSjNum
+				+ ", ksrTotal=" + ksrTotal + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+	}
+
+
 }

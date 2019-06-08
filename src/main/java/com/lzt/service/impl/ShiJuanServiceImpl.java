@@ -1,23 +1,17 @@
 package com.lzt.service.impl;
-
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.lzt.dao.ShiJuanMapper;
 import com.lzt.dao.UserTMapper;
 import com.lzt.dao.WenTiMapper;
-import com.lzt.entity.KsrDaAn;
-import com.lzt.entity.KsrDaAnVo;
+import com.lzt.entity.ShiJuan;
+import com.lzt.entity.ShiJuanVo;
 import com.lzt.entity.UserT;
 import com.lzt.entity.WenTi;
 import com.lzt.myexception.TokenException;
@@ -26,7 +20,6 @@ import com.lzt.myutils.DateUtil;
 import com.lzt.myutils.JwtToken;
 import com.lzt.myutils.MyId;
 import com.lzt.service.ShiJuanService;
-import com.lzt.service.UserService;
 @Service
 public class ShiJuanServiceImpl implements ShiJuanService {
 	
@@ -40,6 +33,7 @@ public class ShiJuanServiceImpl implements ShiJuanService {
 	public HashMap<String,Object> prodShiJuan(HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		HashMap<String,Object> map = new HashMap<String,Object>();
+		String sjId = MyId.getMyId();
 		// 获取用户名称
 				Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
 				Cookie tokenCookie = cookieMap.get("login_token_id");
@@ -83,25 +77,62 @@ public class ShiJuanServiceImpl implements ShiJuanService {
 				map.put("wdList", wdList);
 				map.put("dtList", dtList);
 				map.put("num", num);
+				map.put("sjId", sjId);
+				// 保存试卷
+				ShiJuan shiJuan = new ShiJuan();
+				shiJuan.setKsrId(userId+"");
+				Date date = DateUtil.getTimeFormatDate("yyyy-MM-dd HH:mm:ss");
+				shiJuan.setCreateTime(date);
+				String str ="";
+				for(int i=0;i<xzList.size();i++){
+					WenTi wenTi = xzList.get(i);
+					String questId = wenTi.getQuestId();
+					if(i==xzList.size()-1){
+						str = str+questId;
+					}else{
+						str = str+questId+",";
+					}
+				}
+				for(int i=0;i<wdList.size();i++){
+					WenTi wenTi = wdList.get(i);
+					String questId = wenTi.getQuestId();
+					if(i==wdList.size()-1){
+						str = str+questId;
+					}else{
+						str = str+questId+",";
+					}
+				}
+				for(int i=0;i<dtList.size();i++){
+					WenTi wenTi = dtList.get(i);
+					String questId = wenTi.getQuestId();
+					if(i==dtList.size()-1){
+						str = str+questId;
+					}else{
+						str = str+questId+",";
+					}
+				}
+				shiJuan.setKsrQuestIds(str);
+				shiJuan.setKsrSjNum(num);
+				shiJuan.setSjId(sjId);
+				shiJuan.setUpdateTime(date);
+				int i = shiJuanMapper.insertSelective(shiJuan);
+				if(i==0){
+					 map.put("key", "0");
+					 return map;
+				}
 		return map;
 	}
 
-	public Map<String, Object> submitShiJuan(KsrDaAnVo ksrDaAnVo) {
+	public List<ShiJuan> selByKsrSjNum(Integer userId) {
 		// TODO Auto-generated method stub
-		List<KsrDaAnVo> list = new ArrayList<KsrDaAnVo>();
-		String sjId = MyId.getMyId();
-		KsrDaAn daAn = new KsrDaAn();
-		daAn.setKdaId(MyId.getMyId());
-		daAn.setSjId(sjId);
-		daAn.setQuestId(ksrDaAnVo.getXzQuestId1());
-		daAn.setKsrContent(ksrDaAnVo.getXzContent1());
-		Date date = DateUtil.getTimeFormatDate("yyyy-MM-dd HH:mm:ss");
-		daAn.setCreateTime(date);
-		daAn.setUpdateTime(date);
-		daAn.setKsrQuestType("1");
-		return null;
+		List<ShiJuan> list = shiJuanMapper.selByKsrSjNum(userId+"");
+		return list;
 	}
-	
-	
-	
+
+	public List<ShiJuanVo> selBysjId(String sjId) {
+		// TODO Auto-generated method stub
+		List<ShiJuanVo> sjv = shiJuanMapper.selBysjId(sjId);
+		return sjv;
+	}
+
 }

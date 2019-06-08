@@ -18,8 +18,10 @@
 	src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.min.js"></script>
 <style>
 .row {
-	/* background-color: red; */
 	margin-bottom: 10px;
+}
+.col-md1{
+	width: 10%;
 }
 </style>
 <script type="text/javascript">
@@ -39,6 +41,7 @@
 					}
 					document.getElementById('javaTitle').innerText="java软件工程师笔试题("+data.num+"期)";
 					document.getElementById('xingMing').innerText="姓名:"+data.ksrName+"";
+					document.getElementById('shiJuanId').value=data.sjId;
 					var xzlist =data.xzList;
 					var wdlist =data.wdList;
 					var dtlist =data.dtList;
@@ -48,28 +51,28 @@
 					for(var i=0;i<xzlist.length;i++){
 						var xz = xzlist[i];
 						var a = i+1;
-						var xzStr1 ='<div class="row">'+
+						var xzStr1 ='<div class="row" >'+
 										'<div class="col-md-12">'+
-									'<h5>'+a+'：'+xz.questContent+'</h5>'+
-								'</div>'+
-							'</div>'+
-							'<div class="row">'+
-								'<input type="hidden" name="xzQuestId'+a+'" value="'+xz.questId+'" />'+
-								'<div class="col-md-12">'+
-									'<div class="checkbox">'+
-										'<label><input type="checkbox"  name="xzContent'+a+'" value="A">A:'+xz.optionA+'</label>'+
+											'<h5>'+a+'：'+xz.questContent+'</h5>'+
+										'</div>'+
 									'</div>'+
-									'<div class="checkbox">'+
-										'<label><input type="checkbox" name="xzContent'+a+'" value="B">B:'+xz.optionB+'</label>'+
-									'</div>'+
-									'<div class="checkbox">'+
-										'<label><input type="checkbox" name="xzContent'+a+'" value="C">C:'+xz.optionC+'</label>'+
-									'</div>'+
-									'<div class="checkbox">'+
-										'<label><input type="checkbox" name="xzContent'+a+'" value="D">D:'+xz.optionD+'</label>'+
-									'</div>'+
-								'</div>'+
-							'</div>';
+									'<div class="row" id="'+xz.questId+'">'+
+										'<input type="hidden" name="xzQuestId'+a+'" value="'+xz.questId+'" />'+
+										'<div class="col-md-12">'+
+											'<div class="checkbox">'+
+												'<label><input type="checkbox"  name="xzContent'+a+'" value="A">A:'+xz.optionA+'</label>'+
+											'</div>'+
+											'<div class="checkbox">'+
+												'<label><input type="checkbox" name="xzContent'+a+'" value="B">B:'+xz.optionB+'</label>'+
+											'</div>'+
+											'<div class="checkbox">'+
+												'<label><input type="checkbox" name="xzContent'+a+'" value="C">C:'+xz.optionC+'</label>'+
+											'</div>'+
+											'<div class="checkbox">'+
+												'<label><input type="checkbox" name="xzContent'+a+'" value="D">D:'+xz.optionD+'</label>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
 							xzStr =xzStr+xzStr1;
 					}
 					$("#row_1").after(xzStr);
@@ -115,50 +118,50 @@
 		});
 		
 		 function sjtj(){
-			 //  https://www.cnblogs.com/free-dom/p/5801866.html
-			 
-			 /* var params = $("#examSub").serializeArray(); 
-			 var param = JSON.stringify(params)
-			 alert(param);  */
-			var params = [{"questId":"1","ksrContent":"2"},{"questId":"11","ksrContent":"22"},{"questId":"111","ksrContent":"222"}];
-				/* params = JSON.stringify(params) ; */
-			/* params=[{"questId":"1","ksrContent":"A"},{"questId":"2","ksrContent":"B"}]; */
-			/* var params={["questId":"1","ksrContent":"A"]}; */ 
-			/* 	params = JSON.stringify(params);
-			*/
-			alert(params);
+			var sjId = document.getElementById('shiJuanId').value;
+			var params = $("#examSub").serialize(); 
+			params = params +"&"+"sjId="+sjId+"";
 			    $.ajax({
 				type:"post",
-				url:"/lzt03/shijuan/submitShiJuan",
+				url:"/lzt03/ksrdaan/submitDaAn",
 				data: params,
 				dataType:"json",
 				success : function(data) {
+					document.getElementById('score').innerText = data.score+"分";
+					var list= data.list;
+					for(var i=0;i<list.length;i++){
+						var fvs = list[i];
+						var questId = fvs.questId;
+						var ksrContent = fvs.ksrContent;
+						var ansContent = fvs.ansContent;
+						var str ='<div class="row" id=row'+i+'>'+
+									'<div class="col-md-1" style="background-color: #00FF99;margin-left: 2%;height:30px;line-height:30px;">'+
+										'<h6 id="'+i+'_1"></h6>'+
+									'</div>'+
+									'<div class="col-md-1" style="background-color:red;margin-left: 1px;height:30px;line-height:30px;">'+
+										'<h6 id="'+i+'_2"></h6>'+
+									'</div>'+
+								  '</div>';
+								  if($("#row"+i+"").length==0){
+									  $("#"+questId+"").after(str);
+										$("#"+i+"_1").text("正确答案:"+ansContent);
+										$("#"+i+"_2").text("你的答案:"+ksrContent);
+								  }
 					
+						
+					}
 				} 
 			}); 
 			
 		}
-		 
-		 $.fn.serializeObject = function()   
-		 {   
-		    var o = {};   
-		    var a = this.serializeArray();   
-		    $.each(a, function() {   
-		        if (o[this.name]) {   
-		            if (!o[this.name].push) {   
-		                o[this.name] = [o[this.name]];   
-		            }   
-		            o[this.name].push(this.value || '');   
-		        } else {   
-		            o[this.name] = this.value || '';   
-		        }   
-		    });   
-		    return o;   
+		  function sxtj(){
+			 window.location.reload();
 		 }
 </script>
 </head>
 <body>
 	<div class="container-fluid">
+		<input type="text" id="shiJuanId" name="sjId"/>
 		<form id="examSub" method="post" > 
 			<div class="row" style="margin-top: 20px">
 				<div class="col-md-12">
@@ -170,7 +173,7 @@
 			<div class="row" >
 				<div class="col-md-12">
 					<P align=right>
-						<font size="7" face="微软雅黑" style="color: red; font-style: italic">70分&nbsp&nbsp</font>
+						<font size="7" face="微软雅黑" style="color: red; font-style: italic" id="score"></font>
 					</P>
 				</div>
 			</div>
@@ -187,7 +190,6 @@
 				</div>
 			</div>
 			
-	
 			<div class="row" id="row_2">
 				<div class="col-md-12">
 					<h4>二: 问答题 (8分*5 固定每题8分)</h4>
@@ -201,8 +203,11 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-1">
 					<button type="button" class="btn btn-info active" onclick="sjtj();">提交答案</button> 
+				</div>
+				<div class="col-md-1">
+					<button type="button" class="btn btn-info active" onclick="sxtj();">刷新题目</button> 
 				</div>
 			</div>
 		</form>

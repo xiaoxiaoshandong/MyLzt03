@@ -81,6 +81,24 @@
       </if>
     </trim>
   </insert>
+  
+  	<insert id="batchInsert" parameterType="java.util.List">
+		insert into ksr_da_an (kda_id, sj_id, quest_id, 
+        ksr_content, create_time, update_time, ksr_quest_type) values
+		<foreach collection="list" item="item" index="index"
+			  separator="union all">
+			(	
+				#{item.kdaId},
+				#{item.sjId},
+				#{item.questId},
+				#{item.ksrContent},
+				#{item.createTime},
+				#{item.updateTime},
+				#{item.ksrQuestType}
+			)
+		</foreach>
+	</insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.KsrDaAn">
     update ksr_da_an
     <set>

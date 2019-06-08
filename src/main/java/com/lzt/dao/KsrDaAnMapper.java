@@ -1,5 +1,7 @@
 package com.lzt.dao;
 
+import java.util.List;
+
 import com.lzt.entity.KsrDaAn;
 
 public interface KsrDaAnMapper {
@@ -14,4 +16,6 @@ public interface KsrDaAnMapper {
     int updateByPrimaryKeySelective(KsrDaAn record);
 
     int updateByPrimaryKey(KsrDaAn record);
+    
+    Integer batchInsert(List<KsrDaAn> list);
 }

@@ -1,5 +1,9 @@
 package com.lzt.service;
 
-public interface KsrDaAnService {
+import com.lzt.entity.FenShuVo;
+import com.lzt.entity.KsrDaAnVo;
 
+public interface KsrDaAnService {
+	
+	FenShuVo submitDaAn(KsrDaAnVo ksrDaAnVo);
 }

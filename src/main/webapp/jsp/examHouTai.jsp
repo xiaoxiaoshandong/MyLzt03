@@ -58,7 +58,17 @@
 				closable : true
 			});
 		};
-	
+		function examSel(){
+			var content = '<iframe src="/lzt03/jsp/examSel.jsp" height="100%"  width="100%" '
+				+ ' frameborder="1"  scrolling="0" ></iframe>';
+		//添加一个新的选项卡
+		$("#mytabs").tabs('add', {
+			title : '试卷查询',
+			content : content,
+			closable : true
+		});
+			
+		}
 </script>
 </head>
 <body class="easyui-layout">
