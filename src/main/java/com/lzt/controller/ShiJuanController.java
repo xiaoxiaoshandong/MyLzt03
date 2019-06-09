@@ -62,15 +62,6 @@ public class ShiJuanController {
 		List<ShiJuanVo> sjv = shiJuanService.selBysjId(sjId);
 		mav.setViewName("forward:/jsp/examSel.jsp");
 		mav.addObject("sjv", sjv);
-		System.out.println(sjv);
 		return mav;
 	}
-	
-	/*@RequestMapping(value="/selBysjId")  
-	public List<ShiJuanVo> selBysjId(String sjId){
-		ModelAndView mav =new ModelAndView();
-		List<ShiJuanVo> sjv = shiJuanService.selBysjId(sjId);
-		return sjv;
-	}*/
-	
 }

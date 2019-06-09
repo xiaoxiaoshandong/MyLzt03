@@ -53,8 +53,6 @@ public class ShuxingController {
 		if(shuxing.getErjiId()==null){
 			return null;
 		}
-		System.out.println("shuxing:"+shuxing);
-		System.out.println("shuxing:"+shuxing);
 		List<Shuxing> sx  = shuxingService.selectShuxing(shuxing);
 		Gson gson = new Gson();
 		String json = gson.toJson(sx);

@@ -9,9 +9,10 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="ksr_quest_type" jdbcType="CHAR" property="ksrQuestType" />
+    <result column="shun_xu" jdbcType="INTEGER" property="shunXu" />
   </resultMap>
   <sql id="Base_Column_List">
-    kda_id, sj_id, quest_id, ksr_content, create_time, update_time, ksr_quest_type
+    kda_id, sj_id, quest_id, ksr_content, create_time, update_time, ksr_quest_type,shun_xu
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -25,11 +26,11 @@
   </delete>
   <insert id="insert" parameterType="com.lzt.entity.KsrDaAn">
     insert into ksr_da_an (kda_id, sj_id, quest_id, 
-      ksr_content, create_time, update_time, ksr_quest_type
+      ksr_content, create_time, update_time, ksr_quest_type,shun_xu
       )
     values (#{kdaId,jdbcType=VARCHAR}, #{sjId,jdbcType=VARCHAR}, #{questId,jdbcType=VARCHAR}, 
       #{ksrContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      , #{ksrQuestType,jdbcType=CHAR}
+      , #{ksrQuestType,jdbcType=CHAR}, #{shunXu,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lzt.entity.KsrDaAn">
@@ -56,6 +57,9 @@
        <if test="updateTime != null">
         ksr_quest_type,
       </if>
+      <if test="shunXu != 0">
+        shun_xu,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="kdaId != null">
@@ -79,14 +83,17 @@
       <if test="updateTime != null">
         #{ksrQuestType,jdbcType=CHAR},
       </if>
+       <if test="shunXu != 0">
+        #{shunXu,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   
   	<insert id="batchInsert" parameterType="java.util.List">
 		insert into ksr_da_an (kda_id, sj_id, quest_id, 
-        ksr_content, create_time, update_time, ksr_quest_type) values
+        ksr_content, create_time, update_time, ksr_quest_type,shun_xu) values
 		<foreach collection="list" item="item" index="index"
-			  separator="union all">
+			  separator=",">
 			(	
 				#{item.kdaId},
 				#{item.sjId},
@@ -94,7 +101,8 @@
 				#{item.ksrContent},
 				#{item.createTime},
 				#{item.updateTime},
-				#{item.ksrQuestType}
+				#{item.ksrQuestType},
+				#{item.shunXu}
 			)
 		</foreach>
 	</insert>
@@ -120,6 +128,9 @@
        <if test="updateTime != null">
         ksr_quest_type = #{ksrQuestType,jdbcType=CHAR},
       </if>
+       <if test="shunXu != null">
+        shun_xu = #{shunXu,jdbcType=INTEGER},
+      </if>
     </set>
     where kda_id = #{kdaId,jdbcType=VARCHAR}
   </update>
@@ -130,7 +141,8 @@
       ksr_content = #{ksrContent,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      ksr_quest_type = #{ksrQuestType,jdbcType=CHAR}
+      ksr_quest_type = #{ksrQuestType,jdbcType=CHAR},
+      shun_xu = #{shunXu,jdbcType=INTEGER}
     where kda_id = #{kdaId,jdbcType=VARCHAR}
   </update>
 </mapper>

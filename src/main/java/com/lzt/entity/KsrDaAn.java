@@ -16,6 +16,8 @@ public class KsrDaAn {
     private Date updateTime;
     
     private String ksrQuestType;
+    
+    private int shunXu;
 
     public String getKdaId() {
         return kdaId;
@@ -73,11 +75,21 @@ public class KsrDaAn {
 		this.ksrQuestType = ksrQuestType;
 	}
 
+	
+	public int getShunXu() {
+		return shunXu;
+	}
+
+	public void setShunXu(int shunXu) {
+		this.shunXu = shunXu;
+	}
+
 	@Override
 	public String toString() {
 		return "KsrDaAn [kdaId=" + kdaId + ", sjId=" + sjId + ", questId=" + questId + ", ksrContent=" + ksrContent
-				+ ", createTime=" + createTime + ", updateTime=" + updateTime + ", ksrQuestType=" + ksrQuestType + "]";
+				+ ", createTime=" + createTime + ", updateTime=" + updateTime + ", ksrQuestType=" + ksrQuestType
+				+ ", shunXu=" + shunXu + "]";
 	}
-    
+
     
 }

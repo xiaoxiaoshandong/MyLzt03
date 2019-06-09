@@ -34,7 +34,7 @@
 		resultMap="ShiJuanMap">
 		 SELECT kda.sj_id,kda.quest_id,kda.ksr_content,da.ans_content,wt.quest_content,wt.option_a,wt.option_b,wt.option_c,wt.option_d,sj.ksr_sj_num,sj.ksr_total
 		 FROM ksr_da_an kda INNER JOIN wen_ti wt ON kda.quest_id=wt.quest_id INNER JOIN shi_juan sj ON sj.sj_id= kda.sj_id  INNER JOIN da_an da ON da.quest_id = kda.quest_id
-		 WHERE kda.sj_id=#{sjId};
+		 WHERE kda.sj_id=#{sjId} ORDER BY kda.shun_xu;
 	</select>
 	
 	<select id="selectByPrimaryKey" parameterType="java.lang.String"

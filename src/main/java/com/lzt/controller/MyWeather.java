@@ -18,7 +18,6 @@ public class MyWeather {
         WeatherWebServiceSoapStub service = (WeatherWebServiceSoapStub) locator
                 .getPort(WeatherWebServiceSoapStub.class);
         invokeGetSupportProvince(service);
-        System.out.println("...................");
         invokeGetSupportCity(service);
         invokeGetWeatherByOneCity(service);
     }

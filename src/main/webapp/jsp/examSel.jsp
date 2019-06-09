@@ -65,7 +65,7 @@
 			<div class="row" style="margin-top: 20px">
 				<div class="col-md-12">
 					<p class="text-center">
-						<font id="javaTitle" size="5" face="微软雅黑" class="text-center"></font>
+						<font id="javaTitle" size="5" face="微软雅黑" class="text-center">java软件工程师笔试题(${sjv[0].ksrSjNum})期</font>
 					</p>
 				</div>
 			</div>

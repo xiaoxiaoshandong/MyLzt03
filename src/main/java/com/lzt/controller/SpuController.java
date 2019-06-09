@@ -111,7 +111,6 @@ public class SpuController {
 		// 商品总数
 		int total =0 ;
 			int count = spuService.selectProdCount(spu);
-			System.out.println("count:"+count);
 			if(count%12 !=0){
 				total = count/12+1;
 			}else{
@@ -126,9 +125,7 @@ public class SpuController {
 			
 		map1.put("sv", sv);
 		map1.put("prodVos", prodVos);
-		System.out.println("prodVos"+prodVos);
 		map1.put("prodVos1", prodVos1);
-		/*System.out.println("map1:"+map1);*/
 		return map1;
 	}
 	
@@ -142,7 +139,6 @@ public class SpuController {
 			request.setAttribute("erjiName", name);
 		}
 		List<ProdVo> prodVos = spuService.selectProdBySkuId(map);
-		System.out.println(prodVos);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("forward:/jsp/oneProdShow.jsp");
         //封装要显示到视图的数据

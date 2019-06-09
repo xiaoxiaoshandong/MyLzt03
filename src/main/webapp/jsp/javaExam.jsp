@@ -161,7 +161,7 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<input type="text" id="shiJuanId" name="sjId"/>
+		<input type="hidden" id="shiJuanId" />
 		<form id="examSub" method="post" > 
 			<div class="row" style="margin-top: 20px">
 				<div class="col-md-12">
