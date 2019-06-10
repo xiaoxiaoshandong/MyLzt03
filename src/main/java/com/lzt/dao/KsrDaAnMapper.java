@@ -2,6 +2,7 @@ package com.lzt.dao;
 
 import java.util.List;
 
+import com.lzt.entity.FenShuVo;
 import com.lzt.entity.KsrDaAn;
 
 public interface KsrDaAnMapper {
@@ -18,4 +19,6 @@ public interface KsrDaAnMapper {
     int updateByPrimaryKey(KsrDaAn record);
     
     Integer batchInsert(List<KsrDaAn> list);
+
+    List<KsrDaAn> selectBySjId(String sjId);
 }

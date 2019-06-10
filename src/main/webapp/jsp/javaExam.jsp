@@ -127,6 +127,10 @@
 				data: params,
 				dataType:"json",
 				success : function(data) {
+					if(data == null){
+						alert("已经提交过试卷，请勿再次提交！");
+						return;
+					}
 					document.getElementById('score').innerText = data.score+"分";
 					var list= data.list;
 					for(var i=0;i<list.length;i++){

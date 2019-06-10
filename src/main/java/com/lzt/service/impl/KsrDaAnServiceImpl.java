@@ -34,6 +34,13 @@ public class KsrDaAnServiceImpl implements KsrDaAnService {
 		// TODO Auto-generated method stub
 		List<KsrDaAn> list = new ArrayList<KsrDaAn>();
 		String sjId = ksrDaAnVo.getSjId();
+		
+		// 判断是否提交过试卷
+		List<KsrDaAn> sjIdNum = ksrDaAnMapper.selectBySjId(sjId);
+				if(sjIdNum.size() != 0){
+					return null;
+				}
+		
 		Map<String,Object> mapXz1 = makeKDA(sjId,ksrDaAnVo.getXzQuestId1(),ksrDaAnVo.getXzContent1(),"1",1);
 		KsrDaAn xz1 = (KsrDaAn)mapXz1.get("kda");
 		FenShuVo xzFsv1= (FenShuVo)mapXz1.get("fsv");

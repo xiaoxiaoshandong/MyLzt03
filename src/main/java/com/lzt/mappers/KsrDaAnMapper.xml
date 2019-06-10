@@ -20,6 +20,11 @@
     from ksr_da_an
     where kda_id = #{kdaId,jdbcType=VARCHAR}
   </select>
+  
+   <select id="selectBySjId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List" /> from ksr_da_an where sj_id = #{sjId}
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from ksr_da_an
     where kda_id = #{kdaId,jdbcType=VARCHAR}
