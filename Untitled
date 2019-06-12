@@ -1,1 +1,14 @@
 https://www.cnblogs.com/lamp01/p/6576432.html
+
+购物商城权限
+Java面试题权限
+商城管理员权限
+java面试题管理员权限
+
+用户		角色			权限
+		卖家			商城模块
+		考生			Java面试题
+		购物管理员		购物商城后台
+		Java面试题管理员	Java面试题后台
+		后台管理员
+		root		
