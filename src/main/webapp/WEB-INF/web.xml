@@ -10,11 +10,14 @@
         <param-value>classpath:spring-mybatis.xml</param-value>  
     </context-param> -->
     
+    <!--容器创建时会创建 ServletContext(上下文),这个WEB项目所有部分都将共享这个上下文.把下面配置信息以键值对方式放入 ServletContext，供所有Servlet使用 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
     
+    <!-- listener监听器：当WEB服务器启动时创建，只创建一次。做一些初始化的内容。比如数据库连接池初始化。ContextLoaderListener：当容器启动时，自动装配 
+	applicationContext.xml的配置信息。 -->
     <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
@@ -58,7 +61,6 @@
     </servlet>  
     <servlet-mapping>  
         <servlet-name>SpringMVC</servlet-name>  
-        <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->  
         <url-pattern>/</url-pattern>  
     </servlet-mapping>
     

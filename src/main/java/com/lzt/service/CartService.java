@@ -8,4 +8,6 @@ public interface CartService {
 
 	public int insertSelective(Cart cart2);
 
+	public void testSF() throws Exception;
+
 }

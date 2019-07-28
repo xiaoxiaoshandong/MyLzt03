@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -103,6 +104,17 @@ public class CartProdServiceImpl implements CartProdService {
 		// TODO Auto-generated method stub
 		Integer i = cartProdMapper.cleanGwc(userId);
 		return i;
+	}
+	
+	@Transactional(propagation=Propagation.REQUIRES_NEW,rollbackFor=Exception.class)
+	public void testSF2() throws Exception {
+		// TODO Auto-generated method stub
+		CartProd cartProd = new CartProd();
+		cartProd.setCpId(MyId.getMyId());
+		cartProd.setCartId(MyId.getMyId());
+		cartProd.setNum(99);
+		cartProdMapper.insertSelective(cartProd);
+		throw new Exception();
 	}
 	
 }

@@ -423,5 +423,15 @@ public class CartController {
 		mav = gwcDBToMAV(tokenCookie,"2" );
 		return mav;
 	}
+	
+	@RequestMapping(value="/testSF")  
+	public void testSF(){
+		try {
+			cartService.testSF();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 

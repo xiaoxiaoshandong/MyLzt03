@@ -23,5 +23,7 @@ public interface CartProdService {
 
 
 	public Integer cleanGwc(String userId);
+	
+	public void testSF2()throws Exception;
 
 }

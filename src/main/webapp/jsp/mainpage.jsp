@@ -59,6 +59,10 @@ float: left;
 		window.location.href="${pageContext.request.contextPath}/jsp/javaExam.jsp";
 		return false;
 	};
+	function notePadHouTai(){
+		window.location.href="${pageContext.request.contextPath}/jsp/notePadHouTai.jsp";
+		return false;
+	};
 </script>
 </head>
 <body>
@@ -78,7 +82,9 @@ float: left;
 	<div class="a0">
 	<button class="button0" onclick="examHouTai();" >java面试题系统后台</button>
 	</div>
-	<div class="a0">待开发中。。。</div>
+	<div class="a0">
+	<button class="button0" onclick="notePadHouTai();" >记事本</button>
+	</div>
 	<div class="a0">待开发中。。。</div>
 	<div class="a0">待开发中。。。</div>
 	<div class="a0">待开发中。。。</div>
