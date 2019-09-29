@@ -13,7 +13,11 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
             <property name="locations" value="classpath:jdbc.properties"/>
     </bean>
-
+	<!-- 单机版solr客户端 -->
+  <!--   <bean id="solrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+        构造方法
+        <constructor-arg name="baseURL" value="http://localhost:8081/solr/collection1"/>
+    </bean>  -->
     <!-- 2.扫描的包路径，这里不扫描被@Controller注解的类 --><!--使用<context:component-scan/> 可以不在配置<context:annotation-config/> -->
     <context:component-scan base-package="com.lzt">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>

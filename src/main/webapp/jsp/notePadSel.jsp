@@ -76,13 +76,13 @@
 			},{
 				 field : 'npTitle',  
 				 title : "记事本题目",  
-				 width : 100,  
+				 width : 150,  
 				 align:'center', 
 				 sortable : true,
 			},{
 				 field : 'npContent',  
 				 title : "记事本内容",  
-				 width : 100,  
+				 width : 350,  
 				 align:'center', 
 				 sortable : true
 			},{

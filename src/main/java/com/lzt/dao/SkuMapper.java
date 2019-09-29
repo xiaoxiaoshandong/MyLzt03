@@ -1,5 +1,7 @@
 package com.lzt.dao;
 
+import java.util.List;
+
 import com.lzt.entity.Sku;
 
 public interface SkuMapper {
@@ -14,4 +16,6 @@ public interface SkuMapper {
     int updateByPrimaryKeySelective(Sku record);
 
     int updateByPrimaryKey(Sku record);
+
+	List<Sku> selectSkuAll();
 }
