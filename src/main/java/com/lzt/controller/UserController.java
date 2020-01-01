@@ -32,9 +32,9 @@ public class UserController {
 	private static Logger log=LoggerFactory.getLogger(UserController.class);
 	
 	/**
-	 * 用户登录
-	 * @param user 用户信息
-	 * @return 0:账号或密码错误 1：登录成功 -1:cookie商品入库失败
+	 * 鐢ㄦ埛鐧诲綍
+	 * @param user 鐢ㄦ埛淇℃伅
+	 * @return 0:璐﹀彿鎴栧瘑鐮侀敊璇� 1锛氱櫥褰曟垚鍔� -1:cookie鍟嗗搧鍏ュ簱澶辫触
 	 */
 	@RequestMapping(value="/login")  
     public String login(UserT user,HttpServletResponse response,HttpServletRequest request){ 
@@ -48,17 +48,17 @@ public class UserController {
 			return "0";
 		}
 		Integer userId = us.getId();
-		/*登录成功 生成token*/
+		/*鐧诲綍鎴愬姛 鐢熸垚token*/
 		try {
 			 token = JwtToken.createToken(userId.longValue());
 			 Cookie tokenCookie = new Cookie("login_token_id", token);
-			 // 关闭浏览器就失效
+			 // 鍏抽棴娴忚鍣ㄥ氨澶辨晥
 			 tokenCookie.setMaxAge(-1);
-			 //可在同一应用服务器内共享cookie
+			 //鍙湪鍚屼竴搴旂敤鏈嶅姟鍣ㄥ唴鍏变韩cookie
 			 tokenCookie.setPath("/");
 		     response.addCookie(tokenCookie);
 		     
-		     // 判断cookie中是否有商品信息  有：添加进数据库 没有：不操作
+		     // 鍒ゆ柇cookie涓槸鍚︽湁鍟嗗搧淇℃伅  鏈夛細娣诲姞杩涙暟鎹簱 娌℃湁锛氫笉鎿嶄綔
 		     Map<String, Cookie> cookieMap = CookieUtil.readCookieMap(request);
 		     Cookie spCoodie = cookieMap.get("gwcId");
 		     if(spCoodie != null){
@@ -67,7 +67,7 @@ public class UserController {
 		    	  if(acstdb ==-1){
 		    		  return "-1";
 		    	  }else{
-		    		  // 清空cookie中 购物车商品信息
+		    		  // 娓呯┖cookie涓� 璐墿杞﹀晢鍝佷俊鎭�
 		    		  Cookie cookie = new Cookie("gwcId","");
 		    		  cookie.setMaxAge(0);
 		    		  cookie.setPath("/");
@@ -84,7 +84,7 @@ public class UserController {
 	/**
 	 * 
 	 * @param user
-	 * @return 0:注册失败
+	 * @return 0:娉ㄥ唽澶辫触
 	 */
 	@RequestMapping(value="/registered")
 	public String registered(UserT user){
@@ -104,4 +104,16 @@ public class UserController {
 		}
 		return "0";
 	}
+	
+	@RequestMapping(value="/getUser")
+	public UserT getUser(){
+		UserT userT = new UserT();
+		userT.setAge(18);
+		userT.setaihao("游泳");
+		userT.setId(12313);
+		userT.setminzu("汉");
+		return userT;
+		
+	}
+		
 }
