@@ -1,7 +1,5 @@
 package com.lzt.controller;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lzt.entity.DataScript;
 import com.lzt.service.DataScriptService;
-import com.mysql.fabric.xmlrpc.base.Data;
 
 @RestController  
 @RequestMapping("/dataScript") 
@@ -30,9 +27,19 @@ public class DataScriptController {
 	@RequestMapping(value="/createData")  
 	public Map<String,Object> createData(String dataCont,String tableName,String dataType){
 		Map<String,Object> map  = new HashMap<String,Object>();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-		String format = df.format(new Date(0));
-	    map.put("date", format);
+		try {
+
+			long startTime = System.currentTimeMillis();
+			dataScriptService.createData(dataCont,tableName);
+			long endTime = System.currentTimeMillis();
+			long time  = endTime - startTime;
+			map.put("dataTime", "查询耗时:"+time+"");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("errorMsg", "没有此视图");
+			return map;
+		}
 		return map;
 	}
 }

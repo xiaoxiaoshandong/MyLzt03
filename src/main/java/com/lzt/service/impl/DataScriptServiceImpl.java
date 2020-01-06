@@ -13,10 +13,20 @@ public class DataScriptServiceImpl implements DataScriptService{
 	@Autowired(required=false)
 	private DataScriptServiceMapper dataScriptServiceMapper;
 	
-			public List<DataScript> getTableNames() {
+	public List<DataScript> getTableNames() {
 		// TODO Auto-generated method stub
-				
 		return dataScriptServiceMapper.getTableNames();
+	}
+
+	public List<String> getTablecolumns(String tableName) {
+				// TODO Auto-generated method stub
+		return dataScriptServiceMapper.getTablecolumns(tableName);
+	}
+
+	public void createData(String dataCont, String tableName) {
+		// TODO Auto-generated method stub
+		dataScriptServiceMapper.createData(dataCont,tableName);
+		
 	}
 
 }

@@ -7,4 +7,12 @@
    <select id="getTableNames" parameterType="java.lang.String" resultMap="BaseResultMap">
    			SELECT table_name FROM information_schema.tables WHERE table_schema='lzt';
    </select>
+   
+   <select id="getTablecolumns" parameterType="java.lang.String" resultType="java.lang.String">
+   			SELECT column_name FROM information_schema.columns WHERE table_name=#{tableName} AND table_schema='lzt';
+   </select>
+   
+   <select id="createData" parameterType="java.lang.String" >
+   			call test (0,#{dataCont});
+   </select>
 </mapper>

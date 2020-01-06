@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/lzt/controller/CartController.java=UTF-8
+encoding//src/main/java/com/lzt/controller/UserController.java=UTF-8
 encoding//src/main/webapp/data/class_1.txt=UTF-8
 encoding//src/main/webapp/data/class_2_1.txt=UTF-8
 encoding//src/main/webapp/data/class_2_10.txt=UTF-8
@@ -16,3 +18,5 @@ encoding//src/main/webapp/jsp/myTest.jsp=UTF-8
 encoding//src/main/webapp/jsp/notePadHouTai.jsp=UTF-8
 encoding//src/main/webapp/jsp/oneProdShow.jsp=UTF-8
 encoding//src/main/webapp/jsp/shangPinZhanShi.jsp=UTF-8
+encoding//src/main/webapp/jsp/vueTest01.jsp=UTF-8
+encoding/<project>=UTF-8
