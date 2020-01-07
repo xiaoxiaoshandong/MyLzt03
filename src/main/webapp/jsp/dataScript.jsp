@@ -181,6 +181,7 @@ select{
 		});
 			
 		function zx(){
+			$('#show_id').empty();
 			var params  = $('#jbform').serialize();
 			$.ajax({
 				type:"POST",
@@ -188,10 +189,11 @@ select{
 				dataType:"json",
 				data: params,
 				   success: function (data) {
-					   if(data==0){
-							alert("查询表失败！");
+					   if(data.errorMsg=="没有此视图"){
+						   var c = data.errorMsg;
+							$("#show_id").append(c);
 						}else{
-							var c = data.date;
+							var c = data.dataTime;
 							$("#show_id").append(c);
 							
 						}

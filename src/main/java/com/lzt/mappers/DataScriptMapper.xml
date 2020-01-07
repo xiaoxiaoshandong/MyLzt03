@@ -13,6 +13,6 @@
    </select>
    
    <select id="createData" parameterType="java.lang.String" >
-   			call test (0,#{dataCont});
+   			call ${tableName} (0,#{dataCont});
    </select>
 </mapper>

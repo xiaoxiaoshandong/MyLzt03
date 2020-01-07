@@ -32,8 +32,8 @@ public class DataScriptController {
 			long startTime = System.currentTimeMillis();
 			dataScriptService.createData(dataCont,tableName);
 			long endTime = System.currentTimeMillis();
-			long time  = endTime - startTime;
-			map.put("dataTime", "查询耗时:"+time+"");
+			long time  = (endTime - startTime)/1000;
+			map.put("dataTime", "执行耗时:"+time+"秒");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
