@@ -139,12 +139,24 @@ select{
 									</select>
 								</td>
 							</tr>
+							<tr>
+								<td>药品名称：</td>
+								<td>
+									<select  name="medicineId"  id="medicineName"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>顾客数量：</td>
+								<td>
+									<input type="text" name="consumerNumb"/>
+								</td>
+							</tr>
 						</table>
 					</form>
 				</div>
 				<div class="ctn_up02">
 					<button onclick="zx();">执行</button>
-					<button>清空数据</button>
+					<button onclick="spms();">商品秒杀</button>
 					<button>数据用时</button>
 					<button>数据个数</button>
 				
@@ -178,6 +190,24 @@ select{
 						}
 				}
 			});
+		
+			$.ajax({
+				type:"POST",
+				url:"${pageContext.request.contextPath}/dataScript/getMedicineList",
+				dataType:"json",
+				success : function(data) { 
+					if(data==0){
+						alert("查询表失败！");
+					}else{
+						for (var i = 0; i < data.length; i++) {
+							var c = "<option value="+data[i].id+" >" + data[i].medicineName
+									+ "</option>";
+							$("#medicineName").append(c);
+						}
+					}
+				}
+				
+			});
 		});
 			
 		function zx(){
@@ -186,6 +216,27 @@ select{
 			$.ajax({
 				type:"POST",
 				url:"${pageContext.request.contextPath}/dataScript/createData",
+				dataType:"json",
+				data: params,
+				   success: function (data) {
+					   if(data.errorMsg=="没有此视图"){
+						   var c = data.errorMsg;
+							$("#show_id").append(c);
+						}else{
+							var c = data.dataTime;
+							$("#show_id").append(c);
+							
+						}
+				   }
+			});
+		};
+		
+		function spms(){
+			$('#show_id').empty();
+			var params  = $('#jbform').serialize();
+			$.ajax({
+				type:"POST",
+				url:"${pageContext.request.contextPath}/dataScript/medicineRob",
 				dataType:"json",
 				data: params,
 				   success: function (data) {

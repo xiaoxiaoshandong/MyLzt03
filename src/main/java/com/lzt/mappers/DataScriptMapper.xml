@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lzt.dao.DataScriptServiceMapper">
+<mapper namespace="com.lzt.dao.DataScriptMapper">
   <resultMap id="BaseResultMap" type="com.lzt.entity.DataScript">   
     <result column="table_name" jdbcType="VARCHAR" property="tableName" />
   </resultMap>
@@ -15,4 +15,5 @@
    <select id="createData" parameterType="java.lang.String" >
    			call ${tableName} (0,#{dataCont});
    </select>
+   
 </mapper>

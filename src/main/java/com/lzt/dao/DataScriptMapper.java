@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.lzt.entity.DataScript;
 
-public interface DataScriptServiceMapper {
+public interface DataScriptMapper {
 
 	public List<DataScript> getTableNames();
 

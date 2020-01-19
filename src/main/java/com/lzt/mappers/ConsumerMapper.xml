@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.ConsumerMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.Consumer">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="consumer_name" jdbcType="VARCHAR" property="consumerName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, consumer_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from consumer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from consumer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.Consumer">
+    insert into consumer (id, consumer_name)
+    values (#{id,jdbcType=INTEGER}, #{consumerName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.Consumer">
+    insert into consumer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="consumerName != null">
+        consumer_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="consumerName != null">
+        #{consumerName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.Consumer">
+    update consumer
+    <set>
+      <if test="consumerName != null">
+        consumer_name = #{consumerName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.Consumer">
+    update consumer
+    set consumer_name = #{consumerName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectConsumerList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from consumer limit ${start},${end};
+  </select>
+  
+  <select id="selectConsumerSize" parameterType="java.lang.Integer" resultType="int">
+    select count(*) from consumer
+  </select>
+</mapper>
