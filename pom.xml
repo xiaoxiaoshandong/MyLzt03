@@ -16,6 +16,8 @@
 		<!-- log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
+
+        <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
 	</properties>
 
 	<dependencies>
@@ -251,9 +253,15 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-
-		</plugins>
-	</build>
+        <resources>
+            <!--编译之后包含xml-->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
 </project>
