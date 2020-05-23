@@ -123,7 +123,7 @@
 			params = params +"&"+"sjId="+sjId+"";
 			    $.ajax({
 				type:"post",
-				url:"/lzt03/ksrdaan/submitDaAn",
+				url:"${pageContext.request.contextPath}/ksrdaan/submitDaAn",
 				data: params,
 				dataType:"json",
 				success : function(data) {

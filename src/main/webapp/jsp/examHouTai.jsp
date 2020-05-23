@@ -27,7 +27,7 @@
 <script type="text/javascript">
 		
 		function xzQuestAdd() {
-			var content = '<iframe src="/lzt03/jsp/xzQuestAdd.jsp" height="100%"  width="100%" '
+			var content = '<iframe src="${pageContext.request.contextPath}/jsp/xzQuestAdd.jsp" height="100%"  width="100%" '
 					+ ' frameborder="1"  scrolling="0" ></iframe>';
 			//添加一个新的选项卡
 			$("#mytabs").tabs('add', {
@@ -38,7 +38,7 @@
 		};
 		
 		function wdQuestAdd() {
-			var content = '<iframe src="/lzt03/jsp/wdQuestAdd.jsp" height="100%"  width="100%" '
+			var content = '<iframe src="${pageContext.request.contextPath}/jsp/wdQuestAdd.jsp" height="100%"  width="100%" '
 					+ ' frameborder="1"  scrolling="0" ></iframe>';
 			//添加一个新的选项卡
 			$("#mytabs").tabs('add', {
@@ -49,7 +49,7 @@
 		};
 		
 		function dtQuestAdd() {
-			var content = '<iframe src="/lzt03/jsp/dtQuestAdd.jsp" height="100%"  width="100%" '
+			var content = '<iframe src="${pageContext.request.contextPath}/jsp/dtQuestAdd.jsp" height="100%"  width="100%" '
 					+ ' frameborder="1"  scrolling="0" ></iframe>';
 			//添加一个新的选项卡
 			$("#mytabs").tabs('add', {
@@ -59,7 +59,7 @@
 			});
 		};
 		function examSel(){
-			var content = '<iframe src="/lzt03/jsp/examSel.jsp" height="100%"  width="100%" '
+			var content = '<iframe src="${pageContext.request.contextPath}/jsp/examSel.jsp" height="100%"  width="100%" '
 				+ ' frameborder="1"  scrolling="0" ></iframe>';
 		//添加一个新的选项卡
 		$("#mytabs").tabs('add', {

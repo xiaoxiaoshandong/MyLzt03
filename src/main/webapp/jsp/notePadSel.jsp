@@ -61,7 +61,7 @@
 <script type="text/javascript">
 	$(function() {
 		$('#dg').datagrid({
-			url:"/lzt03/notepad/notePadSel",
+			url:"${pageContext.request.contextPath}/notepad/notePadSel",
 			iconCls : "icon-search",
 			width : 1180,
 			height : 480,

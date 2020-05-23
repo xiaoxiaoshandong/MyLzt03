@@ -27,7 +27,7 @@
 <script type="text/javascript">
 		
 		function notePadAdd() {
-			var content = '<iframe src="/lzt03/jsp/notePadAdd.jsp" height="100%"  width="100%" '
+			var content = '<iframe src="${pageContext.request.contextPath}/jsp/notePadAdd.jsp" height="100%"  width="100%" '
 					+ ' frameborder="1"  scrolling="0" ></iframe>';
 			//添加一个新的选项卡
 			$("#mytabs").tabs('add', {
@@ -38,7 +38,7 @@
 		};
 		
 		function notePadSel() {
-			var content = '<iframe src="/lzt03/jsp/notePadSel.jsp" height="100%"  width="100%" '
+			var content = '<iframe src="${pageContext.request.contextPath}/jsp/notePadSel.jsp" height="100%"  width="100%" '
 					+ ' frameborder="1"  scrolling="0" ></iframe>';
 			//查询记事本内容
 			$("#mytabs").tabs('add', {
