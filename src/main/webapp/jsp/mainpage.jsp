@@ -67,6 +67,10 @@ float: left;
 		window.location.href="${pageContext.request.contextPath}/jsp/dataScript.jsp";
 		return false;
 	};
+    function pigManage(){
+        window.location.href="${pageContext.request.contextPath}/jsp/pigManage.jsp";
+        return false;
+    }
 </script>
 </head>
 <body>
@@ -92,7 +96,9 @@ float: left;
 	<div class="a0" >
 	<button class="button0" onclick="dataScript();"> 数据生成脚本</button>
 	</div>
-	<div class="a0">待开发中。。。</div>
+	<div class="a0">
+        <button class="button0" onclick="pigManage();"> 肥猪满圈管理项目</button>
+    </div>
 	<div class="a0">待开发中。。。</div>
 	<div class="a0">待开发中。。。</div>
 	<div class="a0">待开发中。。。</div>

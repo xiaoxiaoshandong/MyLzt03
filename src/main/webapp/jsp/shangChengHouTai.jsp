@@ -17,7 +17,7 @@
 	href="${pageContext.request.contextPath}/static/easyui/themes/icon.css">
 <script type="text/javascript">
 	function fenlei() {
-		var content = '<iframe src="/lzt03/jsp/fenLei.jsp" height="100%"  width="100%" '
+		var content = '<iframe src="${pageContext.request.contextPath}/jsp/fenLei.jsp" height="100%"  width="100%" '
 				+ ' frameborder="1"  scrolling="0" ></iframe>';
 		//添加一个新的选项卡
 		$("#mytabs").tabs('add', {
@@ -27,7 +27,7 @@
 		});
 	};
 	function spuXinXi() {
-		var content = '<iframe src="/lzt03/jsp/spuXinXi.jsp" height="100%"  width="100%" ></iframe>';
+		var content = '<iframe src="${pageContext.request.contextPath}/jsp/spuXinXi.jsp" height="100%"  width="100%" ></iframe>';
 		//添加一个新的选项卡
 		$("#mytabs").tabs('add', {
 			title : '商品信息',
@@ -37,7 +37,7 @@
 	};
 	
 	function skuXinXi() {
-		var content = '<iframe src="/lzt03/jsp/skuXinXi.jsp" height="100%"  width="100%" ></iframe>';
+		var content = '<iframe src="${pageContext.request.contextPath}/jsp/skuXinXi.jsp" height="100%"  width="100%" ></iframe>';
 		//添加一个新的选项卡
 		$("#mytabs").tabs('add', {
 			title : '库存信息',

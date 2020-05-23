@@ -113,7 +113,7 @@ a {
 		<div class="content" >	
 				<%-- <img id="bg" src="${pageContext.request.contextPath}/static/img/login.jpg" /> --%>
 				<!-- 音乐播放 --> 
-				<EMBED src="${pageContext.request.contextPath}/static/music/fengZhengWu.mp3" 
+				<EMBED src="${pageContext.request.contextPath}/static/music/fengZhengWu.mp3"
 				 loop="true" autostart="true"  hidden="true"></EMBED>
 				 <div class="login_box">
 				 		 <form id="loginForm" name="loginForm" method="post">
