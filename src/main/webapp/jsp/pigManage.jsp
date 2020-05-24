@@ -31,11 +31,33 @@
         };
 
         function pigZhuLanManage() {
-            var content = '<iframe src="${pageContext.request.contextPath}/jsp/pigHouTaiManage.jsp" height="100%"  width="100%" '
+            var content = '<iframe src="${pageContext.request.contextPath}/jsp/pigZhuLanManage.jsp" height="100%"  width="100%" '
                 + ' frameborder="1"  scrolling="0" ></iframe>';
             //添加一个新的选项卡
             $("#mytabs").tabs('add', {
                 title : '猪栏管理',
+                content : content,
+                closable : true
+            });
+        };
+
+        function pigTouRuManage() {
+            var content = '<iframe src="${pageContext.request.contextPath}/jsp/pigTouRuManage.jsp" height="100%"  width="100%" '
+                + ' frameborder="1"  scrolling="0" ></iframe>';
+            //添加一个新的选项卡
+            $("#mytabs").tabs('add', {
+                title : '投入管理',
+                content : content,
+                closable : true
+            });
+        };
+
+        function pigSelShow() {
+            var content = '<iframe src="${pageContext.request.contextPath}/jsp/pigSelShow.jsp" height="100%"  width="100%" '
+                + ' frameborder="1"  scrolling="0" ></iframe>';
+            //添加一个新的选项卡
+            $("#mytabs").tabs('add', {
+                title : '查询展示',
                 content : content,
                 closable : true
             });
@@ -55,11 +77,10 @@
                     <ul>
                         <li><a onclick="pigZhuSheManage();">猪舍管理</a></li>
                         <li><a onclick="pigZhuLanManage();">猪栏管理</a></li>
-                        <li><a onclick="">猪管理</a></li>
-                        <li><a onclick="">投入管理</a></li>
+                        <li><a onclick="pigTouRuManage();">投入管理</a></li>
                     </ul>
                 </li>
-                <li><a onclick="">查询展示</a></li>
+                <li><a onclick="pigSelShow();">查询展示</a></li>
                 <li><a onclick="">可视化展示</a></li>
             </ul>
         </li>

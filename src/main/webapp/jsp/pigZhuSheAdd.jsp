@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js">
     <script type="text/javascript">
-        function toPigHouTaiManage(){
+        function toPigZhuSheManage(){
             window.location.href="pigZhuSheManage.jsp";
         };
 
@@ -48,7 +48,7 @@
             </div>
             <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i>新增</button>
             <button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i>重置</button>
-            <button type="button" class="btn btn-info" onclick="toPigHouTaiManage();"><i class="=glyphicon glyphicon-retweet"></i>返回</button>
+            <button type="button" class="btn btn-info" onclick="toPigZhuSheManage();"><i class="=glyphicon glyphicon-retweet"></i>返回</button>
         </form>
     </div>
 </div>

@@ -17,8 +17,8 @@
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js">
     <script type="text/javascript">
-        function toPigHouTaiManage(){
-            window.location.href="pigZhuSheManage.jsp";
+        function toPigZhuLanManage(){
+            window.location.href="pigZhuLanManage.jsp";
         };
 
     </script>
@@ -29,28 +29,32 @@
     <div class="panel-body">
         <form role="form">
             <div class="form-group">
-                <label for="exampleInputPassword1">猪圈名称</label>
+                <label for="exampleInputPassword1">猪栏名称</label>
                 <input type="text" class="form-control" id="exampleInputPassword1" value="test">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">猪舍管理人</label>
+                <label for="exampleInputPassword1">猪舍名称</label>
                 <input type="text" class="form-control" id="exampleInputPassword1" value="测试用户">
             </div>
             <div class="form-group">
-                <label >猪舍类型</label>
+                <label >猪栏类型</label>
                 <select class="form-control">
                     <option></option>
-                    <option value="1">大棚式</option>
-                    <option value="2">开放式</option>
-                    <option value="3">封闭式</option>
+                    <option value="1">仔猪栏</option>
+                    <option value="2">妊娠栏</option>
+                    <option value="3">肥猪栏</option>
+                    <option value="4">后备栏</option>
+                    <option value="5">空栏</option>
+                    <option value="6">配种公猪栏</option>
                 </select>
 
             </div>
-            <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i>更新</button>
+            <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i>新增</button>
             <button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i>重置</button>
-            <button type="button" class="btn btn-info" onclick="toPigHouTaiManage();"><i class="=glyphicon glyphicon-retweet"></i>返回</button>
+            <button type="button" class="btn btn-info" onclick="toPigZhuLanManage();"><i class="=glyphicon glyphicon-retweet"></i>返回</button>
         </form>
     </div>
 </div>
 </body>
 </html>
+

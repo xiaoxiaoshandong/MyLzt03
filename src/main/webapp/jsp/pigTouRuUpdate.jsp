@@ -17,40 +17,48 @@
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js">
     <script type="text/javascript">
-        function toPigHouTaiManage(){
-            window.location.href="pigZhuSheManage.jsp";
+        function toPigTouRuManage() {
+            window.location.href = "pigTouRuManage.jsp";
         };
 
     </script>
 </head>
 <body>
 <div class="panel panel-default">
-    <div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
+    <div class="panel-heading">表单数据
+        <div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i
+                class="glyphicon glyphicon-question-sign"></i></div>
+    </div>
     <div class="panel-body">
         <form role="form">
-            <div class="form-group">
-                <label for="exampleInputPassword1">猪圈名称</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" value="test">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">猪舍管理人</label>
-                <input type="text" class="form-control" id="exampleInputPassword1" value="测试用户">
-            </div>
-            <div class="form-group">
-                <label >猪舍类型</label>
+            <div class="form-group ">
+                <label >投入类型</label>
                 <select class="form-control">
                     <option></option>
-                    <option value="1">大棚式</option>
-                    <option value="2">开放式</option>
-                    <option value="3">封闭式</option>
+                    <option value="1">饲料投入</option>
+                    <option value="2">人工投入</option>
+                    <option value="3">水投入</option>
+                    <option value="4">电投入</option>
+                    <option value="5">粮食投入</option>
+                    <option value="6">防疫投入</option>
+                    <option value="7">其他投入</option>
                 </select>
-
             </div>
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label for="exampleInputPassword1">投入金额(元)</label>
+                    <input type="text" class="form-control" id="exampleInputPassword1" value="0.00">
+                </div>
+            </div>
+
             <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-edit"></i>更新</button>
             <button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i>重置</button>
-            <button type="button" class="btn btn-info" onclick="toPigHouTaiManage();"><i class="=glyphicon glyphicon-retweet"></i>返回</button>
+            <button type="button" class="btn btn-info" onclick="toPigTouRuManage();"><i
+                    class="=glyphicon glyphicon-retweet"></i>返回
+            </button>
         </form>
     </div>
 </div>
 </body>
 </html>
+
