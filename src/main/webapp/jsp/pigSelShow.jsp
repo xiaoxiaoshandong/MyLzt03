@@ -64,6 +64,7 @@
 
     </script>
 </head>
+
 <body>
 
 <div class="container-fluid">
@@ -76,68 +77,73 @@
                 <div class="panel-body">
                     <form class="form-inline" role="form" style="float:left;">
 
-                        <div class='col-sm-6'>
-
+                        <div class='col-sm-3'>
                             <div class="form-group">
-
                                 <label>选择日期：</label>
-
                                 <!--指定 date标记-->
-
-                                <div class='input-group date' id='datetimepicker1'>
-
-                                    <input type='text' class="form-control" />
-
-                                    <span class="input-group-addon">
-
-                    <span class="glyphicon glyphicon-calendar"></span>
-
-                </span>
-
+                                <div class='input-group date' id='datetimepicker1' >
+                                      <input type='text' class="form-control"  />
+                                      <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                      </span>
                                 </div>
-
                             </div>
-
                         </div>
 
-                        <div class='col-sm-6'>
-
+                        <div class='col-sm-3'>
                             <div class="form-group">
-
-                                <label>选择日期+时间：</label>
-
+                                <label>选择日期：</label>
                                 <!--指定 date标记-->
+                                <div class='input-group date' id='datetimepicker2' >
 
-                                <div class='input-group date' id='datetimepicker2'>
-
-                                    <input type='text' class="form-control" />
+                                    <input type='text' class="form-control"  />
 
                                     <span class="input-group-addon">
-
-                    <span class="glyphicon glyphicon-calendar"></span>
-
-                </span>
-
+                                         <span class="glyphicon glyphicon-calendar"></span>
+                                     </span>
                                 </div>
+                            </div>
+                        </div>
 
+                        <div class='col-sm-2'>
+                             <div class="row">
+                                <label >猪舍选择</label>
+                             </div>
+                            <div class="row">
+                                <select class="form-control"  style= "width:90%" >
+                                    <option></option>
+                                    <option value="1">A猪舍</option>
+                                    <option value="2">B猪舍</option>
+                                    <option value="3">C猪舍</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class='col-sm-2'>
+                            <div class="row">
+                                <label >猪栏选择</label>
+                            </div>
+                            <div class="row">
+                                    <select class="form-control " style= "width:90%">
+                                        <option></option>
+                                        <option value="1">A栏</option>
+                                        <option value="2">B栏</option>
+                                        <option value="3">C栏</option>
+                                    </select>
                             </div>
 
                         </div>
 
-                <div class="form-group ">
-                            <label >猪舍选择</label>
-                            <select class="form-control">
-                                <option></option>
-                                <option value="1">A猪舍</option>
-                                <option value="2">B猪舍</option>
-                                <option value="3">C猪舍</option>
-                            </select>
+                        <div class='col-sm-2'>
+                            <div class="row">&nbsp</div>
+                            <div class="row" style="margin-top:4%">
+                                <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询
+                                </button>
+                            </div>
                         </div>
-
-                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询
-                        </button>
 
                     </form>
+
                     <br>
                     <hr style="clear:both;">
                     <div class="table-responsive">
