@@ -63,6 +63,10 @@
             });
         };
 
+        function pigKeShiHuaShow(){
+            window.location = "pigKeShiHuaShow.jsp";
+        }
+
     </script>
 </head>
 <body class="easyui-layout">
@@ -81,7 +85,7 @@
                     </ul>
                 </li>
                 <li><a onclick="pigSelShow();">查询展示</a></li>
-                <li><a onclick="">可视化展示</a></li>
+                <li><a onclick="pigKeShiHuaShow();">可视化展示</a></li>
             </ul>
         </li>
     </ul>

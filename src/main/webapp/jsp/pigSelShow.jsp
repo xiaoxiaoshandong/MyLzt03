@@ -17,14 +17,49 @@
     <script  src="${pageContext.request.contextPath}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/moment/2.24.0/moment-with-locales.js"></script>
     <script src="${pageContext.request.contextPath}/static/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/echarts/4.7.0/echarts.js"></script>
+    <style>
+        table {
+            border-collapse:collapse;border:none;
+            font-size:12px;
+            filter:alpha(Opacity=60);-moz-opacity:0.9;opacity: 0.7;
+            margin-top: 10px;
+            text-align: center;
 
-    <!--图标样式-->
- <%--  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.js"></script>
-    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>--%>
+        }
+
+        td {
+           background-color: #D6BBFF;
+            BORDER-TOP: 5px solid !important;
+            display: table-cell;
+            vertical-align: middle;
+            text-align:center;
+
+        }
+        th {
+              background-color:#D6BBFF;
+              BORDER-BOTTOM:  10px solid !important;
+            text-align:center;
+            display: table-cell;
+            vertical-align: middle;
+
+        }
+        .demo2-bg{
+           /* background: url(${pageContext.request.contextPath}/static/img/pig1.jpg) no-repeat 4px 5px;*/
+            backgroundColor:'rgba(128, 128, 128, 0.5)';
+            background-size: cover;
+            position: relative;
+        }
+        .demo2{
+            filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6
+        }
+        .form-control {
+            background-color:rgba(125,125,125,0);
+        }
+        .tbody tr{
+            height: 53px;
+        }
+    </style>
     <script type="text/javascript">
         function pigTouRuAdd(){
             window.location.href="pigTouRuAdd.jsp";
@@ -62,21 +97,23 @@
             defaultDate: "1990-1-1"
         });
 
+
+
     </script>
 </head>
 
 <body>
 
-<div class="container-fluid">
+<div class="container-fluid ">
     <div class="row">
-        <div class="col-md-12  main">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+        <div class="col-sm-12  main ">
+            <div class="panel panel-default demo2-bg">
+                <div class="panel-heading demo2">
                     <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
                 </div>
                 <div class="panel-body">
                     <form class="form-inline" role="form" style="float:left;">
-
+                        <div class="row">
                         <div class='col-sm-3'>
                             <div class="form-group">
                                 <label>选择日期：</label>
@@ -119,7 +156,7 @@
                             </div>
                         </div>
 
-                        <div class='col-sm-2'>
+                      <%--  <div class='col-sm-2'>
                             <div class="row">
                                 <label >猪栏选择</label>
                             </div>
@@ -132,7 +169,7 @@
                                     </select>
                             </div>
 
-                        </div>
+                        </div>--%>
 
                         <div class='col-sm-2'>
                             <div class="row">&nbsp</div>
@@ -141,86 +178,145 @@
                                 </button>
                             </div>
                         </div>
-
+                        </div>
                     </form>
 
                     <br>
-                    <hr style="clear:both;">
-                    <div class="table-responsive">
-                        <table class="table  table-bordered">
-                            <thead>
-                            <tr>
-                                <th width="30">#</th>
-                                <th>投入类型</th>
-                                <th>投入金额(元)</th>
-                                <th>创建时间</th>
-                                <th>更新时间</th>
-                                <th width="100">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>饲料投入</td>
-                                <td>2000.00</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-xs" onclick="pigTouRuUpdate();"><i
-                                            class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" class="btn btn-success btn-xs"><i
-                                            class="glyphicon glyphicon-remove"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>粮食投入</td>
-                                <td>10000.00</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-xs"><i
-                                            class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" class="btn btn-success btn-xs"><i
-                                            class="glyphicon glyphicon-remove"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>猪舍投入</td>
-                                <td>300.00</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-xs"><i
-                                            class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" class="btn btn-success btn-xs"><i
-                                            class="glyphicon glyphicon-remove"></i></button>
-                                </td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td colspan="7" align="center">
-                                    <ul class="pagination">
-                                        <li class="disabled"><a href="#">上一页</a></li>
-                                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">下一页</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
+                    <div class="row">
+                        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                        <div class='col-sm-4' >
+                             <div  class=' form-control' id="lrzs" style="height:70%;margin-top: 3%; "></div>
+                        </div>
 
-                            </tfoot>
-                        </table>
-                    </div>
+                        <div class='col-sm-4'>
+                            <div  class=' form-control' id="gszs" style="height:70%;margin-top:3%;"></div>
+                        </div>
+                        <div class='col-sm-4'>
+                           <%-- <div class="table-responsive">--%>
+                                <table class="table table-bordered" >
+                                    <thead>
+                                    <tr style="height: 70px;">
+                                        <th width="50">编号</th>
+                                        <th>更换前</th>
+                                        <th>更换后</th>
+                                        <th>更换时间</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody class="tbody">
+                                        <tr  >
+                                            <td >1</td>
+                                            <td>A栏</td>
+                                            <td>B栏</td>
+                                            <td>2017-06-01 19:00:00</td>
+                                        </tr>
+                                        <tr style="">
+                                            <td>2</td>
+                                            <td>A栏</td>
+                                            <td>B栏</td>
+                                            <td>2017-06-01 19:00:00</td>
+                                        </tr>
+                                        <tr style="">
+                                            <td>3</td>
+                                            <td>A栏</td>
+                                            <td>B栏</td>
+                                            <td>2017-06-01 19:00:00</td>
+                                        </tr>
+                                        <tr style="">
+                                            <td>4</td>
+                                            <td>A栏</td>
+                                            <td>B栏</td>
+                                            <td>2017-06-01 19:00:00</td>
+                                        </tr>
+                                        <tr style="">
+                                            <td>5</td>
+                                            <td>A栏</td>
+                                            <td>B栏</td>
+                                            <td>2017-06-01 19:00:00</td>
+                                        </tr>
+
+                                        <tr style="">
+                                            <td>6</td>
+                                            <td>A栏</td>
+                                            <td>B栏</td>
+                                            <td>2017-06-01 19:00:00</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                          <%--  </div>--%>
+                        </div>
+                  </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('lrzs'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: '利润展示'
+        },
+        tooltip: {},
+        legend: {
+            data:['人数']
+        },
+        xAxis: {
+            data: ["纯利润","毛利润","投入"]
+        },
+        yAxis: {},
+        series: [{
+            name: '元',
+            type: 'bar',
+            data: [-30000,10000,40000]
+        }],
+        backgroundColor:'rgba(128, 128, 128, 0.5)' //rgba设置透明度0.1
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option , true);
+    window.addEventListener('resize', function() {
+            myChart.resize();
+        }
+    );
+
+    // 基于准备好的dom，初始化echarts实例
+    var gszsChart = echarts.init(document.getElementById('gszs'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: '死亡,出栏,新增比例展示'
+        },
+        tooltip: {},
+        legend: {
+            data:['个数']
+        },
+        xAxis: {
+            data: ["死亡","出栏","新增仔猪"]
+        },
+        yAxis: {},
+        series: [{
+            name: '个',
+            type: 'bar',
+            data: [5, 15,50]
+        }],
+        backgroundColor:'rgba(128, 128, 128, 0.5)' //rgba设置透明度0.1
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    gszsChart.setOption(option , true);
+    window.addEventListener('resize', function() {
+        gszsChart.resize();
+        }
+    );
+
+
+</script>
 </body>
 </html>
