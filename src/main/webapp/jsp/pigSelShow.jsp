@@ -116,7 +116,7 @@
                         <div class="row">
                         <div class='col-sm-3'>
                             <div class="form-group">
-                                <label>选择日期：</label>
+                                <label>起始日期：</label>
                                 <!--指定 date标记-->
                                 <div class='input-group date' id='datetimepicker1' >
                                       <input type='text' class="form-control"  />
@@ -129,7 +129,7 @@
 
                         <div class='col-sm-3'>
                             <div class="form-group">
-                                <label>选择日期：</label>
+                                <label>结束日期：</label>
                                 <!--指定 date标记-->
                                 <div class='input-group date' id='datetimepicker2' >
 
@@ -192,59 +192,7 @@
                             <div  class=' form-control' id="gszs" style="height:70%;margin-top:3%;"></div>
                         </div>
                         <div class='col-sm-4'>
-                           <%-- <div class="table-responsive">--%>
-                                <table class="table table-bordered" >
-                                    <thead>
-                                    <tr style="height: 70px;">
-                                        <th width="50">编号</th>
-                                        <th>更换前</th>
-                                        <th>更换后</th>
-                                        <th>更换时间</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody class="tbody">
-                                        <tr  >
-                                            <td >1</td>
-                                            <td>A栏</td>
-                                            <td>B栏</td>
-                                            <td>2017-06-01 19:00:00</td>
-                                        </tr>
-                                        <tr style="">
-                                            <td>2</td>
-                                            <td>A栏</td>
-                                            <td>B栏</td>
-                                            <td>2017-06-01 19:00:00</td>
-                                        </tr>
-                                        <tr style="">
-                                            <td>3</td>
-                                            <td>A栏</td>
-                                            <td>B栏</td>
-                                            <td>2017-06-01 19:00:00</td>
-                                        </tr>
-                                        <tr style="">
-                                            <td>4</td>
-                                            <td>A栏</td>
-                                            <td>B栏</td>
-                                            <td>2017-06-01 19:00:00</td>
-                                        </tr>
-                                        <tr style="">
-                                            <td>5</td>
-                                            <td>A栏</td>
-                                            <td>B栏</td>
-                                            <td>2017-06-01 19:00:00</td>
-                                        </tr>
-
-                                        <tr style="">
-                                            <td>6</td>
-                                            <td>A栏</td>
-                                            <td>B栏</td>
-                                            <td>2017-06-01 19:00:00</td>
-                                        </tr>
-                                    </tbody>
-
-                                </table>
-                          <%--  </div>--%>
+                            <div  class=' form-control'id="trgx" style="height:70%;margin-top:3%;"></div>
                         </div>
                   </div>
                 </div>
@@ -264,12 +212,29 @@
         },
         tooltip: {},
         legend: {
-            data:['人数']
+            data:['元']
         },
         xAxis: {
             data: ["纯利润","毛利润","投入"]
         },
-        yAxis: {},
+        yAxis: {
+            type: 'value',
+            axisTick: {
+                inside: true
+            },
+            scale: true,
+            axisLabel: {
+                margin: 2,
+                formatter: function (value, index) {
+                    if ( value < 10000000) {
+                        value = value / 10000 + "万";
+                    } else if (value >= 10000000) {
+                        value = value / 10000000 + "千万";
+                    }
+                    return value;
+                }
+            },
+        },
         series: [{
             name: '元',
             type: 'bar',
@@ -291,20 +256,20 @@
     // 指定图表的配置项和数据
     var option = {
         title: {
-            text: '死亡,出栏,新增比例展示'
+            text: '个数比例展示'
         },
         tooltip: {},
         legend: {
-            data:['个数']
+            data:['个']
         },
         xAxis: {
-            data: ["死亡","出栏","新增仔猪"]
+            data: ["死亡","出栏","新增仔猪","其他"]
         },
         yAxis: {},
         series: [{
             name: '个',
             type: 'bar',
-            data: [5, 15,50]
+            data: [5, 15,50,12]
         }],
         backgroundColor:'rgba(128, 128, 128, 0.5)' //rgba设置透明度0.1
     };
@@ -313,6 +278,59 @@
     gszsChart.setOption(option , true);
     window.addEventListener('resize', function() {
         gszsChart.resize();
+        }
+    );
+
+    // 基于准备好的dom，初始化echarts实例
+    var trgxChart = echarts.init(document.getElementById('trgx'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: '投入各项展示'
+        },
+        tooltip: {},
+        legend: {
+            data:['元']
+        },
+        xAxis: {
+            data: ["饲料投入","人工投入","水投入","电投入","粮食投入","防疫投入","其他投入"],
+            axisLabel: {
+                interval:0,
+                rotate:40
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisTick: {
+                inside: true
+            },
+            scale: true,
+            axisLabel: {
+                margin: 2,
+                formatter: function (value, index) {
+                    if (value >= 10000 && value < 10000000) {
+                        value = value / 10000 + "万";
+                    } else if (value >= 10000000) {
+                        value = value / 10000000 + "千万";
+                    }
+                    return value;
+                }
+
+    },
+        },
+        series: [{
+            name: '元',
+            type: 'bar',
+            data: [5000, 15000,50000,12000,12000,44000,66000]
+        }],
+        backgroundColor:'rgba(128, 128, 128, 0.5)' //rgba设置透明度0.1
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    trgxChart.setOption(option , true);
+    window.addEventListener('resize', function() {
+            trgxChart.resize();
         }
     );
 

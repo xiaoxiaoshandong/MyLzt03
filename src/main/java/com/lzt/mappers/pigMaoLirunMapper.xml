@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzt.dao.pigMaoLirunMapper" >
+  <resultMap id="BaseResultMap" type="com.lzt.entity.pigMaoLirun" >
+    <id column="mlr_id" property="mlrId" jdbcType="VARCHAR" />
+    <result column="mlr_acount" property="mlrAcount" jdbcType="VARCHAR" />
+    <result column="zl_id" property="zlId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mlr_id, mlr_acount, zl_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pig_mao_lirun
+    where mlr_id = #{mlrId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pig_mao_lirun
+    where mlr_id = #{mlrId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.pigMaoLirun" >
+    insert into pig_mao_lirun (mlr_id, mlr_acount, zl_id, 
+      create_time, update_time)
+    values (#{mlrId,jdbcType=VARCHAR}, #{mlrAcount,jdbcType=VARCHAR}, #{zlId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.pigMaoLirun" >
+    insert into pig_mao_lirun
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mlrId != null" >
+        mlr_id,
+      </if>
+      <if test="mlrAcount != null" >
+        mlr_acount,
+      </if>
+      <if test="zlId != null" >
+        zl_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mlrId != null" >
+        #{mlrId,jdbcType=VARCHAR},
+      </if>
+      <if test="mlrAcount != null" >
+        #{mlrAcount,jdbcType=VARCHAR},
+      </if>
+      <if test="zlId != null" >
+        #{zlId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.pigMaoLirun" >
+    update pig_mao_lirun
+    <set >
+      <if test="mlrAcount != null" >
+        mlr_acount = #{mlrAcount,jdbcType=VARCHAR},
+      </if>
+      <if test="zlId != null" >
+        zl_id = #{zlId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where mlr_id = #{mlrId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.pigMaoLirun" >
+    update pig_mao_lirun
+    set mlr_acount = #{mlrAcount,jdbcType=VARCHAR},
+      zl_id = #{zlId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where mlr_id = #{mlrId,jdbcType=VARCHAR}
+  </update>
+</mapper>

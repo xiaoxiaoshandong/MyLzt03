@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzt.dao.pigTouruMapper" >
+  <resultMap id="BaseResultMap" type="com.lzt.entity.pigTouru" >
+    <id column="tr_id" property="trId" jdbcType="VARCHAR" />
+    <result column="tr_acount" property="trAcount" jdbcType="VARCHAR" />
+    <result column="tr_type" property="trType" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tr_id, tr_acount, tr_type, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pig_touru
+    where tr_id = #{trId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pig_touru
+    where tr_id = #{trId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.pigTouru" >
+    insert into pig_touru (tr_id, tr_acount, tr_type, 
+      create_time, update_time)
+    values (#{trId,jdbcType=VARCHAR}, #{trAcount,jdbcType=VARCHAR}, #{trType,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.pigTouru" >
+    insert into pig_touru
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="trId != null" >
+        tr_id,
+      </if>
+      <if test="trAcount != null" >
+        tr_acount,
+      </if>
+      <if test="trType != null" >
+        tr_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="trId != null" >
+        #{trId,jdbcType=VARCHAR},
+      </if>
+      <if test="trAcount != null" >
+        #{trAcount,jdbcType=VARCHAR},
+      </if>
+      <if test="trType != null" >
+        #{trType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.pigTouru" >
+    update pig_touru
+    <set >
+      <if test="trAcount != null" >
+        tr_acount = #{trAcount,jdbcType=VARCHAR},
+      </if>
+      <if test="trType != null" >
+        tr_type = #{trType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where tr_id = #{trId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.pigTouru" >
+    update pig_touru
+    set tr_acount = #{trAcount,jdbcType=VARCHAR},
+      tr_type = #{trType,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where tr_id = #{trId,jdbcType=VARCHAR}
+  </update>
+</mapper>

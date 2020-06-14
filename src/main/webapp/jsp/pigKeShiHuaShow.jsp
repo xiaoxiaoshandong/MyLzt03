@@ -126,9 +126,10 @@
 
 <div class="container-fluid demo2-bg">
     <div class="row">
-        <div class="col-sm-12 dropdown" style="margin-top: 1%;margin-left: 1%;">
+        <div class="col-sm-1 dropdown" style="margin-top: 1%;margin-left:1%;">
+            <%--<div class="row">&nbsp</div>--%>
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" style="background-color: rgba(0,0,0,0.4);">
-                Dropdown button
+                猪舍选择
             </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="#">A舍</a>

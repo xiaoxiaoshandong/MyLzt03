@@ -10,7 +10,6 @@
 <head>
     <title>Title</title>
     <script src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js"></script>
-    <script src="${pageContext.request.contextPath}/static/vue/vue.js"></script>
     <link rel="stylesheet" type="text/css"
           href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css"
@@ -19,12 +18,12 @@
           href="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js">
 
     <script type="text/javascript">
-        function pigZhuSheAdd(){
-            window.location.href="pigZhuSheAdd.jsp";
+        function pigZhuNumAdd(){
+            window.location.href="pigZhuNumAdd.jsp";
         };
 
-        function pigZhuSheUpdate(){
-            window.location.href="pigZhuSheUpdate.jsp";
+        function pigZhuNumUpdate(){
+            window.location.href="pigZhuNumUpdate.jsp";
         };
     </script>
 </head>
@@ -47,7 +46,7 @@
                         </div>
                         <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询
                         </button>
-                        <button type="button" class="btn btn-warning" onclick="pigZhuSheAdd()"><i class="glyphicon  glyphicon-share"></i> 新增
+                        <button type="button" class="btn btn-warning" onclick="pigZhuNumAdd()"><i class="glyphicon  glyphicon-share"></i> 新增
                         </button>
                     </form>
                     <br>
@@ -57,9 +56,10 @@
                             <thead>
                             <tr>
                                 <th width="30">#</th>
-                                <th>猪舍名称</th>
-                                <th>猪舍管理人</th>
-                                <th>猪舍类型</th>
+                                <th>猪栏ID</th>
+                                <th>猪栏名称</th>
+                                <th>变更数量</th>
+                                <th>修改类型</th>
                                 <th>创建时间</th>
                                 <th>更新时间</th>
                                 <th width="100">操作</th>
@@ -68,13 +68,14 @@
                             <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>A舍</td>
-                                <td>张三</td>
-                                <td>封闭式</td>
+                                <td>1001</td>
+                                <td>A栏</td>
+                                <td>50</td>
+                                <td>新增</td>
                                 <td>2017-06-01 19:00:00</td>
                                 <td>2017-06-01 19:00:00</td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-xs" onclick="pigZhuSheUpdate();"><i
+                                    <button type="button" class="btn btn-success btn-xs" onclick="pigZhuNumUpdate();"><i
                                             class="glyphicon glyphicon-edit"></i></button>
                                     <button type="button" class="btn btn-success btn-xs"><i
                                             class="glyphicon glyphicon-remove"></i></button>
@@ -82,9 +83,10 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>B舍</td>
-                                <td>李四</td>
-                                <td>开放式</td>
+                                <td>1001</td>
+                                <td>A栏</td>
+                                <td>2</td>
+                                <td>死亡</td>
                                 <td>2017-06-01 19:00:00</td>
                                 <td>2017-06-01 19:00:00</td>
                                 <td>
@@ -96,9 +98,10 @@
                             </tr>
                             <tr>
                                 <td>3</td>
-                                <td>C舍</td>
-                                <td>王五</td>
-                                <td>大棚式</td>
+                                <td>1001</td>
+                                <td>A栏</td>
+                                <td>49</td>
+                                <td>出栏</td>
                                 <td>2017-06-01 19:00:00</td>
                                 <td>2017-06-01 19:00:00</td>
                                 <td>
@@ -111,7 +114,7 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td colspan="7" align="center">
+                                <td colspan="8" align="center">
                                     <ul class="pagination">
                                         <li class="disabled"><a href="#">上一页</a></li>
                                         <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
@@ -133,8 +136,4 @@
     </div>
 </div>
 </body>
-<script type="text/javascript">
-
-
-</script>
 </html>

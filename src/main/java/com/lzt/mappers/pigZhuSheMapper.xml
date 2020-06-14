@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lzt.dao.pigZhuSheMapper" >
+  <resultMap id="BaseResultMap" type="com.lzt.entity.pigZhuShe" >
+    <id column="zs_id" property="zsId" jdbcType="VARCHAR" />
+    <result column="zs_name" property="zsName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    zs_id, zs_name, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from pig_zhu_she
+    where zs_id = #{zsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from pig_zhu_she
+    where zs_id = #{zsId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.lzt.entity.pigZhuShe" >
+    insert into pig_zhu_she (zs_id, zs_name, create_time, 
+      update_time)
+    values (#{zsId,jdbcType=VARCHAR}, #{zsName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lzt.entity.pigZhuShe" >
+    insert into pig_zhu_she
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zsId != null" >
+        zs_id,
+      </if>
+      <if test="zsName != null" >
+        zs_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zsId != null" >
+        #{zsId,jdbcType=VARCHAR},
+      </if>
+      <if test="zsName != null" >
+        #{zsName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lzt.entity.pigZhuShe" >
+    update pig_zhu_she
+    <set >
+      <if test="zsName != null" >
+        zs_name = #{zsName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where zs_id = #{zsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lzt.entity.pigZhuShe" >
+    update pig_zhu_she
+    set zs_name = #{zsName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where zs_id = #{zsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

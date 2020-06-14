@@ -52,12 +52,33 @@
             });
         };
 
+        function pigZhuNumManage() {
+            var content = '<iframe src="${pageContext.request.contextPath}/jsp/pigZhuNumManage.jsp" height="100%"  width="100%" '
+                + ' frameborder="1"  scrolling="0" ></iframe>';
+            //添加一个新的选项卡
+            $("#mytabs").tabs('add', {
+                title : '猪数量管理',
+                content : content,
+                closable : true
+            });
+        };
         function pigSelShow() {
             var content = '<iframe src="${pageContext.request.contextPath}/jsp/pigSelShow.jsp" height="100%"  width="100%" '
                 + ' frameborder="1"  scrolling="0" ></iframe>';
             //添加一个新的选项卡
             $("#mytabs").tabs('add', {
-                title : '查询展示',
+                title : '柱状展示',
+                content : content,
+                closable : true
+            });
+        };
+
+        function pigTableShow() {
+            var content = '<iframe src="${pageContext.request.contextPath}/jsp/pigTableShow.jsp" height="100%"  width="100%" '
+                + ' frameborder="1"  scrolling="0" ></iframe>';
+            //添加一个新的选项卡
+            $("#mytabs").tabs('add', {
+                title : '表格展示',
                 content : content,
                 closable : true
             });
@@ -82,9 +103,11 @@
                         <li><a onclick="pigZhuSheManage();">猪舍管理</a></li>
                         <li><a onclick="pigZhuLanManage();">猪栏管理</a></li>
                         <li><a onclick="pigTouRuManage();">投入管理</a></li>
+                        <li><a onclick="pigZhuNumManage();">猪数量管理</a></li>
                     </ul>
                 </li>
-                <li><a onclick="pigSelShow();">查询展示</a></li>
+                <li><a onclick="pigSelShow();">柱状展示</a></li>
+                <li><a onclick="pigTableShow();">表格展示</a></li>
                 <li><a onclick="pigKeShiHuaShow();">可视化展示</a></li>
             </ul>
         </li>
