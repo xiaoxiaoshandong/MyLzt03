@@ -1,22 +1,22 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2020/5/23
-  Time: 22:05
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
     <script src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-theme.css">
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js">
+    <script src="${pageContext.request.contextPath}/static/vue/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="${pageContext.request.contextPath}/static/element-ui/index.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/element-ui/index.css">
 
+    <%--<!-- 引入样式 -->--%>
+    <%--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">--%>
+    <%--<!-- 引入组件库 -->--%>
+    <%--<script src="https://unpkg.com/element-ui/lib/index.js"></script>--%>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/my_style/myStyle.css">
     <script type="text/javascript">
         function pigZhuNumAdd(){
             window.location.href="pigZhuNumAdd.jsp";
@@ -26,114 +26,169 @@
             window.location.href="pigZhuNumUpdate.jsp";
         };
     </script>
+
+
 </head>
 <body>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12  main">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
-                </div>
-                <div class="panel-body">
-                    <form class="form-inline" role="form" style="float:left;">
-                        <div class="form-group has-feedback">
-                            <div class="input-group">
-                                <div class="input-group-addon">查询条件</div>
-                                <input class="form-control has-success" type="text" placeholder="请输入查询条件">
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询
-                        </button>
-                        <button type="button" class="btn btn-warning" onclick="pigZhuNumAdd()"><i class="glyphicon  glyphicon-share"></i> 新增
-                        </button>
-                    </form>
-                    <br>
-                    <hr style="clear:both;">
-                    <div class="table-responsive">
-                        <table class="table  table-bordered">
-                            <thead>
-                            <tr>
-                                <th width="30">#</th>
-                                <th>猪栏ID</th>
-                                <th>猪栏名称</th>
-                                <th>变更数量</th>
-                                <th>修改类型</th>
-                                <th>创建时间</th>
-                                <th>更新时间</th>
-                                <th width="100">操作</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>1001</td>
-                                <td>A栏</td>
-                                <td>50</td>
-                                <td>新增</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-xs" onclick="pigZhuNumUpdate();"><i
-                                            class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" class="btn btn-success btn-xs"><i
-                                            class="glyphicon glyphicon-remove"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>1001</td>
-                                <td>A栏</td>
-                                <td>2</td>
-                                <td>死亡</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-xs"><i
-                                            class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" class="btn btn-success btn-xs"><i
-                                            class="glyphicon glyphicon-remove"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>1001</td>
-                                <td>A栏</td>
-                                <td>49</td>
-                                <td>出栏</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>
-                                    <button type="button" class="btn btn-success btn-xs"><i
-                                            class="glyphicon glyphicon-edit"></i></button>
-                                    <button type="button" class="btn btn-success btn-xs"><i
-                                            class="glyphicon glyphicon-remove"></i></button>
-                                </td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td colspan="8" align="center">
-                                    <ul class="pagination">
-                                        <li class="disabled"><a href="#">上一页</a></li>
-                                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">下一页</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-
-                            </tfoot>
-                        </table>
+<div id="app">
+    <el-row :gutter="20">
+        <el-col :span="24" class="">
+            <div class="bg-purple">
+                <div class="el-icon-s-grid grid-content my-ztleft  bg-purple " >数据列表</div>
+            </div>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20">
+        <el-col :span="6">
+            <el-row>
+                <el-col :span="8">
+                    <div class="grid-content my-ztcenter bg-purple my_cxtj " >查询条件</div>
+                </el-col>
+                <el-col :span="16">
+                    <div class="grid-content bg-purple">
+                        <el-input v-model="input" placeholder="请输入内容"></el-input>
                     </div>
+                </el-col>
+            </el-row>
+        </el-col>
+        <el-col :span="1.1">
+            <el-button type="primary">查询</el-button>
+        </el-col>
+        <el-col :span="1.1">
+            <el-button type="primary" onclick="pigZhuNumAdd()">新增</el-button>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20">
+        <el-col :span="24">
+            <div class="grid-content bg-purple">
+                <template>
+                    <el-table
+                            :data="tableData"
+                            border
+                            style="width: 100%">
+                        <el-table-column
+                                prop="date"
+                                label="猪栏唯一标识"
+                                width="150"
+                                align="center"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                prop="date"
+                                label="猪栏名称"
+                                width="150"
+                                align="center"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                prop="name"
+                                label="变更数量"
+                                width="120">
+                        </el-table-column>
+                        <el-table-column
+                                prop="name"
+                                label="修改类型"
+                                width="120">
+                        </el-table-column>
+                        <el-table-column
+                                prop="city"
+                                label="创建时间"
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="address"
+                                label="更新时间"
+                                width=150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="zip"
+                                label="操作"
+                                width="200">
+                            <template slot-scope="scope">
+                                <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                                <el-button type="text" size="small" onclick="pigZhuNumUpdate()">编辑</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </template>
+            </div>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20">
+        <el-col :span="12">
+            <div class="grid-content"></div>
+        </el-col>
+        <el-col :span="12">
+            <div class="grid-content">
+                <div class="block">
+                    <%--<span class="demonstration">完整功能</span>--%>
+                    <el-pagination
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                            :current-page="currentPage4"
+                            :page-sizes="[100, 200, 300, 400]"
+                            :page-size="100"
+                            layout="total, sizes, prev, pager, next, jumper"
+                            :total="400">
+                    </el-pagination>
                 </div>
             </div>
-        </div>
-    </div>
+        </el-col>
+    </el-row>
 </div>
 </body>
+<script>
+    new Vue({
+        el: '#app',
+        methods: {
+            handleClick(row) {
+                console.log(row);
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            }
+        },
+        data() {
+            return {
+                tableData: [{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    province: '上海',
+                    city: '普陀区',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                    zip: 200333
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    province: '上海',
+                    city: '普陀区',
+                    address: '上海市普陀区金沙江路 1517 弄',
+                    zip: 200333
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    province: '上海',
+                    city: '普陀区',
+                    address: '上海市普陀区金沙江路 1519 弄',
+                    zip: 200333
+                }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    province: '上海',
+                    city: '普陀区',
+                    address: '上海市普陀区金沙江路 1516 弄',
+                    zip: 200333
+                }],
+                currentPage1: 5,
+                currentPage2: 5,
+                currentPage3: 5,
+                currentPage4: 4
+            }
+        }
+    })
+
+</script>
 </html>

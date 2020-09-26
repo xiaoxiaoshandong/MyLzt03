@@ -1,207 +1,110 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2020/5/23
-  Time: 22:05
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
-  <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/static/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
-    <script  src="${pageContext.request.contextPath}/static/jquery/3.3.1/jquery.js"></script>
-    <script  src="${pageContext.request.contextPath}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/moment/2.24.0/moment-with-locales.js"></script>
-    <script src="${pageContext.request.contextPath}/static/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
+    <script src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js"></script>
+    <script src="${pageContext.request.contextPath}/static/vue/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="${pageContext.request.contextPath}/static/element-ui/index.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/element-ui/index.css">
     <script src="${pageContext.request.contextPath}/static/echarts/4.7.0/echarts.js"></script>
-    <style>
-        table {
-            border-collapse:collapse;border:none;
-            font-size:12px;
-            filter:alpha(Opacity=60);-moz-opacity:0.9;opacity: 0.7;
-            margin-top: 10px;
-            text-align: center;
-
-        }
-
-        td {
-           background-color: #D6BBFF;
-            BORDER-TOP: 5px solid !important;
-            display: table-cell;
-            vertical-align: middle;
-            text-align:center;
-
-        }
-        th {
-              background-color:#D6BBFF;
-              BORDER-BOTTOM:  10px solid !important;
-            text-align:center;
-            display: table-cell;
-            vertical-align: middle;
-
-        }
-        .demo2-bg{
-           /* background: url(${pageContext.request.contextPath}/static/img/pig1.jpg) no-repeat 4px 5px;*/
-            backgroundColor:'rgba(128, 128, 128, 0.5)';
-            background-size: cover;
-            position: relative;
-        }
-        .demo2{
-            filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6
-        }
-        .form-control {
-            background-color:rgba(125,125,125,0);
-        }
-        .tbody tr{
-            height: 53px;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/my_style/myStyle.css">
     <script type="text/javascript">
-        function pigTouRuAdd(){
-            window.location.href="pigTouRuAdd.jsp";
+        function pigZhuLanAdd(){
+            window.location.href="pigZhuLanAdd.jsp";
         };
 
-        function pigTouRuUpdate(){
-            window.location.href="pigTouRuUpdate.jsp";
+        function pigZhuLanUpdate(){
+            window.location.href="pigZhuLanUpdate.jsp";
         };
-
-
-
-        $(function () {
-            var picker1 = $('#datetimepicker1').datetimepicker({
-                format: 'YYYY-MM-DD',
-                locale: moment.locale('zh-cn'),
-                //minDate: '2016-7-1'
-            });
-            var picker2 = $('#datetimepicker2').datetimepicker({
-                format: 'YYYY-MM-DD',
-                locale: moment.locale('zh-cn')
-            });
-            //动态设置最小值
-            picker1.on('dp.change', function (e) {
-                picker2.data('DateTimePicker').minDate(e.date);
-            });
-            //动态设置最大值
-            picker2.on('dp.change', function (e) {
-                picker1.data('DateTimePicker').maxDate(e.date);
-            });
-        });
-
-        $('#datetimepicker1').datetimepicker({
-            format: 'YYYY-MM-DD',
-            locale: moment.locale('zh-cn'),
-            defaultDate: "1990-1-1"
-        });
-
-
-
     </script>
+
+
 </head>
-
 <body>
-
-<div class="container-fluid ">
-    <div class="row">
-        <div class="col-sm-12  main ">
-            <div class="panel panel-default demo2-bg">
-                <div class="panel-heading demo2">
-                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
-                </div>
-                <div class="panel-body">
-                    <form class="form-inline" role="form" style="float:left;">
-                        <div class="row">
-                        <div class='col-sm-3'>
-                            <div class="form-group">
-                                <label>起始日期：</label>
-                                <!--指定 date标记-->
-                                <div class='input-group date' id='datetimepicker1' >
-                                      <input type='text' class="form-control"  />
-                                      <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                      </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class='col-sm-3'>
-                            <div class="form-group">
-                                <label>结束日期：</label>
-                                <!--指定 date标记-->
-                                <div class='input-group date' id='datetimepicker2' >
-
-                                    <input type='text' class="form-control"  />
-
-                                    <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                     </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class='col-sm-2'>
-                             <div class="row">
-                                <label >猪舍选择</label>
-                             </div>
-                            <div class="row">
-                                <select class="form-control"  style= "width:90%" >
-                                    <option></option>
-                                    <option value="1">A猪舍</option>
-                                    <option value="2">B猪舍</option>
-                                    <option value="3">C猪舍</option>
-                                </select>
-                            </div>
-                        </div>
-
-                      <%--  <div class='col-sm-2'>
-                            <div class="row">
-                                <label >猪栏选择</label>
-                            </div>
-                            <div class="row">
-                                    <select class="form-control " style= "width:90%">
-                                        <option></option>
-                                        <option value="1">A栏</option>
-                                        <option value="2">B栏</option>
-                                        <option value="3">C栏</option>
-                                    </select>
-                            </div>
-
-                        </div>--%>
-
-                        <div class='col-sm-2'>
-                            <div class="row">&nbsp</div>
-                            <div class="row" style="margin-top:4%">
-                                <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询
-                                </button>
-                            </div>
-                        </div>
-                        </div>
-                    </form>
-
-                    <br>
-                    <div class="row">
-                        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-                        <div class='col-sm-4' >
-                             <div  class=' form-control' id="lrzs" style="height:70%;margin-top: 3%; "></div>
-                        </div>
-
-                        <div class='col-sm-4'>
-                            <div  class=' form-control' id="gszs" style="height:70%;margin-top:3%;"></div>
-                        </div>
-                        <div class='col-sm-4'>
-                            <div  class=' form-control'id="trgx" style="height:70%;margin-top:3%;"></div>
-                        </div>
-                  </div>
-                </div>
+<div id="app">
+    <el-row :gutter="20">
+        <el-col :span="24" class="">
+            <div class="bg-purple">
+                <div class="el-icon-s-grid grid-content my-ztleft  bg-purple " >数据列表</div>
             </div>
-        </div>
-    </div>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20">
+        <el-col :span="6">
+            <template>
+                <div class="block">
+                    <el-date-picker
+                            v-model="value1"
+                            type="date"
+                            placeholder="起始日期">
+                    </el-date-picker>
+                </div>
+            </template>
+        </el-col>
+        <el-col :span="6">
+            <template>
+                <div class="block">
+                    <el-date-picker
+                            v-model="value2"
+                            type="date"
+                            placeholder="结束日期">
+                    </el-date-picker>
+                </div>
+            </template>
+        </el-col>
+        <el-col :span="4">
+            <el-dropdown split-button type="primary">
+                猪舍选择
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>A猪舍</el-dropdown-item>
+                    <el-dropdown-item>B猪舍</el-dropdown-item>
+                    <el-dropdown-item>C猪舍</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </el-col>
+        <el-col :span="2">
+            <el-button type="primary">查询</el-button>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20">
+        <el-col :span="8">
+            <div  class=' form-control' id="lrzs" style="height:340px;margin-top: 3%; "></div>
+        </el-col>
+        <el-col :span="8">
+            <div  class=' form-control' id="gszs" style="height:340px;margin-top:3%;"></div>
+        </el-col>
+        <el-col :span="8">
+            <div  class=' form-control'id="trgx" style="height:340px;margin-top:3%;"></div>
+        </el-col>
+    </el-row>
 </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        methods: {
 
-<script type="text/javascript">
+        },
+        data() {
+            return {
+                //日期
+                pickerOptions: {
+                    disabledDate(time) {
+                        return time.getTime() > Date.now();
+                    },
+                    shortcuts: [{
+                    }]
+                },
+                value1: '',
+                value2: ''
+            }
+        }
+    });
+
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('lrzs'));
 
@@ -277,7 +180,7 @@
     // 使用刚指定的配置项和数据显示图表。
     gszsChart.setOption(option , true);
     window.addEventListener('resize', function() {
-        gszsChart.resize();
+            gszsChart.resize();
         }
     );
 
@@ -317,7 +220,7 @@
                     return value;
                 }
 
-    },
+            },
         },
         series: [{
             name: '元',
@@ -334,7 +237,5 @@
         }
     );
 
-
 </script>
-</body>
 </html>

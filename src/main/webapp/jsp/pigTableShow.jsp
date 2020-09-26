@@ -1,176 +1,237 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2020/5/23
-  Time: 22:05
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <!-- 引入样式 -->
     <script src="${pageContext.request.contextPath}/static/common/jquery-1.7.2.js"></script>
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/bootstrap/css/bootstrap-theme.css">
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js">
+    <script src="${pageContext.request.contextPath}/static/vue/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="${pageContext.request.contextPath}/static/element-ui/index.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/element-ui/index.css">
 
+    <%--<!-- 引入样式 -->--%>
+    <%--<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">--%>
+    <%--<!-- 引入组件库 -->--%>
+    <%--<script src="https://unpkg.com/element-ui/lib/index.js"></script>--%>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/my_style/myStyle.css">
+    <style>
+
+    </style>
     <script type="text/javascript">
-        function pigTouRuAdd(){
-            window.location.href="pigTouRuAdd.jsp";
+        function pigZhuNumAdd(){
+            window.location.href="pigZhuNumAdd.jsp";
         };
 
-        function pigTouRuUpdate(){
-            window.location.href="pigTouRuUpdate.jsp";
+        function pigZhuNumUpdate(){
+            window.location.href="pigZhuNumUpdate.jsp";
         };
     </script>
+
+
 </head>
 <body>
+<div id="app">
+    <el-row :gutter="20">
+        <el-col :span="24" class="">
+            <div class="bg-purple">
+                <div class="el-icon-s-grid grid-content my-ztleft  bg-purple " >数据列表</div>
+            </div>
+        </el-col>
+    </el-row>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12  main">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
+    <el-row :gutter="20">
+        <el-col :span="6">
+            <template>
+                <div class="block">
+                    <el-date-picker
+                            v-model="value1"
+                            type="date"
+                            placeholder="起始日期">
+                    </el-date-picker>
                 </div>
-                <div class="panel-body">
-                    <form class="form-inline" role="form" style="float:left;">
+            </template>
+        </el-col>
+        <el-col :span="6">
+            <template>
+                <div class="block">
+                    <el-date-picker
+                            v-model="value2"
+                            type="date"
+                            placeholder="结束日期">
+                    </el-date-picker>
+                </div>
+            </template>
+        </el-col>
+        <el-col :span="3.5">
+            <el-dropdown split-button type="primary">
+                猪舍选择
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>A猪舍</el-dropdown-item>
+                    <el-dropdown-item>B猪舍</el-dropdown-item>
+                    <el-dropdown-item>C猪舍</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+            <%--<el-dropdown size="medium" split-button type="primary">--%>
+        </el-col>
+        <el-col :span="2.5">
+            <el-dropdown split-button type="primary">
+                类型
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>猪栏更换</el-dropdown-item>
+                    <el-dropdown-item>猪动态</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </el-col>
+        <el-col :span="2">
+            <el-button type="primary">查询</el-button>
+        </el-col>
+    </el-row>
 
-                        <div class="row">
-                            <div class='col-sm-3'>
-                                <div class="form-group">
-                                    <label>起始日期：</label>
-                                    <!--指定 date标记-->
-                                    <div class='input-group date' id='datetimepicker1' >
-                                        <input type='text' class="form-control"  />
-                                        <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                      </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class='col-sm-3'>
-                                <div class="form-group">
-                                    <label>结束日期：</label>
-                                    <!--指定 date标记-->
-                                    <div class='input-group date' id='datetimepicker2' >
-
-                                        <input type='text' class="form-control"  />
-
-                                        <span class="input-group-addon">
-                                         <span class="glyphicon glyphicon-calendar"></span>
-                                     </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class='col-sm-2'>
-                                <div class="row">
-                                    <label >猪舍选择</label>
-                                </div>
-                                <div class="row">
-                                    <select class="form-control"  style= "width:90%" >
-                                        <option></option>
-                                        <option value="1">A猪舍</option>
-                                        <option value="2">B猪舍</option>
-                                        <option value="3">C猪舍</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class='col-sm-2'>
-                                <div class="row">
-                                    <label >类型</label>
-                                </div>
-                                <div class="row">
-                                    <select class="form-control"  style= "width:90%" >
-                                        <option></option>
-                                        <option value="1">猪栏更换</option>
-                                        <option value="2">猪动态</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class='col-sm-2'>
-                                <div class="row">&nbsp</div>
-                                <div class="row" style="margin-top:4%">
-                                    <button type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
-                    <br>
-                    <hr style="clear:both;">
-                    <div class="table-responsive">
-                        <table class="table  table-bordered">
-                            <thead>
-                            <tr>
-                                <th width="30">#</th>
-                                <th>猪栏ID</th>
-                                <th>猪栏名称</th>
-                                <th>变更数量</th>
-                                <th>修改类型</th>
-                                <th>创建时间</th>
-                                <th>更新时间</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>1001</td>
-                                <td>A栏</td>
-                                <td>50</td>
-                                <td>新增</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>2017-06-01 19:00:00</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>1001</td>
-                                <td>A栏</td>
-                                <td>2</td>
-                                <td>死亡</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>2017-06-01 19:00:00</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>1001</td>
-                                <td>A栏</td>
-                                <td>49</td>
-                                <td>出栏</td>
-                                <td>2017-06-01 19:00:00</td>
-                                <td>2017-06-01 19:00:00</td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td colspan="8" align="center">
-                                    <ul class="pagination">
-                                        <li class="disabled"><a href="#">上一页</a></li>
-                                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li><a href="#">下一页</a></li>
-                                    </ul>
-                                </td>
-                            </tr>
-
-                            </tfoot>
-                        </table>
-                    </div>
+    <el-row :gutter="20">
+        <el-col :span="24">
+            <div class="grid-content bg-purple">
+                <template>
+                    <el-table
+                            :data="tableData"
+                            border
+                            style="width: 100%">
+                        <el-table-column
+                                prop="date"
+                                label="猪栏唯一标识"
+                                width="150"
+                                align="center"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                prop="date"
+                                label="猪栏名称"
+                                width="150"
+                                align="center"
+                        >
+                        </el-table-column>
+                        <el-table-column
+                                prop="name"
+                                label="变更数量"
+                                width="120">
+                        </el-table-column>
+                        <el-table-column
+                                prop="name"
+                                label="修改类型"
+                                width="120">
+                        </el-table-column>
+                        <el-table-column
+                                prop="city"
+                                label="创建时间"
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="address"
+                                label="更新时间"
+                                width=150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="zip"
+                                label="操作"
+                                width="200">
+                            <template slot-scope="scope">
+                                <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+                                <el-button type="text" size="small" onclick="pigZhuNumUpdate()">编辑</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </template>
+            </div>
+        </el-col>
+    </el-row>
+    <el-row :gutter="20">
+        <el-col :span="12">
+            <div class="grid-content"></div>
+        </el-col>
+        <el-col :span="12">
+            <div class="grid-content">
+                <div class="block">
+                    <%--<span class="demonstration">完整功能</span>--%>
+                    <el-pagination
+                            @size-change="handleSizeChange"
+                            @current-change="handleCurrentChange"
+                            :current-page="currentPage4"
+                            :page-sizes="[100, 200, 300, 400]"
+                            :page-size="100"
+                            layout="total, sizes, prev, pager, next, jumper"
+                            :total="400">
+                    </el-pagination>
                 </div>
             </div>
-        </div>
-    </div>
+        </el-col>
+    </el-row>
 </div>
 </body>
+<script>
+    new Vue({
+        el: '#app',
+        methods: {
+            handleClick(row) {
+                console.log(row);
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            }
+        },
+        data() {
+            return {
+                //列表
+                tableData: [{
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    province: '上海',
+                    city: '普陀区',
+                    address: '上海市普陀区金沙江路 1518 弄',
+                    zip: 200333
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    province: '上海',
+                    city: '普陀区',
+                    address: '上海市普陀区金沙江路 1517 弄',
+                    zip: 200333
+                }, {
+                    date: '2016-05-01',
+                    name: '王小虎',
+                    province: '上海',
+                    city: '普陀区',
+                    address: '上海市普陀区金沙江路 1519 弄',
+                    zip: 200333
+                }, {
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    province: '上海',
+                    city: '普陀区',
+                    address: '上海市普陀区金沙江路 1516 弄',
+                    zip: 200333
+                }],
+                currentPage1: 5,
+                currentPage2: 5,
+                currentPage3: 5,
+                currentPage4: 4,
+                //日期
+                pickerOptions: {
+                    disabledDate(time) {
+                        return time.getTime() > Date.now();
+                    },
+                    shortcuts: [{
+                    }]
+                },
+                value1: '',
+                value2: ''
+            };
+        }
+    })
+
+</script>
 </html>
