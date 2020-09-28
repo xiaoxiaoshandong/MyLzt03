@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lzt.dao.ColumnsMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.Columns">
+      <result column="TABLE_CATALOG" jdbcType="VARCHAR" property="tableCatalog" />
+      <result column="TABLE_SCHEMA" jdbcType="VARCHAR" property="tableSchema" />
+      <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+      <result column="COLUMN_NAME" jdbcType="VARCHAR" property="columnName" />
+      <result column="ORDINAL_POSITION" jdbcType="VARCHAR" property="ordinalPosition" />
+      <result column="COLUMN_DEFAULT" jdbcType="VARCHAR" property="columnDefault" />
+      <result column="IS_NULLABLE" jdbcType="VARCHAR" property="isNullable" />
+      <result column="DATA_TYPE" jdbcType="VARCHAR" property="dataType" />
+      <result column="CHARACTER_MAXIMUM_LENGTH" jdbcType="VARCHAR" property="characterMaximumLength" />
+      <result column="CHARACTER_OCTET_LENGTH" jdbcType="VARCHAR" property="characterOctetLength" />
+      <result column="NUMERIC_PRECISION" jdbcType="VARCHAR" property="numericPrecision" />
+      <result column="NUMERIC_SCALE" jdbcType="VARCHAR" property="numericScale" />
+      <result column="CHARACTER_SET_NAME" jdbcType="VARCHAR" property="characterSetName" />
+      <result column="COLLATION_NAME" jdbcType="VARCHAR" property="collationName" />
+      <result column="COLUMN_TYPE" jdbcType="VARCHAR" property="columnType" />
+      <result column="COLUMN_KEY" jdbcType="VARCHAR" property="columnKey" />
+      <result column="EXTRA" jdbcType="VARCHAR" property="extra" />
+      <result column="PRIVILEGES" jdbcType="VARCHAR" property="privileges" />
+      <result column="COLUMN_COMMENT" jdbcType="VARCHAR" property="columnComment" />
+  </resultMap>
+  <sql id="Base_Column_List">
+        TABLE_CATALOG ,
+        TABLE_SCHEMA ,
+        TABLE_NAME  ,
+        COLUMN_NAME   ,
+        ORDINAL_POSITION  ,
+        COLUMN_DEFAULT  ,
+        IS_NULLABLE  ,
+        DATA_TYPE  ,
+        CHARACTER_MAXIMUM_LENGTH  ,
+        CHARACTER_OCTET_LENGTH  ,
+        NUMERIC_PRECISION  ,
+        NUMERIC_SCALE  ,
+        CHARACTER_SET_NAME  ,
+        COLLATION_NAME  ,
+        COLUMN_TYPE ,
+        COLUMN_KEY  ,
+        EXTRA  ,
+        PRIVILEGES ,
+        COLUMN_COMMENT
+  </sql>
+  <select id="getColumns" parameterType="java.lang.String" resultMap="BaseResultMap">
+      SELECT <include refid="Base_Column_List" />  FROM information_schema.columns WHERE table_name= #{tableName}
+  </select>
+</mapper>
