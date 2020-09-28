@@ -35,6 +35,7 @@
     <mvc:resources location="/data/" mapping="/data/**"/>
     <mvc:resources location="/jsp/" mapping="/jsp/**"/>
     <mvc:resources location="/bootstrap/" mapping="/bootstrap/**"/>
+    <mvc:resources location="/my_style/" mapping="/my_style/**"/>
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->  
     <bean id="mappingJacksonHttpMessageConverter"  
         class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">  
@@ -92,6 +93,27 @@
         <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->  
         <property name="prefix" value="/jsp/" />  
         <property name="suffix" value=".jsp" />  
-    </bean>  
-    
+    </bean>
+
+    <!--&lt;!&ndash; 加载配置文件 &ndash;&gt;-->
+    <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+        <!--<property name="order" value="1"></property>-->
+        <!--<property name="ignoreUnresolvablePlaceholders" value="true"></property>-->
+        <!--<property name="locations">-->
+            <!--<list>-->
+                <!--<value>classpath:columns.properties</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;配置全局变量&ndash;&gt;-->
+    <!--<bean id="columnsProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
+        <!--<property name="singleton" value="true"/>-->
+        <!--<property name="properties">-->
+            <!--<props>-->
+                <!--<prop key="author">${author}</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+
 </beans>
