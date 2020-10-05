@@ -1,22 +1,20 @@
 package com.lzt.controller;
 
 
-import com.lzt.entity.Columns;
+import com.lzt.entity.MyGenerator;
 import com.lzt.entity.ParamVO;
-import com.lzt.myutils.IoUtil;
-import com.lzt.myutils.PropertiesUtil;
-import com.lzt.service.ColumnsService;
+import com.lzt.service.MyGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Columns")
-public class ColumnsController {
+@RequestMapping("/myGenerator")
+public class MyGeneratorController {
 
     @Autowired(required = false)
-    private ColumnsService columnsService;
+    private MyGeneratorService myGeneratorService;
 
 //    @Autowired(required = false)
 //    public ColumnsProperties columnsProperties;
@@ -30,8 +28,8 @@ public class ColumnsController {
 //   }
 
     @RequestMapping(value = "/getColumns")
-    public List<Columns> getColumns(ParamVO param) {
-        List<Columns> list = columnsService.getColumns(param);
+    public List<MyGenerator> getMyGenerator(ParamVO param) {
+        Integer  i = myGeneratorService.getMyGenerator(param);
         return null;
     }
 }

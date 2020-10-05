@@ -1,6 +1,6 @@
 package com.lzt.dao;
 
-import com.lzt.entity.Columns;
+import com.lzt.entity.MyGenerator;
 import com.lzt.entity.ParamVO;
 
 import java.util.List;
@@ -13,7 +13,9 @@ import java.util.List;
  * @Date 2020年09月25日
  * @Description 字段Dao
  */
-public interface ColumnsMapper {
+public interface MyGeneratorMapper {
 
-    List<Columns> getColumns(ParamVO param);
+    List<MyGenerator> getMyGenerator(ParamVO param);
+
+    MyGenerator getMyGeneratorByPrimaryKey(String table_name);
 }

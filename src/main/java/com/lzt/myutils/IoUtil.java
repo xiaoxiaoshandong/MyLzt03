@@ -12,8 +12,9 @@ public class IoUtil {
      * @param content 内容
      * @param packagePath 路径
      * @param tableName 表名称
+     * @param fileType 文件类型 例如：java , xml
      */
-    public static void wirteToFile(String content,String packagePath,String tableName){
+    public static void wirteToFile(String content,String packagePath,String tableName,String fileType){
         PrintWriter pw = null;
         BufferedWriter bw = null;
         //根据空文件获取项目路径
@@ -26,7 +27,7 @@ public class IoUtil {
             //不存在则创建
             parentDir.mkdirs();
         }
-        String filePath = packagePath+"\\"+tableName+".java";    //java文件路径
+        String filePath = packagePath+"\\"+tableName+"."+fileType;    //java文件路径
         File file = new File(filePath);
         try {
             //判断是否存在java文件

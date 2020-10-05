@@ -1,14 +1,14 @@
 package com.lzt.entity;
 
 /**
- * @ClassName Columns
+ * @ClassName MyGenerator
  * @author li_zhentao
  * @jdkVersion jdk1.7
  * @version
  * @Date 2020年09月25日
  * @Description 字段
  */
-public class Columns {
+public class MyGenerator {
     /**
      *  表名+字段
      */

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lzt.dao.ColumnsMapper">
-  <resultMap id="BaseResultMap" type="com.lzt.entity.Columns">
+<mapper namespace="com.lzt.dao.MyGeneratorMapper">
+  <resultMap id="BaseResultMap" type="com.lzt.entity.MyGenerator">
       <result column="TABLE_CATALOG" jdbcType="VARCHAR" property="tableCatalog" />
       <result column="TABLE_SCHEMA" jdbcType="VARCHAR" property="tableSchema" />
       <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
@@ -43,7 +43,11 @@
         PRIVILEGES ,
         COLUMN_COMMENT
   </sql>
-  <select id="getColumns" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="getMyGenerator" parameterType="java.lang.String" resultMap="BaseResultMap">
       SELECT <include refid="Base_Column_List" />  FROM information_schema.columns WHERE table_name= #{tableName}
   </select>
+
+    <select id="getMyGeneratorByPrimaryKey" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />  FROM information_schema.columns WHERE table_name= #{table_name} AND COLUMN_KEY='PRI';
+    </select>
 </mapper>
