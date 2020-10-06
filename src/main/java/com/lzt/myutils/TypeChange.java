@@ -39,5 +39,17 @@ public class TypeChange {
         return s;
     }
 
+    /**
+     *
+     * @param str  随意
+     * @Description 首字母表小写
+     */
+    public static String lowerFirstCase(String str){
+        char[] chars = str.toCharArray();
 
+        //首字母小写方法，大写会变成小写，如果小写首字母会消失
+        chars[0] +=32;
+        return String.valueOf(chars);
+
+    }
 }

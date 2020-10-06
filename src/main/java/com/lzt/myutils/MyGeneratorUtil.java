@@ -75,73 +75,73 @@ public class MyGeneratorUtil {
     }
 
     /**
-     * @param data_type
+     * @param datatype
      * @return
      */
-    public static String dataTypeToJdbcType(String data_type){
-        if(data_type.equals("bigint")){
+    public static String dataTypeToJdbcType(String datatype){
+        if(datatype.equals("bigint")){
             return "BIGINT";
-        }else if(data_type.equals("bit")){
+        }else if(datatype.equals("bit")){
             return "BIT";
-        }else if(data_type.equals("bool")){
+        }else if(datatype.equals("bool")){
             return "BIT";
-        }else if(data_type.equals("boolean")){
+        }else if(datatype.equals("boolean")){
             return "BIT";
-        }else if(data_type.equals("char")){
+        }else if(datatype.equals("char")){
             return "CHAR";
-        }else if(data_type.equals("date")){
+        }else if(datatype.equals("date")){
             return "DATE";
-        }else if(data_type.equals("datetime")){
+        }else if(datatype.equals("datetime")){
             return "TIMESTAMP";
-        }else if(data_type.equals("decimal")){
+        }else if(datatype.equals("decimal")){
             return "DECIMAL";
-        }else if(data_type.equals("double")){
+        }else if(datatype.equals("double")){
             return "DOUBLE";
-        }else if(data_type.equals("enum")){
+        }else if(datatype.equals("enum")){
             return "CHAR";
-        }else if(data_type.equals("float")){
+        }else if(datatype.equals("float")){
             return "REAL";
-        }else if(data_type.equals("int")){
+        }else if(datatype.equals("int")){
             return "INTEGER";
-        }else if(data_type.equals("mediumint")){
+        }else if(datatype.equals("mediumint")){
             return "INTEGER";
-        }else if(data_type.equals("numeric")){
+        }else if(datatype.equals("numeric")){
             return "DECIMAL";
-        }else if(data_type.equals("real")){
+        }else if(datatype.equals("real")){
             return "DOUBLE";
-        }else if(data_type.equals("set")){
+        }else if(datatype.equals("set")){
             return "CHAR";
-        }else if(data_type.equals("smallint")){
+        }else if(datatype.equals("smallint")){
             return "SMALLINT";
-        }else if(data_type.equals("time")){
+        }else if(datatype.equals("time")){
             return "TIME";
-        }else if(data_type.equals("timestamp")){
+        }else if(datatype.equals("timestamp")){
             return "TIMESTAMP";
-        }else if(data_type.equals("tinyint")){
+        }else if(datatype.equals("tinyint")){
             return "TINYINT";
-        }else if(data_type.equals("tinytext")){
+        }else if(datatype.equals("tinytext")){
             return "VARCHAR";
-        }else if(data_type.equals("varchar")){
+        }else if(datatype.equals("varchar")){
             return "VARCHAR";
-        }else if(data_type.equals("year")){
+        }else if(datatype.equals("year")){
             return "DATE";
-        }else if(data_type.equals("binary")){
+        }else if(datatype.equals("binary")){
             return "BINARY";
-        }else if(data_type.equals("blob")){
+        }else if(datatype.equals("blob")){
             return "LONGVARBINARY";
-        }else if(data_type.equals("longblob")){
+        }else if(datatype.equals("longblob")){
             return "LONGVARBINARY";
-        }else if(data_type.equals("longtext")){
+        }else if(datatype.equals("longtext")){
             return "LONGVARCHAR";
-        }else if(data_type.equals("mediumblob")){
+        }else if(datatype.equals("mediumblob")){
             return "LONGVARBINARY";
-        }else if(data_type.equals("mediumtext")){
+        }else if(datatype.equals("mediumtext")){
             return "LONGVARCHAR";
-        }else if(data_type.equals("text")){
+        }else if(datatype.equals("text")){
             return "LONGVARCHAR";
-        }else if(data_type.equals("tinyblob")){
+        }else if(datatype.equals("tinyblob")){
             return "BINARY";
-        }else if(data_type.equals("varbinary")){
+        }else if(datatype.equals("varbinary")){
             return "VARBINARY";
         }else{
             return "没有对比类型！";
